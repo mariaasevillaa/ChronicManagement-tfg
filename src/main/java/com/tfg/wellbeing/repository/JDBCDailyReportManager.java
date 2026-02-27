@@ -58,5 +58,52 @@ public class JDBCDailyReportManager {
             }
 
         }
+        public int getTotalReportsByPatientId(int patient_id) {
+        String sql ="SELECT COUNT(*) FROM daily_reports WHERE patient_id= ? ";
+        try(Connection c = datasource.getConnection();
+        PreparedStatement ps =c.prepareStatement(sql)) {
+            ps.setInt(1,patient_id);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+
+        }
+
+        public double getAverageMood(int patient_id) {
+        String sql = "SELECT AVG(mood) FROM daily_reports WHERE patient_id= ? ";
+        try (Connection c = datasource.getConnection();
+        PreparedStatement ps= c.prepareStatement(sql)) {
+            ps.setInt(1,patient_id);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    return rs.getDouble(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+        }
+        public double getAverageMedicationTaken(int patient_id) {
+        String sql = "SELECT (SUM (medication_taken)*100 )/COUNT(*) FROM daily_reports WHERE patient_id= ?";
+            try (Connection c = datasource.getConnection();
+                 PreparedStatement ps= c.prepareStatement(sql)) {
+                ps.setInt(1,patient_id);
+                try(ResultSet rs = ps.executeQuery()){
+                    while (rs.next()) {
+                        return rs.getDouble(1);
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return 0;
+        }
 
 }

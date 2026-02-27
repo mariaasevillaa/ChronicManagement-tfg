@@ -7,11 +7,11 @@ private int id;
 private int user_id;
 private String name;
 private String surname;
-private Date date_of_birth;
+private String date_of_birth;
 private String chronic_condition;
-private Date diagnosis_date;
+private String diagnosis_date;
 
-    public Patient(int id, int user_id, String name, String surname, Date date_of_birth, String chronic_condition, Date diagnosis_date) {
+    public Patient(int id, int user_id, String name, String surname, String date_of_birth, String chronic_condition, String diagnosis_date) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;
@@ -36,7 +36,7 @@ private Date diagnosis_date;
         return surname;
     }
 
-    public Date getDate_of_birth() {
+    public String getDate_of_birth() {
         return date_of_birth;
     }
 
@@ -44,7 +44,7 @@ private Date diagnosis_date;
         return chronic_condition;
     }
 
-    public Date getDiagnosis_date() {
+    public String getDiagnosis_date() {
         return diagnosis_date;
     }
 
@@ -64,7 +64,7 @@ private Date diagnosis_date;
         this.surname = surname;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
+    public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
@@ -72,7 +72,7 @@ private Date diagnosis_date;
         this.chronic_condition = chronic_condition;
     }
 
-    public void setDiagnosis_date(Date diagnosis_date) {
+    public void setDiagnosis_date(String diagnosis_date) {
         this.diagnosis_date = diagnosis_date;
     }
 

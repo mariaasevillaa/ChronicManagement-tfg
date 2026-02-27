@@ -49,9 +49,9 @@ public class JDBCPatientManager {
                                 rs.getInt("user_id"),
                                 rs.getString("name"),
                                 rs.getString("surname"),
-                                rs.getDate("date_of_birth"),
+                                rs.getString("date_of_birth"),
                                rs.getString("chronic_condition"),
-                                rs.getDate("diagnosis_date"));
+                                rs.getString("diagnosis_date"));
                         patients.add(patient);
                     }
                     return patients;
