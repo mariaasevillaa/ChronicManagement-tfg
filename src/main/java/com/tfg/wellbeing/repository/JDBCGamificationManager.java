@@ -57,25 +57,47 @@ public class JDBCGamificationManager {
         return 0;
     }
 
-    // no me funciona el update
 
-    public int addPoints(int patient_id, int points){
-        createIfNotExists(patient_id);
-        String sql ="UPDATE  gamification_status SET points = points= + ? WHERE patient_id = ?";
-        try(Connection c = dataSource.getConnection();
-        PreparedStatement ps= c.prepareStatement(sql)) {
-            ps.setInt(1, points);
-            ps.setInt(2, patient_id);
-             int rows = ps.executeUpdate();
 
-            if (rows == 0) {
-                throw new RuntimeException("No rows updated. patient_id not found: " + patient_id);
-            }
+    public String addPointsDebug(int patientId, int pointsToAdd) {
+
+        createIfNotExists(patientId);
+
+        String sql = "UPDATE gamification_status SET points = points + ? WHERE patient_id = ?";
+
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, pointsToAdd);
+            ps.setInt(2, patientId);
+
+            int rows = ps.executeUpdate();
+
+            int now = getPoints(patientId);
+
+            return "rowsUpdated=" + rows + " | pointsNow=" + now;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error updating points",e);
+            throw new RuntimeException("Error updating points", e);
         }
-        return getPoints(patient_id);
+    }
+    public int addPoints(int patientId, int pointsToAdd) {
+        createIfNotExists(patientId);
+
+        String sql = "UPDATE gamification_status SET points = points + ? WHERE patient_id = ?";
+
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, pointsToAdd);
+            ps.setInt(2, patientId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating points", e);
+        }
+
+        return getPoints(patientId);
     }
 
 }

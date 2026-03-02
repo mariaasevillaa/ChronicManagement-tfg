@@ -1,10 +1,13 @@
 
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.model.Daily_report;
 import com.tfg.wellbeing.repository.JDBCDailyReportManager;
 import com.tfg.wellbeing.repository.JDBCDailySymptomsManager;
-import org.springframework.web.bind.annotation.*;
+import com.tfg.wellbeing.repository.JDBCGamificationManager;
+import com.tfg.wellbeing.repository.JDBCPatientAchievements;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -13,36 +16,48 @@ public class DailyReportTestController {
 
     private final JDBCDailyReportManager reportManager;
     private final JDBCDailySymptomsManager symptomsManager;
+    private final JDBCGamificationManager gamification;
+    private final JDBCPatientAchievements patientAchievements;
 
-    public DailyReportTestController (JDBCDailyReportManager reportManager, JDBCDailySymptomsManager symptomsManager) {
+    public DailyReportTestController(JDBCDailyReportManager reportManager,
+                                           JDBCDailySymptomsManager symptomsManager,
+                                           JDBCGamificationManager gamification,JDBCPatientAchievements patientAchievements) {
         this.reportManager = reportManager;
         this.symptomsManager = symptomsManager;
+        this.gamification = gamification;
+        this.patientAchievements = patientAchievements;
     }
 
-    @GetMapping("/test/patient/reports")
-    public String getReports(@RequestParam int patientId) {
+    @GetMapping("/test/patient/add-full-report")
+    public String addFullReport(@RequestParam int patientId,
+                                @RequestParam int mood,
+                                @RequestParam int medication,
+                                @RequestParam String note,
+                                @RequestParam String date,
+                                @RequestParam(required = false) List<Integer> symptoms) {
 
-        List<Daily_report> reports = reportManager.getReportByPatientId(patientId);
+        // 1) Insert daily_report y obtener id
+        int reportId = reportManager.addDailyReport(patientId, mood, medication, note, date);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Patient ").append(patientId).append(" reports:\n\n");
-
-        for (Daily_report r : reports) {
-            sb.append("Report ID: ").append(r.getId())
-                    .append(" | Date: ").append(r.getReport_date())
-                    .append(" | Mood: ").append(r.getMood())
-                    .append(" | Medication: ").append(r.getMedication_taken())
-                    .append("\nNotes: ").append(r.getNote())
-                    .append("\nSymptoms: ");
-
-            List<String> symptoms = symptomsManager.getSymptomsByReportId(r.getId());
-            if (symptoms.isEmpty()) sb.append("(none)");
-            else sb.append(String.join(", ", symptoms));
-
-            sb.append("\n\n-------------------------\n\n");
+        // 2) Insertar síntomas (si hay)
+        if (symptoms != null) {
+            for (Integer symptomId : symptoms) {
+                symptomsManager.addDailySymptoms(symptomId,reportId);
+            }
         }
 
-        return sb.toString();
-    }
+        // 3) Gamificación: sumar puntos, mirar lo del hash
+        int newTotal = gamification.addPoints(patientId, 10);
+        // Si llega a 50 puntos
+        if (newTotal >= 50) {
 
+            // id 1 = achievement de 50 puntos
+            int achievementId = 1;
+
+                patientAchievements.addPatientAchievements(patientId, achievementId);
+
+        }
+
+        return "Report created id=" + reportId + " | points now=" + newTotal;
+    }
 }

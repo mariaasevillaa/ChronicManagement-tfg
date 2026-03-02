@@ -21,10 +21,14 @@ public class GamificationTestController {
         return "Patient " + patientId + " points: " + points;
     }
 
-    @GetMapping("/test/patient/add-points")
-    public String addPoints(@RequestParam int patientId, @RequestParam int points) {
-        int newTotal = gamification.addPoints(patientId, points);
-        return "New points total: " + newTotal;
+    @GetMapping("/test/patient/add-points-debug")
+    public String addPointsDebug(@RequestParam int patientId, @RequestParam int points) {
+        return gamification.addPointsDebug(patientId, points);
+    }
+    @GetMapping("/test/patient/gamification-debug")
+    public String debug(@RequestParam int patientId) {
+        int points = gamification.getPoints(patientId);
+        return "patientId=" + patientId + " points=" + points;
     }
     @GetMapping("/test/patient/gamification-row")
     public String row(@RequestParam int patientId) {
