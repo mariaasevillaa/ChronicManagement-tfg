@@ -1,14 +1,13 @@
 
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.repository.JDBCDailyReportManager;
-import com.tfg.wellbeing.repository.JDBCDailySymptomsManager;
-import com.tfg.wellbeing.repository.JDBCGamificationManager;
-import com.tfg.wellbeing.repository.JDBCPatientAchievements;
+import com.tfg.wellbeing.model.Achievements;
+import com.tfg.wellbeing.repository.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,14 +17,17 @@ public class DailyReportTestController {
     private final JDBCDailySymptomsManager symptomsManager;
     private final JDBCGamificationManager gamification;
     private final JDBCPatientAchievements patientAchievements;
+    private final JDBCAchievementsManager achievements;
 
     public DailyReportTestController(JDBCDailyReportManager reportManager,
                                            JDBCDailySymptomsManager symptomsManager,
-                                           JDBCGamificationManager gamification,JDBCPatientAchievements patientAchievements) {
+                                           JDBCGamificationManager gamification,JDBCPatientAchievements patientAchievements,
+                                     JDBCAchievementsManager achievements) {
         this.reportManager = reportManager;
         this.symptomsManager = symptomsManager;
         this.gamification = gamification;
         this.patientAchievements = patientAchievements;
+        this.achievements = achievements;
     }
 
     @GetMapping("/test/patient/add-full-report")
@@ -48,16 +50,23 @@ public class DailyReportTestController {
 
         // 3) Gamificación: sumar puntos, mirar lo del hash
         int newTotal = gamification.addPoints(patientId, 10);
-        // Si llega a 50 puntos
-        if (newTotal >= 50) {
+        List<Achievements> achievementslist = achievements.getAchievements();
 
-            // id 1 = achievement de 50 puntos
-            int achievementId = 1;
+        List<String> unlocked = new ArrayList<>();
 
-                patientAchievements.addPatientAchievements(patientId, achievementId);
+        for (Achievements a : achievementslist) {
+            if (newTotal >= a.getPoints_reward()) {
 
+                if (!patientAchievements.hasAchievement(patientId, a.getId())) {
+                    patientAchievements.addPatientAchievements(patientId, a.getId());
+                    unlocked.add(a.getName());
+                }
+            }
         }
 
-        return "Report created id=" + reportId + " | points now=" + newTotal;
+
+      return "Report created id=" + reportId +
+                " | points now=" + newTotal +
+                " | new achievements=" + unlocked;
     }
 }
