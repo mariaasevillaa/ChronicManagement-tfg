@@ -2,6 +2,7 @@
 package com.tfg.wellbeing.controller;
 
 import com.tfg.wellbeing.model.Achievements;
+import com.tfg.wellbeing.model.Alerts;
 import com.tfg.wellbeing.repository.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,16 +19,18 @@ public class DailyReportTestController {
     private final JDBCGamificationManager gamification;
     private final JDBCPatientAchievements patientAchievements;
     private final JDBCAchievementsManager achievements;
+    private final JDBCAlertsManager alertsManager;
 
     public DailyReportTestController(JDBCDailyReportManager reportManager,
                                            JDBCDailySymptomsManager symptomsManager,
                                            JDBCGamificationManager gamification,JDBCPatientAchievements patientAchievements,
-                                     JDBCAchievementsManager achievements) {
+                                     JDBCAchievementsManager achievements,JDBCAlertsManager alertsManager) {
         this.reportManager = reportManager;
         this.symptomsManager = symptomsManager;
         this.gamification = gamification;
         this.patientAchievements = patientAchievements;
         this.achievements = achievements;
+        this.alertsManager = alertsManager;
     }
 
     @GetMapping("/test/patient/add-full-report")
@@ -38,35 +41,39 @@ public class DailyReportTestController {
                                 @RequestParam String date,
                                 @RequestParam(required = false) List<Integer> symptoms) {
 
-        // 1) Insert daily_report y obtener id
+        // 1 Insert report
         int reportId = reportManager.addDailyReport(patientId, mood, medication, note, date);
 
-        // 2) Insertar síntomas (si hay)
+        // 2 Insert symptoms
         if (symptoms != null) {
             for (Integer symptomId : symptoms) {
-                symptomsManager.addDailySymptoms(symptomId,reportId);
+                symptomsManager.addDailySymptoms(reportId, symptomId);
             }
         }
 
-        // 3) Gamificación: sumar puntos, mirar lo del hash
+        // 3 Gamification
         int newTotal = gamification.addPoints(patientId, 10);
-        List<Achievements> achievementslist = achievements.getAchievements();
 
-        List<String> unlocked = new ArrayList<>();
+        // 4 ALERT CHECK
+        if (mood <= 2) {
 
-        for (Achievements a : achievementslist) {
-            if (newTotal >= a.getPoints_reward()) {
+            if (!alertsManager.hasActiveAlerts(patientId, "LOW_MOOD")) {
 
-                if (!patientAchievements.hasAchievement(patientId, a.getId())) {
-                    patientAchievements.addPatientAchievements(patientId, a.getId());
-                    unlocked.add(a.getName());
-                }
+                alertsManager.createAlerts(
+                        patientId,
+                        "LOW_MOOD",
+                        0,
+                        "Patient reported low mood",
+                        date
+                );
             }
         }
 
-
-      return "Report created id=" + reportId +
-                " | points now=" + newTotal +
-                " | new achievements=" + unlocked;
+        return "Report created id=" + reportId +
+                " | points now=" + newTotal;
+    }
+    @GetMapping("/test/patient/alerts")
+    public List<Alerts> alerts(@RequestParam int patientId) {
+        return alertsManager.getAllAlerts(patientId);
     }
 }
