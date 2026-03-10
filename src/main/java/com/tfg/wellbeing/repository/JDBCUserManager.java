@@ -44,4 +44,31 @@ public class JDBCUserManager {
         }
         return 1;
     }
+    public User getUserByEmail(String email) {
+
+        String sql = "SELECT * FROM users WHERE email = ?";
+
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("role")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
 }
