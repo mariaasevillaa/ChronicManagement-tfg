@@ -1,6 +1,5 @@
 package com.tfg.wellbeing.controller;
 
-import ch.qos.logback.core.model.Model;
 import com.tfg.wellbeing.model.Achievements;
 import com.tfg.wellbeing.model.Daily_report;
 import com.tfg.wellbeing.model.Patient;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class PatientController {
          int points=  gamificationManager.addPoints(patient_id,10);
         List<Achievements> achievements= achievementsManager.getAchievements();
         for(Achievements a : achievements) {
-            if(points>a.getPoints_reward()){
+            if(points>=a.getPoints_reward()){
                 if(!patientAchievementsManager.hasAchievement(patient_id,a.getId())){
                     patientAchievementsManager.addPatientAchievements(patient_id,a.getId());
                 }
@@ -67,6 +67,28 @@ public class PatientController {
             }
         }
         return "redirect:/patient_dashboard";
+
     }
+
+    @GetMapping("/patient_progress")
+    public String patientProgress(@RequestParam int patient_id, Model model) {
+        int total_reports= dailyReportManager.getTotalReportsByPatientId(patient_id);
+        model.addAttribute("Totalreports : ",total_reports);
+        double average_mood =dailyReportManager.getAverageMood(patient_id);
+        model.addAttribute("Averagemood : ",average_mood);
+        double average_medication = dailyReportManager.getAverageMedicationTaken(patient_id);
+        model.addAttribute("Averagemedicationtaken : ",average_medication);
+        return "patient_progress";
+
+    }
+
+    @GetMapping("/patient_gamification")
+    public String patientGamification(@RequestParam int patient_id, Model model) {
+        int points= gamificationManager.getPoints(patient_id);
+        model.addAttribute("points : ",points);
+        return "patient_gamification";
+    }
+
+
 
 }
