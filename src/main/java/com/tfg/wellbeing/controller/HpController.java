@@ -60,6 +60,7 @@ public class HpController {
     public String patientAlerts(Model model, @RequestParam int patient_id) {
         List<Alerts>alertsList=alertsManager.getAllAlerts(patient_id);
         model.addAttribute("alertsList", alertsList);
+        return "patient_alerts";
     }
 
 }
