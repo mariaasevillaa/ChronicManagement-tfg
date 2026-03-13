@@ -37,26 +37,26 @@ public class HpController {
 
     }
 
-    @GetMapping("/hp/patient_list")
+    @GetMapping("/patient_list")
     public String patientList(Model model, @RequestParam int hp_id) {
         List<Patient> patientList= patientManager.getPatientByHpId(hp_id);
         model.addAttribute("Patientlist", patientList);
         return "patient_list";
     }
-    @GetMapping("/hp/review_reports")
+    @GetMapping("/review_reports")
     public String reviewReports(Model model, @RequestParam int patient_id) {
         List<Daily_report> dailyReportList= dailyReportManager.getReportByPatientId(patient_id);
         model.addAttribute("dailyReports", dailyReportList);
         return "review_reports";
 
     }
-    @GetMapping("/hp/configure_parameters")
+    @GetMapping("/configure_parameters")
     public String configureParameters(Model model, @RequestParam int patient_id) {
         MonitoringParameters mp= monitoringParameters.getParametersbyPatientId(patient_id);
         model.addAttribute("monitoringParameters", mp);
         return "configure_parameters";
     }
-    @GetMapping("/hp/patient_alerts")
+    @GetMapping("/patient_alerts")
     public String patientAlerts(Model model, @RequestParam int patient_id) {
         List<Alerts>alertsList=alertsManager.getAllAlerts(patient_id);
         model.addAttribute("alertsList", alertsList);

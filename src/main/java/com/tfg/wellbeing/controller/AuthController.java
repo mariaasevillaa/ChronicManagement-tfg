@@ -17,13 +17,13 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
-        return "Register";
+        return "register";
     }
 
     @PostMapping("/register")
     public String register(@RequestParam String email,  @RequestParam String password) {
         userManager.addUser(email, password, "patient");
-        return "login";
+        return "redirect:/login";
 
     }
     @GetMapping("/login")
@@ -41,10 +41,10 @@ public class AuthController {
 
         }
         if(user.getRole().equals("patient")) {
-            return "patient_dashboard";
+            return "redirect:/patient_dashboard";
         }
         if(user.getRole().equals("healthcare professional")) {
-            return "professional_dashboard";
+            return "redirect:/hp_dashboard";
         }
         return "login";
 
