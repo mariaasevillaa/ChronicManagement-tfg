@@ -15,7 +15,7 @@ public class JDBCUserManager {
     public JDBCUserManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    public void addUser(String email, String password, String role) {
+    public int addUser(String email, String password, String role) {
         String sql = "INSERT INTO users (email, password, role) values (?, ?, ?)";
         try(Connection c= dataSource.getConnection();
             PreparedStatement ps= c.prepareStatement(sql)) {
@@ -23,6 +23,12 @@ public class JDBCUserManager {
             ps.setString(2, password);
             ps.setString(3, role);
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                throw new RuntimeException("No ID obtained");
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Error adding user", e);
         }

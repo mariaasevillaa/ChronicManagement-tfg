@@ -5,6 +5,7 @@ import com.tfg.wellbeing.model.Daily_report;
 import com.tfg.wellbeing.model.Patient;
 import com.tfg.wellbeing.model.Symptoms;
 import com.tfg.wellbeing.repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +37,12 @@ public class PatientController {
         this.alertsManager = alertsManager;
     }
     @GetMapping("/patient_dashboard")
-    public String patientDashboard() {
+    public String patientDashboard(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user_id", user_id);
         return "patient_dashboard";
     }
     @GetMapping("/daily_reports")
