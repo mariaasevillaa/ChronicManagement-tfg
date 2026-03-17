@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient gamification</title>
 </head>
 <body>
+<h1> Here you can see your points</h1>
+<form action="/patient_gamification" method="get">
+    <p>Your current points are: <span th:text="${points}"></span></p>
+    <h2>Your Achievements</h2>
+    <ul>
+        <li th:each="a : ${achievements}">
+            <span th:text="${a.name}"></span>
+        </li>
+    </ul>
 
+
+    <a href="/patient_dashboard">Back to dashboard</a>
+
+
+</form>
 </body>
 </html>

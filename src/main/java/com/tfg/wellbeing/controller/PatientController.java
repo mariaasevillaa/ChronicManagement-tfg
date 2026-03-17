@@ -46,11 +46,16 @@ public class PatientController {
         return "patient_dashboard";
     }
     @GetMapping("/daily_reports")
-    public String dailyReports() {
+    public String dailyReports(HttpSession session,Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        model.addAttribute("patient_id", patient_id);
         return "daily_reports";
     }
     @PostMapping("/daily_reports")
-    public String dailyReports(@RequestParam int patient_id, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms ) {
+    public String dailyReports(HttpSession session, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms ) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int report_id= dailyReportManager.addDailyReport(patient_id,mood,medication_taken,note,date);
         if(symptoms != null) {
             for(Integer symptom_id : symptoms) {
@@ -58,11 +63,12 @@ public class PatientController {
             }
         }
          int points=  gamificationManager.addPoints(patient_id,10);
-        List<Achievements> achievements= achievementsManager.getAchievements();
+        List<Achievements> achievements= achievementsManager.getAchievements(patient_id);
         for(Achievements a : achievements) {
             if(points>=a.getPoints_reward()){
                 if(!patientAchievementsManager.hasAchievement(patient_id,a.getId())){
                     patientAchievementsManager.addPatientAchievements(patient_id,a.getId());
+
                 }
             }
         }
@@ -77,21 +83,27 @@ public class PatientController {
     }
 
     @GetMapping("/patient_progress")
-    public String patientProgress(@RequestParam int patient_id, Model model) {
+    public String patientProgress(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int total_reports= dailyReportManager.getTotalReportsByPatientId(patient_id);
-        model.addAttribute("Totalreports : ",total_reports);
+        model.addAttribute("Totalreports",total_reports);
         double average_mood =dailyReportManager.getAverageMood(patient_id);
-        model.addAttribute("Averagemood : ",average_mood);
+        model.addAttribute("Averagemood",average_mood);
         double average_medication = dailyReportManager.getAverageMedicationTaken(patient_id);
-        model.addAttribute("Averagemedicationtaken : ",average_medication);
+        model.addAttribute("Averagemedicationtaken",average_medication);
         return "patient_progress";
 
     }
 
     @GetMapping("/patient_gamification")
-    public String patientGamification(@RequestParam int patient_id, Model model) {
+    public String patientGamification(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
-        model.addAttribute("points : ",points);
+        List<Achievements> achievementsList=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        model.addAttribute("points",points);
+        model.addAttribute("achievements",achievementsList);
         return "patient_gamification";
     }
 

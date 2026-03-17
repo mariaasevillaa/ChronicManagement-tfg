@@ -62,5 +62,21 @@ public class JDBCPatientManager {
             }
         }
 
+        public int getPatientIDbyUserID(int user_id) {
+        String sql = "SELECT id FROM patient WHERE user_id=?";
+        try(Connection c = dataSource.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, user_id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        }
+
 
 }
