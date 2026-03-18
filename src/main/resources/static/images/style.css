@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Playwrite+CU+Guides&display=swap');
+.header {
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+
+}
+
+
+#background {
+   //background-color:rgba(255,0,0,0.3);
+    background-image: url("wallpaper.png");
+    background-size: cover;        /* clave */
+    background-position: center;   /* centrada */
+    background-repeat: no-repeat;  /* no se repite */
+    min-height: 100vh;             /* ocupa toda la pantalla */
+    width: 100%;
+
+
+}
+
+#background > * {
+    position: relative;
+    z-index: 1;
+}
+.button-lr{
+    font-family: "Italiana", sans-serif;
+    padding: 10px 18px;
+    margin: 10px;
+    background-color: white;
+    color: #69443c;
+    font-weight: bold;
+
+}
+.top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+
+.button-link {
+
+}

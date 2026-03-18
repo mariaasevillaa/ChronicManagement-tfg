@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient progress</title>
 </head>
 <body>
+<h1> Here you can see your progress over time </h1>
+<form action="/patient_progress" method="get">
+    <p>You have submitted this amount of reports: <span th:text="${Totalreports}"></span></p>
+    <p>Your average mood is : <span th:text="${Averagemood}"></span></p>
+    <p>Your average medication that you have taken is : <span th:text="${Averagemedicationtaken}"></span></p>
+</form>
 
 </body>
 </html>
