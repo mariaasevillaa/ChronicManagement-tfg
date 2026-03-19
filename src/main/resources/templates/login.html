@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/images/style.css">
 </head>
 <body>
+<article id="background">
 
-<h1>Log in</h1>
+
+
+
 
 <form action="/login" method="post">
-    <label>Email</label>
-    <input type="email" name="email" required>
+    <section class="login">
+        <h1 class="header-login">Welcome back !<br> Log in</h1>
+    <label >Email<br></label>
+    <input type="email" name="email" class="login-button" required>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+    <label>Password <br></label>
+    <input type="password" name="password" class="login-button"  required>
 
-    <button type="submit">Log in</button>
+    <button type="submit" class="submit-login">Log in</button>
+    </section>
 </form>
+    <img src="/images/silueta.png" class="perfil">
 
-<a href="/register">Create account</a>
-
+<a href="/register" class="acount"> You don't have an account? Create account</a>
+</article>
 </body>
 </html>
