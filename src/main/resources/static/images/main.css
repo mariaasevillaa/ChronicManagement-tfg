@@ -7,7 +7,7 @@
     font-style: normal;
     font-size: xx-large;
     text-align: center;
-    top: 250px;
+    top: 300px;
 
 }
 .header3{
@@ -19,21 +19,20 @@
 }
 
 #background {
-   //background-color:rgba(255,0,0,0.3);
+    /* background-color: rgba(255,0,0,0.3); */
     background-image: url("wallpaper.png");
-    background-size: cover;        /* clave */
-    background-position: center;   /* centrada */
-    background-repeat: no-repeat;  /* no se repite */
-    min-height: 100vh;             /* ocupa toda la pantalla */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
     width: 100%;
-
-
-}
-
-#background > * {
     position: relative;
-    z-index: 1;
+
+
+
 }
+
+
 .button-lr{
     font-family: "Alumni Sans Pinstripe", sans-serif;
     font-size: 20px;
@@ -76,29 +75,8 @@
     width: 120px;
     top: 10px;
     left: 45px;
-
 }
-.login{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 
-    background: rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    border-radius: 20px;
-
-    width: 400px;
-    margin: 0 auto;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    position: absolute;
-    top: 250px;
-    left: 500px;
-
-    font-family: "Alumni Sans Pinstripe", sans-serif;
-    color: #69443c;
-    font-size: 28px;
-}
 .header-login{
     color: #69443c;
     font-family: "Italiana", sans-serif;
@@ -134,15 +112,65 @@
     padding: 10px;
     border-radius: 80px;
     border-color: #69443c;
+    position: absolute;
     width: 90px;
-    left: 670px;
+    left: 46.5%;
     top: 100px;
 
 }
 .acount{
+    position: absolute;
     text-decoration: none;
     color: black;
-    left: 480px;
-    top: 590px;
+    left: 40%;
+    top: 620px;
 
 }
+
+.register-button{
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.88);
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    color: #69443c;
+    font-size: 24px;
+}
+.auth-form{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-box{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    background: rgba(255, 255, 255, 0.88);
+    padding: 22px 26px;
+    border-radius: 20px;
+
+    width: 380px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    color: #69443c;
+    font-size: 18px;
+}
+

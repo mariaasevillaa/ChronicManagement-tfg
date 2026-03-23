@@ -1,5 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Patient List</title>
+    <link rel="stylesheet" href="/images/main.css">
 </head>
+<body>
+<article id="background">
+    <form action="/patient_list" method="get">
+        <h1>Here is the patient list</h1>
+        <ul>
+            <li th:each="patient : ${Patientlist}">
+            <span th:text="${patient.name}"
+                  th:text="${patient.surname}"
+                  th:text="${patient.chronic_condition}"
+            ></span>
+
+            </li>
+        </ul>
+
+    </form>
+
+</article>
+</body>
