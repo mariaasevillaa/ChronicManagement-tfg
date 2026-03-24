@@ -9,17 +9,21 @@
 <article id="background">
     <div class="patient" >
         <form action="/patient_dashboard" method="get">
-            <h1 class="header">Welcome back,<span th:text="${name}"></span></h1>
+            <h1 class="header">Welcome back, <span th:text="${name}"></span>!</h1>
             <h2 class="header3"> Below you can find several options. <br>Please choose what you want to do! </h2>
             <section class="pdash_buttons">
-                <a href="/daily_reports" class="option-patient">  📝 Complete the Daily well-being report</a>
-                <a href="/patient_progress" class="option-patient">  📈 View your progress over time
+                <a href="/daily_reports" class="option-patient">  📝 Daily well-being report</a>
+                <a href="/patient_progress" class="option-patient">  📈 View your progress
                 </a>
-                <a href="/patient_gamification" class="option-patient">⭐ View your current gamification status
+                <a href="/patient_gamification" class="option-patient">⭐ Gamification status
                 </a>
-                <button class="option-patient"> 🏆Receive an achievement notification</button>
+                <button class="option-patient"> 🏆 Achievements </button>
             </section>
         </form>
+    </div>
+    <div class="top">
+        <a href="/logout" class="logout">Log out | </a>
+        <span  th:text="${name}" class="name"></span>
     </div>
     <img src="/images/logo2.png" class="logo">
     <img src="/images/silueta.png" class="icono1">

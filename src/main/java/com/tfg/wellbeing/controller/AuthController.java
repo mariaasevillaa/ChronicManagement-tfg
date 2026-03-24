@@ -42,6 +42,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session) {
         User user = userManager.getUserByEmail(email);
+        Patient patient = patientManager.getPatientByEmail(email);
 
         if(user == null) {
             return "login";
@@ -53,6 +54,7 @@ public class AuthController {
         }
         session.setAttribute("user_id", user.getId());
         session.setAttribute("role", user.getRole());
+        session.setAttribute("name",patient.getName());
 
         if(user.getRole().equals("patient")) {
             System.out.println("Patient logged in, going to patient dashboard");
@@ -64,5 +66,10 @@ public class AuthController {
         }
         return "login";
 
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }

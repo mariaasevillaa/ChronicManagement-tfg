@@ -77,6 +77,31 @@ public class JDBCPatientManager {
             throw new RuntimeException(e);
         }
         }
+    public Patient getPatientByEmail(String email) {
+        String sql = "SELECT p.* " +
+                "FROM patient p " +
+                "INNER JOIN users u ON p.user_id = u.id " +
+                "WHERE u.email = ?";
 
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Patient patient = new Patient(rs.getInt("id"),rs.getInt("user_id"),rs.getString("name"),
+                    rs.getString("surname"),rs.getString("date_of_birth"),rs.getString("chronic_condition"),rs.getString("diagnosis_date")
+                    );
+                    return patient;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }
