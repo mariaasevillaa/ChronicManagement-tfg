@@ -6,12 +6,14 @@ import com.tfg.wellbeing.repository.JDBCUserManager;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.tfg.wellbeing.model.Patient;
 
 @Controller
 public class AuthController {
 
     private final JDBCUserManager userManager;
     private final JDBCPatientManager patientManager;
+
 
 
     public AuthController(JDBCUserManager userManager, JDBCPatientManager patientManager) {
@@ -40,6 +42,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session) {
         User user = userManager.getUserByEmail(email);
+
         if(user == null) {
             return "login";
         }

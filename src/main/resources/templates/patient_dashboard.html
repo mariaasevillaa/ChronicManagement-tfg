@@ -1,25 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="/images/dashboard.css">
 </head>
 <body>
-<h1>Welcome to the Patient Dashboard !</h1>
-<h2> Below you can find several options. <br>Please choose what you want to do! </h2>
-
-    <a href="/daily_reports"><button>Complete the Daily well-being report</button><br>
-    </a>
+<article id="background">
+    <div class="patient" >
+        <form action="/patient_dashboard" method="get">
+            <h1 class="header">Welcome back,<span th:text="${name}"></span></h1>
+            <h2 class="header3"> Below you can find several options. <br>Please choose what you want to do! </h2>
+            <section class="pdash_buttons">
+                <a href="/daily_reports" class="option-patient">  📝 Complete the Daily well-being report</a>
+                <a href="/patient_progress" class="option-patient">  📈 View your progress over time
+                </a>
+                <a href="/patient_gamification" class="option-patient">⭐ View your current gamification status
+                </a>
+                <button class="option-patient"> 🏆Receive an achievement notification</button>
+            </section>
+        </form>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
 <!--añadir luego como quiero que sea mi boton -->
 
-    <a href="/patient_progress"><button>View your progress over time </button><br>
-    </a>
-
-    <a href="/patient_gamification"><button>View your current gamification status </button><br>
-    </a>
-
-    <button>Receive an achievement notification</button>
-
+</article>
 
 </body>
 </html>

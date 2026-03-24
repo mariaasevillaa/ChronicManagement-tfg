@@ -43,6 +43,9 @@ public class PatientController {
             return "redirect:/login";
         }
         model.addAttribute("user_id", user_id);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
+
         return "patient_dashboard";
     }
     @GetMapping("/daily_reports")
