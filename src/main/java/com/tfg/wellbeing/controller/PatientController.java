@@ -66,7 +66,7 @@ public class PatientController {
             }
         }
          int points=  gamificationManager.addPoints(patient_id,10);
-        List<Achievements> achievements= achievementsManager.getAchievements(patient_id);
+        List<Achievements> achievements= patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         for(Achievements a : achievements) {
             if(points>=a.getPoints_reward()){
                 if(!patientAchievementsManager.hasAchievement(patient_id,a.getId())){

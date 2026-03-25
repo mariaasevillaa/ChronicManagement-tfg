@@ -3,62 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Daily Reports</title>
+    <link rel="stylesheet" href="/images/dashboard.css">
 </head>
 <body>
-<h1>  COMPLETE DAILY WELLBEING REPORT</h1>
-<form action="/daily_reports" method="post">
-    <label>Mood(1(lowest)-5 (highest))</label>
-    <input type="number" name="mood" min="1" max="5" required>
-    <br>
+<article id="background">
+    <div class="report">
+        <form action="daily_reports" method="post">
+            <h1 class="header_report">  Daily Well-being report</h1>
+            <h2 class="header3_report"> Complete your daily check-in in less than 1 minute</h2>
+            <div class="report1">
+                <label>Mood(1(lowest)-5 (highest))</label><br>
+                <label> <input type="checkbox" name="mood" value="1">Extremely low</label>
+                <label> <input type="checkbox" name="mood" value="2">Low</label>
+                <label> <input type="checkbox" name="mood" value="3">Medium</label>
+                <label> <input type="checkbox" name="mood" value="4">High</label>
+                <label> <input type="checkbox" name="mood" value="5">Extremely high</label>
+                <br>
+                <label>Have you taken your medication today? </label><br>
+                <label> <input type="checkbox" name="mood" value="0">No</label>
+                <label> <input type="checkbox" name="mood" value="1">Yes</label>
+                <br>
 
-    <label>Have you taken your medication today? (0 (no) 1(yes))</label>
-    <input type="number" name="medication_taken" min ="0" max="1" required>
-    <br>
-
-    <label>Anything you want to comment? Write it here</label>
-    <input type="text" name="note" required>
-    <br>
-
-    <label>Today's date</label>
-    <input type="text" name="date" required>
-    <br>
-    <h2> Select as many symptoms as ypu have</h2>
-    <label> <input type="checkbox" name="symptoms" value="1">Fatigue</label><br>
-    <label> <input type="checkbox" name="symptoms" value="2">Headache</label><br>
-    <label> <input type="checkbox" name="symptoms" value="3">Dizziness</label><br>
-    <label> <input type="checkbox" name="symptoms" value="4">Nausea</label><br>
-    <label> <input type="checkbox" name="symptoms" value="5">Vomiting</label><br>
-    <label> <input type="checkbox" name="symptoms" value="6">Fever</label><br>
-    <label> <input type="checkbox" name="symptoms" value="7">Chills</label><br>
-    <label> <input type="checkbox" name="symptoms" value="8">Muscle pain</label><br>
-    <label> <input type="checkbox" name="symptoms" value="9">Joint pain</label><br>
-    <label> <input type="checkbox" name="symptoms" value="10">Abdominal pain</label><br>
-    <label> <input type="checkbox" name="symptoms" value="11">Chest pain</label><br>
-    <label> <input type="checkbox" name="symptoms" value="12">Shortness of breath</label><br>
-    <label> <input type="checkbox" name="symptoms" value="13">Cough</label><br>
-    <label> <input type="checkbox" name="symptoms" value="14">Palpitations</label><br>
-    <label> <input type="checkbox" name="symptoms" value="15">Swelling (edema)</label><br>
-    <label> <input type="checkbox" name="symptoms" value="16">Sleep problems</label><br>
-    <label> <input type="checkbox" name="symptoms" value="17">Insomnia</label><br>
-    <label> <input type="checkbox" name="symptoms" value="18">Excessive sleepiness</label><br>
-    <label> <input type="checkbox" name="symptoms" value="19">Weakness</label><br>
-    <label> <input type="checkbox" name="symptoms" value="20">Diarrhea</label><br>
-    <label> <input type="checkbox" name="symptoms" value="21">Constipation</label><br>
-    <label> <input type="checkbox" name="symptoms" value="22">Loss of appetite</label><br>
-    <label> <input type="checkbox" name="symptoms" value="23">Anxiety</label><br>
-    <label> <input type="checkbox" name="symptoms" value="24">Low mood</label><br>
-    <label> <input type="checkbox" name="symptoms" value="25">Irritability</label><br>
-    <label> <input type="checkbox" name="symptoms" value="26">Difficulty concentrating</label><br>
-    <label> <input type="checkbox" name="symptoms" value="27">High blood sugar symptoms</label><br>
-    <label> <input type="checkbox" name="symptoms" value="28">Low blood sugar symptoms</label><br>
-    <label> <input type="checkbox" name="symptoms" value="29">High blood pressure symptoms</label><br>
-    <label> <input type="checkbox" name="symptoms" value="30">Low blood pressure symptoms</label><br>
-    <label> <input type="checkbox" name="symptoms" value="31">Other</label><br>
-
-
-    <button type="submit">Send</button>
+                <label>Today's date (yyyy-mm-dd)</label>
+                <input type="text" name="date" required>
+                <br>
+                <label>Comment</label>
+                <input type="text" name="note" required>
+                <br>
+            </div>
+            <div class="report2">
+                <h2 class="header3_report"> Select as many symptoms as you have</h2>
+                <div class="button">
+                    <label> <input type="checkbox" name="symptoms" value="1">Fatigue</label>
+                    <label> <input type="checkbox" name="symptoms" value="2">Headache</label>
+                    <label> <input type="checkbox" name="symptoms" value="3">Dizziness</label>
+                    <label> <input type="checkbox" name="symptoms" value="4">Nausea</label>
+                    <label> <input type="checkbox" name="symptoms" value="5">Vomiting</label>
+                    <label> <input type="checkbox" name="symptoms" value="6">Fever</label>
+                    <label> <input type="checkbox" name="symptoms" value="7">Chills</label>
+                    <label> <input type="checkbox" name="symptoms" value="8">Muscle pain</label>
+                    <label> <input type="checkbox" name="symptoms" value="9">Joint pain</label>
+                    <label> <input type="checkbox" name="symptoms" value="10">Abdominal pain</label>
+                    <label> <input type="checkbox" name="symptoms" value="11">Chest pain</label>
+                    <label> <input type="checkbox" name="symptoms" value="12">Shortness of breath</label>
+                    <label> <input type="checkbox" name="symptoms" value="13">Cough</label>
+                    <label> <input type="checkbox" name="symptoms" value="14">Palpitations</label>
+                    <label> <input type="checkbox" name="symptoms" value="15">Swelling (edema)</label>
+                    <label> <input type="checkbox" name="symptoms" value="16">Sleep problems</label>
+                    <label> <input type="checkbox" name="symptoms" value="17">Insomnia</label>
+                    <label> <input type="checkbox" name="symptoms" value="18">Excessive sleepiness</label>
+                    <label> <input type="checkbox" name="symptoms" value="19">Weakness</label>
+                    <label> <input type="checkbox" name="symptoms" value="20">Diarrhea</label>
+                    <label> <input type="checkbox" name="symptoms" value="21">Constipation</label>
+                    <label> <input type="checkbox" name="symptoms" value="22">Loss of appetite</label>
+                    <label> <input type="checkbox" name="symptoms" value="23">Anxiety</label>
+                    <label> <input type="checkbox" name="symptoms" value="24">Low mood</label>
+                    <label> <input type="checkbox" name="symptoms" value="25">Irritability</label>
+                    <label> <input type="checkbox" name="symptoms" value="26">Difficulty concentrating</label>
+                    <label> <input type="checkbox" name="symptoms" value="27">High blood sugar symptoms</label>
+                    <label> <input type="checkbox" name="symptoms" value="28">Low blood sugar symptoms</label>
+                    <label> <input type="checkbox" name="symptoms" value="29">High blood pressure symptoms</label>
+                    <label> <input type="checkbox" name="symptoms" value="30">Low blood pressure symptoms</label>
+                    <label> <input type="checkbox" name="symptoms" value="31">Other</label>
+                </div>
 
 
-</form>
+            </div>
+
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+
+</article>
+
 </body>
 </html>
