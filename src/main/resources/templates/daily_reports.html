@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Daily Reports</title>
-    <link rel="stylesheet" href="/images/dashboard.css">
+    <link rel="stylesheet" href="/images/dashboard1.css">
 </head>
 <body>
 <article id="background">
     <div class="report">
-        <form action="daily_reports" method="post">
+        <form action="/daily_reports" method="post">
             <h1 class="header_report">  Daily Well-being report</h1>
             <h2 class="header3_report"> Complete your daily check-in in less than 1 minute</h2>
             <div class="report1">
-                <label>Mood(1(lowest)-5 (highest))</label><br>
-                <label> <input type="checkbox" name="mood" value="1">Extremely low</label>
-                <label> <input type="checkbox" name="mood" value="2">Low</label>
-                <label> <input type="checkbox" name="mood" value="3">Medium</label>
-                <label> <input type="checkbox" name="mood" value="4">High</label>
-                <label> <input type="checkbox" name="mood" value="5">Extremely high</label>
+                <label>What is your mood?</label><br>
+                <label> <input type="radio" name="mood" value="1">Extremely low</label>
+                <label> <input type="radio" name="mood" value="2">Low</label>
+                <label> <input type="radio" name="mood" value="3">Medium</label>
+                <label> <input type="radio" name="mood" value="4">High</label>
+                <label> <input type="radio" name="mood" value="5">Extremely high</label>
                 <br>
                 <label>Have you taken your medication today? </label><br>
-                <label> <input type="checkbox" name="mood" value="0">No</label>
-                <label> <input type="checkbox" name="mood" value="1">Yes</label>
+                <label> <input type="radio" name="mood" value="0">No</label>
+                <label> <input type="radio" name="mood" value="1">Yes</label>
                 <br>
 
                 <label>Today's date (yyyy-mm-dd)</label>
@@ -70,7 +70,7 @@
 
             </div>
 
-            <button type="submit">Send</button>
+            <button type="submit" class="report_send">Send</button>
         </form>
 
     </div>

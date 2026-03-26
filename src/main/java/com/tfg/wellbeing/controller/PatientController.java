@@ -53,10 +53,12 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         model.addAttribute("patient_id", patient_id);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
         return "daily_reports";
     }
     @PostMapping("/daily_reports")
-    public String dailyReports(HttpSession session, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms ) {
+    public String dailyReports(HttpSession session, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms, Model model ) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int report_id= dailyReportManager.addDailyReport(patient_id,mood,medication_taken,note,date);
@@ -81,6 +83,8 @@ public class PatientController {
 
             }
         }
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name",name);
         return "redirect:/patient_dashboard";
 
     }
