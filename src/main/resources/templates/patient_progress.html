@@ -3,14 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient progress</title>
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
-<h1> Here you can see your progress over time </h1>
-<form action="/patient_progress" method="get">
-    <p>You have submitted this amount of reports: <span th:text="${Totalreports}"></span></p>
-    <p>Your average mood is : <span th:text="${Averagemood}"></span></p>
-    <p>Your average medication that you have taken is : <span th:text="${Averagemedicationtaken}"></span></p>
-</form>
+<article id="background">
+    <div class="progress">
+        <form action="/patient_progress" method="get">
+        <h1 class="header_progress"> Your progress over time </h1>
+        <h2 class="header3_progress"> Track your daily reports, mood and medication adherence</h2>
+            <div class="progress-row">
+            <p class="box-progress"><span th:text="${Totalreports}"></span><br>Reports submitted</p>
+            <p class="box-progress"><span th:text="${Averagemood}+ '/5'"></span><br>Average mood</p>
+            <p class="box-progress"><span th:text="${Averagemedicationtaken}"></span><br>Medication adherence</p>
+            </div>
+            <div class="range-button">
+                <button type="button" onclick="updateChart('days')"> Days</button>
+                <button type="button" onclick="updateChart('weeks')"> Weeks</button>
+                <button type="button" onclick="updateChart('months')"> Months</button>
+            </div>
+        </form>
+    </div>
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+</article>
 
 </body>
 </html>

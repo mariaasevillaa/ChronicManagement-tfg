@@ -99,6 +99,8 @@ public class PatientController {
         model.addAttribute("Averagemood",average_mood);
         double average_medication = dailyReportManager.getAverageMedicationTaken(patient_id);
         model.addAttribute("Averagemedicationtaken",average_medication);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
         return "patient_progress";
 
     }
