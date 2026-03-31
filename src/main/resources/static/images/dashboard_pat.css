@@ -210,9 +210,10 @@
 }
 .box-progress{
     background: rgb(154, 114, 105,0.4);
-    padding: 10px 10px;
+    padding: 10px 15px;
     margin: 20px 0;
     font-size: 16px;
+    border-radius: 18px;
 
 }
 .progress-row{
@@ -220,4 +221,26 @@
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+}
+.chart canvas{
+    width: 100%;
+    height: 300px;
+}
+.chart{
+    background: rgba(255,255,255,0.75);
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.button-chart{
+    background: rgba(255,255,255,0.88);
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 10px 10px;
+
+}
+.button-chart:hover{
+    background-color: #8c7d7c;
+    color: white;
 }

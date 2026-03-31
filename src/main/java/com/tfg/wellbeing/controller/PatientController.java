@@ -101,6 +101,12 @@ public class PatientController {
         model.addAttribute("Averagemedicationtaken",average_medication);
         String name= (String) session.getAttribute("name");
         model.addAttribute("name", name);
+        model.addAttribute("daysvalues", dailyReportManager.getDaysValues(patient_id));
+        model.addAttribute("dayslabels", dailyReportManager.getDaysLabel(patient_id));
+        model.addAttribute("weeksvalues", dailyReportManager.getWeekValues(patient_id));
+        model.addAttribute("weekslabels", dailyReportManager.getWeekLabels(patient_id));
+        model.addAttribute("monthsvalues", dailyReportManager.getMonthValues(patient_id));
+        model.addAttribute("monthslabels", dailyReportManager.getMonthLabels(patient_id));
         return "patient_progress";
 
     }

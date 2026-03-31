@@ -128,5 +128,143 @@ public class JDBCDailyReportManager {
             throw new RuntimeException(e);
         }
 
+
     }
+    public List<String>getDaysLabel(int patient_id){
+        String sql = "SELECT date FROM daily_reports WHERE patient_id= ? ORDER BY date  ";
+        List<String>labels=new ArrayList<>();
+        try(Connection c =datasource.getConnection();
+        PreparedStatement ps= c.prepareStatement(sql)) {
+            ps.setInt(1, patient_id);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    labels.add(rs.getString("date"));
+
+                }
+        }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return labels;
+
+    }
+
+    public List<Double>getDaysValues(int patient_id){
+        String sql = "SELECT mood FROM daily_reports WHERE patient_id= ? ORDER BY date  ";
+        List<Double>values=new ArrayList<>();
+        try(Connection c =datasource.getConnection();
+            PreparedStatement ps= c.prepareStatement(sql)) {
+            ps.setInt(1, patient_id);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    values.add(rs.getDouble("mood"));
+
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return values;
+
+    }
+    public List<String> getWeekLabels(int patientId) {
+        List<String> labels = new ArrayList<>();
+
+        String sql = "SELECT strftime('%W', date) AS week_label " +
+                "FROM daily_reports WHERE patient_id = ? " +
+                "GROUP BY strftime('%W', date) " +
+                "ORDER BY strftime('%W', date)";
+
+        try (Connection con = datasource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int numberweek=rs.getInt("week_label");
+                labels.add("Week " + numberweek);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return labels;
+    }
+    public List<Double> getWeekValues(int patientId) {
+        List<Double> values = new ArrayList<>();
+
+        String sql = "SELECT AVG(mood) AS avg_mood " +
+                "FROM daily_reports WHERE patient_id = ? " +
+                "GROUP BY strftime('%W', date) " +
+                "ORDER BY strftime('%W', date)";
+
+        try (Connection con = datasource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                values.add(rs.getDouble("avg_mood"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return values;
+    }
+    public List<String> getMonthLabels(int patientId) {
+        List<String> labels = new ArrayList<>();
+
+        String sql = "SELECT strftime('%Y-%m', date) AS month_label " +
+                "FROM daily_reports WHERE patient_id = ? " +
+                "GROUP BY strftime('%Y-%m', date) " +
+                "ORDER BY strftime('%Y-%m', date)";
+
+        try (Connection con = datasource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                labels.add(rs.getString("month_label"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return labels;
+    }
+    public List<Double> getMonthValues(int patientId) {
+        List<Double> values = new ArrayList<>();
+
+        String sql = "SELECT AVG(mood) AS avg_mood " +
+                "FROM daily_reports WHERE patient_id = ? " +
+                "GROUP BY strftime('%Y-%m', date) " +
+                "ORDER BY strftime('%Y-%m', date)";
+
+        try (Connection con = datasource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                values.add(rs.getDouble("avg_mood"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return values;
+    }
+
 }
