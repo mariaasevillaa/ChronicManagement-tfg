@@ -99,5 +99,19 @@ public class JDBCGamificationManager {
 
         return getPoints(patientId);
     }
-
+    public int getStreakDayss (int patient_id){
+        String sql = "SELECT streak_days FROM gamification_status WHERE patient_id = ?";
+        try(Connection c =dataSource.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, patient_id);
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    return rs.getInt("streak_days");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

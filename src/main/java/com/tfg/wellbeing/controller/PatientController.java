@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -68,7 +69,7 @@ public class PatientController {
             }
         }
          int points=  gamificationManager.addPoints(patient_id,10);
-        List<Achievements> achievements= patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        List<Achievements> achievements= achievementsManager.getAchievements();
         for(Achievements a : achievements) {
             if(points>=a.getPoints_reward()){
                 if(!patientAchievementsManager.hasAchievement(patient_id,a.getId())){
@@ -116,12 +117,49 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
-        List<Achievements> achievementsList=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        int streakdays= gamificationManager.getStreakDayss(patient_id);
+        List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        List<Achievements> allAchievements=achievementsManager.getAchievements();
+        Achievements nextAchievement = null;
+        for (Achievements a : allAchievements) {
+            if (points < a.getPoints_reward()) {
+                nextAchievement = a;
+                break;
+            }
+        }
+        model.addAttribute("nextachievement",nextAchievement);
         model.addAttribute("points",points);
-        model.addAttribute("achievements",achievementsList);
+        model.addAttribute("streakdays",streakdays);
+        model.addAttribute("unlockedachievements",unlockedAchievements);
+        model.addAttribute("allachievements",allAchievements);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
         return "patient_gamification";
     }
 
+    @GetMapping("/patient_achievements")
+    public String patientAchievements(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        List<Achievements> allAchievements=achievementsManager.getAchievements();
+        List<Achievements> lockedAchievements = new ArrayList<>();
+
+        for (Achievements a : allAchievements) {
+            if (!patientAchievementsManager.hasAchievement(patient_id, a.getId())) {
+                lockedAchievements.add(a);
+            }
+        }
+
+        model.addAttribute("unlockedAchievements", unlockedAchievements);
+        model.addAttribute("lockedAchievements", lockedAchievements);
+
+        String name = (String) session.getAttribute("name");
+        model.addAttribute("name", name);
+
+        return "patient_achievements";
+
+    }
 
 
 

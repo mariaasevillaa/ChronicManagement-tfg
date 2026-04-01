@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient gamification</title>
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
 </head>
 <body>
-<h1> Here you can see your points</h1>
-<form action="/patient_gamification" method="get">
-    <p>Your current points are: <span th:text="${points}"></span></p>
-    <h2>Your Achievements</h2>
-    <ul>
-        <li th:each="a : ${achievements}">
-            <span th:text="${a.name}"></span>
-        </li>
-    </ul>
+<article id="background">
+    <div class="gamification">
+        <form action="/patient_gamification" method="get">
+            <h1 class="header_progress"> Your gamification status </h1>
+            <h2 class="header3"> Track your points and progress</h2>
+            <div class="gamification-row">
+                <p class="box-gamification">Your current points <span th:text="${points}"></span></p>
+                <p class="box-gamification"> Streak days: <span th:text="${streakdays}"></span></p>
+            </div>
+            <h3 class="header3_progress"> Next achievement:</h3>
+            <div class="nextAchievement">
+                <p > Name: <span th:text="${nextachievement.getName()}"></span></p>
+                <p > Description: <span th:text="${nextachievement.getDescription()}"></span></p>
+                <p > Reward: <span th:text="${nextachievement.getPoints_reward()}"></span>points</p>
+            </div>
+                <a href="/patient_dashboard" class="return_dashboard">Back to dashboard</a>
 
 
-    <a href="/patient_dashboard">Back to dashboard</a>
 
 
-</form>
+        </form>
+    </div>
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+
+</article>
 </body>
 </html>

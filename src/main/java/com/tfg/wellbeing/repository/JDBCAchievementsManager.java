@@ -17,15 +17,14 @@ public class JDBCAchievementsManager {
     public JDBCAchievementsManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    public List<Achievements> getAchievements(int patient_id) {
-        String sql= "SELECT * FROM achievements WHERE patient_id=?";
+    public List<Achievements> getAchievements() {
+        String sql= "SELECT * FROM achievements ";
         List<Achievements> achievementsList = new ArrayList<>();
         try(Connection c = dataSource.getConnection();
         PreparedStatement ps= c.prepareStatement(sql)) {
-            ps.setInt(1, patient_id);
             try(ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    Achievements achievement = new Achievements(rs.getInt("id"),rs.getString("name"),rs.getInt("points_reward"));
+                    Achievements achievement = new Achievements(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
                     achievementsList.add(achievement);
                 }
             }

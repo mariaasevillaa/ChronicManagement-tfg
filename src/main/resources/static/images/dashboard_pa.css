@@ -244,3 +244,52 @@
     background-color: #8c7d7c;
     color: white;
 }
+.gamification{
+    text-align: center;
+    width: 85%;
+    max-width: 620px;
+    align-items: center;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.88);
+    padding: 20px 24px;
+
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+.gamification-row{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.box-gamification{
+    background: rgb(154, 114, 105,0.4);
+    padding: 12px 17px;
+    margin: 20px 0;
+    font-size: 18px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+
+}
+.return_dashboard{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: white;
+    color: #8c7d7c;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.return_dashboard:hover{
+    background-color: #8c7d7c;
+    color: white;
+}
+.nextAchievement{
+    background: rgb(154, 114, 105,0.4);
+    padding: 12px 17px;
+    margin: 20px 0;
+    font-size: 20px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+}

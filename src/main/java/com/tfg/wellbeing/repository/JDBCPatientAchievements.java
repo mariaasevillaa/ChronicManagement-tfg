@@ -48,14 +48,14 @@ public class JDBCPatientAchievements {
 
     }
     public List<Achievements> getAchievemntsbyPatientId(int patient_id) {
-        String sql = "SELECT a.id, a.name, a.points_reward FROM patient_achievements pa JOIN achievements a ON a.id=pa.achievement_id WHERE pa.patient_id=?";
+        String sql = "SELECT a.id, a.name, a.description,a.points_reward,a.reports_needed FROM patient_achievements pa JOIN achievements a ON a.id=pa.achievement_id WHERE pa.patient_id=?";
         List<Achievements> achievementslist = new ArrayList<>();
         try (Connection c = dataSource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
             try(ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Achievements achievements= new Achievements(rs.getInt("id"),rs.getString("name"),rs.getInt("points_reward"));
+                    Achievements achievements= new Achievements(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
                     achievementslist.add(achievements);
 
                 }
