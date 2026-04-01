@@ -141,6 +141,7 @@ public class PatientController {
     public String patientAchievements(HttpSession session, Model model) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        int points= gamificationManager.getPoints(patient_id);
         List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         List<Achievements> allAchievements=achievementsManager.getAchievements();
         List<Achievements> lockedAchievements = new ArrayList<>();
@@ -150,9 +151,10 @@ public class PatientController {
                 lockedAchievements.add(a);
             }
         }
-
+        model.addAttribute("points",points);
         model.addAttribute("unlockedAchievements", unlockedAchievements);
         model.addAttribute("lockedAchievements", lockedAchievements);
+        model.addAttribute("unlockedAchievementssize", unlockedAchievements.size());
 
         String name = (String) session.getAttribute("name");
         model.addAttribute("name", name);

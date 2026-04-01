@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient achievements</title>
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
+<article id="background">
+    <div class="achievements">
+        <form action="patient_achievements" method="get">
+            <h1 class="header_progress"> Your achievements</h1>
+            <h2 class="header3"> Unlock rewards by staying consistent with your reports</h2>
+            <div class="achievements-summary">
+                <div class="summary">
+                    <p class="summary-number" ><span th:text="${points}"></span></p>
+                    <p class="summary-number">Total points</p>
+                </div>
+                <div class="summary">
+                    <p class="summary-number" th:text="${unlockedAchievementssize}" ></p>
+                    <p class="summary-number">Unlocked</p>
+                </div>
+            </div>
+
+            <div class="unlocked_achievements">
+                <h3 class="header3_progress">Unlocked</h3>
+                <div>
+                    <div th:each="a : ${unlockedAchievements}" class="achievements-box-unlocked">
+                        <p> ✔ <span th:text="${a.name}"></span></p>
+                        <p th:text="${a.points_reward} + ' points'"></p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="locked_achievements">
+            <h3 class="header3_progress">Locked</h3>
+                <div>
+                    <div th:each="a : ${lockedAchievements}" class="achievements-box">
+                        <p> 🔒 <span th:text="${a.name}"></span></p>
+                        <p th:text="${a.points_reward} + ' points'"></p>
+
+                    </div>
+                </div>
+
+    </div>
+            <a href="/patient_dashboard" class="return_dashboard">Back to dashboard</a>
+        </form>
+
+    </div>
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+
+</article>
+
 
 </body>
 </html>

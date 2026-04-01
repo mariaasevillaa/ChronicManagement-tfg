@@ -293,3 +293,71 @@
     font-size: 20px;
     font-family: "Alumni Sans Pinstripe", sans-serif;
 }
+.achievements{
+    text-align: center;
+    width: 85%;
+    max-width: 620px;
+    align-items: center;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.88);
+    padding: 20px 24px;
+
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+.unlocked_achievements,
+.locked_achievements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.unlocked_achievements > div,
+.locked_achievements > div {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.achievements-box-unlocked {
+    background: rgb(154, 114, 105, 1);
+    padding: 10px 12px;
+    margin: 10px 0;
+    font-size: 18px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    width: 160px;
+    text-align: center;
+    border-radius: 10px;
+}
+.achievements-box{
+    background: rgb(154, 114, 105, 0.4);
+    padding: 10px 12px;
+    margin: 10px 0;
+    font-size: 18px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    width: 160px;
+    text-align: center;
+    border-radius: 10px;
+}
+.summary{
+    background: rgba(154, 114, 105, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px;
+    min-width: 130px;
+    text-align: center;
+}
+.summary-number{
+    font-size: 14px;
+    margin: 0;
+    color: #7a5148;
+    font-weight: bold;
+}
+.achievements-summary{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0 35px 0;
+}
