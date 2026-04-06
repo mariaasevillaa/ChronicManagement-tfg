@@ -5,7 +5,7 @@
     font-family: "Italiana", sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: xx-large;
+    font-size: 30px;
     text-align: center;
 
 
@@ -13,13 +13,12 @@
 .header3{
     color: #69443c;
     font-family: "Italiana", sans-serif;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
     top: 260px;
 }
 
 #background {
-    /* background-color: rgba(255,0,0,0.3); */
     background-image: url("wallpaper.png");
     background-size: cover;
     background-position: center;
@@ -37,9 +36,9 @@
 
 .button-lr{
     font-family: "Alumni Sans Pinstripe", sans-serif;
-    font-size: 20px;
-    font-weight: bolder;
-    padding: 14px 28px;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 16px 30px;
     margin: 10px;
     background-color: white;
     color: #8c7d7c;
@@ -176,7 +175,7 @@
     gap: 8px;
 
     background: rgba(255, 255, 255, 0.88);
-    padding: 24px 30px;
+    padding: 24px 80px;
     border-radius: 20px;
 
     width: 380px;
@@ -196,4 +195,85 @@
     width: 240px;
 
 }
+.bottom{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    width: 820px;
+    max-width: 90%;
+    margin: 40px auto 0 auto;
+}
+.bottom-info{
+    background: rgba(154, 114, 105, 0.35);
+    border-radius: 18px;
+    padding: 18px 20px;
+    text-align: center;
+    color: #3f2a25;
+    font-size: 22px;
+    line-height: 1.4;
+    font-weight: 800;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
 
+}
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.delay1 { animation-delay: 0.2s; }
+.delay2 { animation-delay: 0.4s; }
+.delay3 { animation-delay: 0.6s; }
+.row{
+    display: flex;
+    gap: 15px;
+    flex: 1;
+}
+.header3-register{
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    top: 260px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+.left-box{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    background: rgba(154, 114, 105, 0.35);
+    padding: 40px;
+    border-radius: 20px;
+
+    width: 380px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    justify-content: center; /*centra verticalmente*/
+    align-items: center; /*horizontalmente*/
+    text-align: center;
+}
+.img{
+    width: 450px;
+}
+.register-left{
+   display: flex;
+    justify-content: center;
+}
+.question{
+    color: #3f2a25;
+    font-size: 18px;
+    text-decoration: none;
+    margin-top: 0px;
+}

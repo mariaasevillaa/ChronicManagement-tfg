@@ -8,33 +8,49 @@
 <body>
 <article id="background">
 <form action="/register" method="post" class="auth-form">
+<div class="container">
+    <div class="left-box">
+        <div class="fade-in delay1">
+            <img src="/images/logo-removebg-preview.png" class="img">
+            <div class="register-left">
+                <a href="/login" class="question"> Already have an account? <span  style="color: #69443c" >Login</span></a>
 
+            </div>
+        </div>
+
+
+
+    </div>
     <section class="register-box">
         <h1 class="header-login">Create an account</h1>
-    <label>Name</label>
-    <input type="text" name="name" class="register-button" required >
+        <p class="header3-register">Start tracking your health in just a few steps</p>
+        <div class="row">
+            <label>Name</label>
+            <input type="text" name="name" class="register-button" required >
 
-    <label>Surname</label>
-    <input type="text" name="surname" class="register-button" required >
+            <label>Surname</label>
+            <input type="text" name="surname" class="register-button" required >
+        </div>
+        <label>Date of birth</label>
+        <input type="text" name="date_of_birth"  class="register-button" required >
 
-    <label>Date of birth</label>
-    <input type="text" name="date_of_birth"  class="register-button" required >
+        <label>Chronic condition</label>
+        <input type="text" name="chronic_condition"  class="register-button" required >
 
-    <label>Chronic condition</label>
-    <input type="text" name="chronic_condition"  class="register-button" required >
+        <label>Diagnosis date</label>
+        <input type="text" name="diagnosis_date"  class="register-button" required >
 
-    <label>Diagnosis date</label>
-    <input type="text" name="diagnosis_date"  class="register-button" required >
+        <label>Email</label>
+        <input type="email" name="email"  class="register-button" required >
 
-    <label>Email</label>
-    <input type="email" name="email"  class="register-button" required >
-
-    <label>Password</label>
-    <input type="password" name="password" class="register-button" required >
+        <label>Password</label>
+        <input type="password" name="password" class="register-button" required >
 
 
-    <button type="submit" class="submit-login">Register</button>
+        <button type="submit" class="submit-login">Register</button>
     </section>
+</div>
+
 </form>
     <img src="/images/logo2.png" class="logo">
 </article>

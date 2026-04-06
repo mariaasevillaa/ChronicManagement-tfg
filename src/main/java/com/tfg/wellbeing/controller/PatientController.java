@@ -69,12 +69,13 @@ public class PatientController {
             }
         }
          int points=  gamificationManager.addPoints(patient_id,10);
-        List<Achievements> achievements= achievementsManager.getAchievements();
-        for(Achievements a : achievements) {
-            if(points>=a.getPoints_reward()){
-                if(!patientAchievementsManager.hasAchievement(patient_id,a.getId())){
-                    patientAchievementsManager.addPatientAchievements(patient_id,a.getId());
+        int reportsCount = dailyReportManager.countReportsByPatientId(patient_id);
+        List<Achievements> achievements = achievementsManager.getAchievements();
 
+        for (Achievements a : achievements) {
+            if (reportsCount >= a.getReports_needed()) {
+                if (!patientAchievementsManager.hasAchievement(patient_id, a.getId())) {
+                    patientAchievementsManager.addPatientAchievements(patient_id, a.getId());
                 }
             }
         }
@@ -118,11 +119,12 @@ public class PatientController {
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
         int streakdays= gamificationManager.getStreakDayss(patient_id);
+        int reportsCount=dailyReportManager.countReportsByPatientId(patient_id);
         List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         List<Achievements> allAchievements=achievementsManager.getAchievements();
         Achievements nextAchievement = null;
         for (Achievements a : allAchievements) {
-            if (points < a.getPoints_reward()) {
+            if (reportsCount < a.getReports_needed()) {
                 nextAchievement = a;
                 break;
             }
@@ -132,6 +134,7 @@ public class PatientController {
         model.addAttribute("streakdays",streakdays);
         model.addAttribute("unlockedachievements",unlockedAchievements);
         model.addAttribute("allachievements",allAchievements);
+        model.addAttribute("reportsCount", reportsCount);
         String name= (String) session.getAttribute("name");
         model.addAttribute("name", name);
         return "patient_gamification";
@@ -142,12 +145,15 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
+        int reportsCount= dailyReportManager.countReportsByPatientId(patient_id);
         List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         List<Achievements> allAchievements=achievementsManager.getAchievements();
         List<Achievements> lockedAchievements = new ArrayList<>();
 
         for (Achievements a : allAchievements) {
-            if (!patientAchievementsManager.hasAchievement(patient_id, a.getId())) {
+            if (reportsCount >= a.getReports_needed()) {
+                unlockedAchievements.add(a);
+            } else {
                 lockedAchievements.add(a);
             }
         }

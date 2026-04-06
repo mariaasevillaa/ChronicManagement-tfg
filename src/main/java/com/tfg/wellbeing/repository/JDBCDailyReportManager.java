@@ -266,5 +266,23 @@ public class JDBCDailyReportManager {
 
         return values;
     }
+    public int countReportsByPatientId(int patient_id) {
+        String sql = "SELECT COUNT(*) FROM daily_reports WHERE patient_id = ?";
+        try (Connection con = datasource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, patient_id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 }
+
