@@ -3,14 +3,13 @@ package com.tfg.wellbeing.controller;
 import com.tfg.wellbeing.model.Alerts;
 import com.tfg.wellbeing.model.Daily_report;
 import com.tfg.wellbeing.model.MonitoringParameters;
+import com.tfg.wellbeing.repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.tfg.wellbeing.model.Patient;
-import com.tfg.wellbeing.repository.JDBCAlertsManager;
-import com.tfg.wellbeing.repository.JDBCDailyReportManager;
-import com.tfg.wellbeing.repository.JDBCHpPatientManager;
-import com.tfg.wellbeing.repository.JDBCMonitoringParameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -22,27 +21,49 @@ public class HpController {
     private final JDBCMonitoringParameters monitoringParameters;
     private final JDBCAlertsManager alertsManager;
     private final JDBCDailyReportManager dailyReportManager;
+    private final JDBCPatientManager patientManager1;
 
 
-    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameters monitoringParameters, JDBCAlertsManager alertsManager, JDBCDailyReportManager dailyReportManager) {
+    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameters monitoringParameters, JDBCAlertsManager alertsManager, JDBCDailyReportManager dailyReportManager, JDBCPatientManager patientManager1) {
         this.patientManager = patientManager;
         this.monitoringParameters = monitoringParameters;
         this.alertsManager = alertsManager;
         this.dailyReportManager = dailyReportManager;
+        this.patientManager1 = patientManager1;
     }
 
     @GetMapping("/hp_dashboard")
-    public String hpDashboard() {
+    public String hpDashboard(Model model, HttpSession session) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user_id", user_id);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
+        List<Patient>patientList=patientManager1.getAllPatients();
+        model.addAttribute("Patientlist", patientList);
         return "hp_dashboard";
 
     }
+    @PostMapping("/select_patient")
+    public String selectPatient(@RequestParam("patient_id") int patientId,
+                                HttpSession session){
 
-    @GetMapping("/patient_list")
-    public String patientList(Model model, @RequestParam int hp_id) {
-        List<Patient> patientList= patientManager.getPatientByHpId(hp_id);
-        model.addAttribute("Patientlist", patientList);
-        return "patient_list";
+        Integer doctorId = (Integer) session.getAttribute("doctor_id");
+        String role = (String) session.getAttribute("role");
+
+        if (doctorId == null || role == null || !role.equalsIgnoreCase("DOCTOR")) {
+            return "redirect:/login";
+        }
+
+        patientManager.assignPatientToHp(doctorId, patientId);
+
+        return "redirect:/view_patient";
     }
+
+
+
     @GetMapping("/review_reports")
     public String reviewReports(Model model, @RequestParam int patient_id) {
         List<Daily_report> dailyReportList= dailyReportManager.getReportByPatientId(patient_id);

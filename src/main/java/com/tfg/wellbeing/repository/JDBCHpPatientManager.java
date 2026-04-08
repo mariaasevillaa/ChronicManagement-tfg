@@ -44,4 +44,18 @@ public class JDBCHpPatientManager {
         }
 
     }
+    public void assignPatientToHp(int hpId, int patientId) {
+        String sql = "INSERT OR IGNORE INTO hp_patient (hp_id, patient_id) VALUES (?, ?)";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, hpId);
+            stmt.setInt(2, patientId);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

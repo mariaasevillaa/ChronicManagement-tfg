@@ -1,6 +1,8 @@
 package com.tfg.wellbeing.controller;
 
+import com.tfg.wellbeing.model.Health_professional;
 import com.tfg.wellbeing.model.User;
+import com.tfg.wellbeing.repository.JDBCHealthCareManager;
 import com.tfg.wellbeing.repository.JDBCPatientManager;
 import com.tfg.wellbeing.repository.JDBCUserManager;
 import jakarta.servlet.http.HttpSession;
@@ -13,12 +15,14 @@ public class AuthController {
 
     private final JDBCUserManager userManager;
     private final JDBCPatientManager patientManager;
+    private final JDBCHealthCareManager healthCareManager;
 
 
 
-    public AuthController(JDBCUserManager userManager, JDBCPatientManager patientManager) {
+    public AuthController(JDBCUserManager userManager, JDBCPatientManager patientManager, JDBCHealthCareManager healthCareManager) {
         this.userManager = userManager;
         this.patientManager = patientManager;
+        this.healthCareManager = healthCareManager;
     }
 
     @GetMapping("/register")
@@ -42,7 +46,6 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session) {
         User user = userManager.getUserByEmail(email);
-        Patient patient = patientManager.getPatientByEmail(email);
 
         if(user == null) {
             return "login";
@@ -54,13 +57,21 @@ public class AuthController {
         }
         session.setAttribute("user_id", user.getId());
         session.setAttribute("role", user.getRole());
-        session.setAttribute("name",patient.getName());
 
         if(user.getRole().equals("patient")) {
+            Patient patient = patientManager.getPatientByEmail(email);
+            if(patient != null) {
+                session.setAttribute("name",patient.getName());
+            }
             System.out.println("Patient logged in, going to patient dashboard");
             return "redirect:/patient_dashboard";
         }
-        if(user.getRole().equals("healthcare professional")) {
+        if(user.getRole().equals("DOCTOR")) {
+            Health_professional healthProfessional= healthCareManager.getHealthProfessionalByEmail(email);
+            if(healthProfessional != null) {
+                session.setAttribute("name",healthProfessional.getName());
+            }
+
             System.out.println("Healthcare professional logged in, going to healthcare professional dashboard");
             return "redirect:/hp_dashboard";
         }

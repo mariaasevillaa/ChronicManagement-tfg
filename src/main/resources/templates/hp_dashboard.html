@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Healthcare Professional dashboard</title>
+    <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
+<article id="background">
+    <div class="healthcare">
+        <form action="hp_dashboard" method="get">
+            <h1 class="header">Welcome back,Doctor <span th:text="${name}"></span>!</h1>
+            <h2 class="header3"> List of available patients. <br>Select a patient to review or assign to yourself. </h2>
+
+                <div class="pdash_buttons">
+                    <div class="info-patient" th:each="patient: ${Patientlist}">
+                        <p> Patient: <span th:text="${patient.getName()} " ></span> <span th:text="${ patient.getSurname()}" ></span></p>
+                        <p> Condition: <span th:text="${patient.getChronic_condition()}" ></span></p>
+                        <form action="select_patient" method="post">
+                            <button type="submit" class="select-patinent">Select patient</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </form>
+
+
+    </div>
+
+
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+
+
+</article>
+
 
 </body>
 </html>
