@@ -5,14 +5,14 @@ public class Health_professional {
     private int user_id;
     private String name;
     private String surname;
-    private String specialization;
+    private String speciality;
 
-    public Health_professional(int id, int user_id, String name, String surname, String specialization) {
+    public Health_professional(int id, int user_id, String name, String surname, String speciality) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;
         this.surname = surname;
-        this.specialization = specialization;
+        this.speciality = speciality;
     }
 
     public int getId() {
@@ -48,11 +48,11 @@ public class Health_professional {
     }
 
     public String getSpecialization() {
-        return specialization;
+        return speciality;
     }
 
     public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+        this.speciality = specialization;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Health_professional {
                 ", user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", specialization='" + specialization + '\'' +
+                ", specialization='" + speciality + '\'' +
                 '}';
     }
 }

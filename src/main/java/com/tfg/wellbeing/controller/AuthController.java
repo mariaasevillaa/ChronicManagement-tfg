@@ -62,14 +62,21 @@ public class AuthController {
             Patient patient = patientManager.getPatientByEmail(email);
             if(patient != null) {
                 session.setAttribute("name",patient.getName());
+                session.setAttribute("patient_id", patient.getId());
             }
             System.out.println("Patient logged in, going to patient dashboard");
             return "redirect:/patient_dashboard";
         }
         if(user.getRole().equals("DOCTOR")) {
             Health_professional healthProfessional= healthCareManager.getHealthProfessionalByEmail(email);
+            System.out.println("LOGIN doctor user = " + user.getEmail());
+            System.out.println("LOGIN role = " + user.getRole());
+            System.out.println("LOGIN healthProfessional = " + healthProfessional);
             if(healthProfessional != null) {
                 session.setAttribute("name",healthProfessional.getName());
+                session.setAttribute("healthprofessional_id", healthProfessional.getId());
+                System.out.println("LOGIN doctor_id saved = " + healthProfessional.getId());
+
             }
 
             System.out.println("Healthcare professional logged in, going to healthcare professional dashboard");

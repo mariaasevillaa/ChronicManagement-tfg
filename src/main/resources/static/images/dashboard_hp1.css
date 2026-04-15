@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Italiana&family=Playwrite+CU+Guides&family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+
+#background {
+    /* background-color: rgba(255,0,0,0.3); */
+    background-image: url("wallpaper.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 45px;
+    text-align: center;
+
+
+}
+.header3{
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    top: 260px;
+}
+.logo{
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    width: 240px;
+
+}
+.icono1{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 95px;
+}
+.logout{
+
+    text-decoration: none;
+    font-family: "Italiana", sans-serif;
+    font-size: 20px;
+
+    color: #69443c;
+
+}
+.top{
+    position: absolute;
+    top: 60px;
+    right: 150px;
+    align-items: center;
+
+}
+.logout:hover{
+    color: #cccccc;
+}
+.name{
+    text-decoration: none;
+    font-family: "Italiana", sans-serif;
+    font-size: 20px;
+
+    color: #69443c;
+}
+.healthcare{
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    align-items: center;
+    margin: 0 auto;
+}
+.pdash_buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+.info-patient{
+    background: rgba(255,255,255,0.88);
+    padding: 14px  ;
+    border-radius: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.select-patinent{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 17px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: white;
+    color: #8c7d7c;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.select-patinent:hover{
+    background-color: #8c7d7c;
+    color: white;
+}
+.viewPatient{
+    width: 85%;
+    max-width: 620px;
+    align-items: center;
+    margin: 8px auto;
+    background: rgba(255,255,255,0.88);
+    padding: 20px 24px;
+
+    border-radius: 25px;
+    box-sizing: border-box;
+
+}
+.option-hp{
+    background: rgba(255,255,255,0.88);
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 100px;
+
+    text-decoration: none;
+    border: none;
+    color: #69443c;
+
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.option-hp:hover{
+    background-color: #8c7d7c;
+    color: white;
+}
+.return_dashboard{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: white;
+    color: #8c7d7c;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    align-items: center;
+    display: flex;
+
+}
+.return_dashboard:hover{
+    background-color: #8c7d7c;
+    color: white;
+}
+.review-reports{
+    width: 85%;
+    max-width: 620px;
+    align-items: center;
+    margin: 8px auto;
+    background: rgba(255,255,255,0.88);
+    padding: 40px;
+
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.reports-table th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #3f2a25;
+    color: #3f2a25;
+}
+
+.reports-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.reports-table tr:hover {
+    background-color: #eee8e6;
+}
+.title1{
+    font-size: 20px;
+    color: #69443c;
+}
+.progress{
+    text-align: center;
+    width: 85%;
+    max-width: 620px;
+    align-items: center;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.88);
+    padding: 20px 24px;
+
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+.header_progress{
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 30px;
+    text-align: center;
+
+}
+.header3_progress{
+    color: #69443c;
+    font-family: "Italiana", sans-serif;
+    font-size: 15px;
+    text-align: center;
+    top: 260px;
+}
+.box-progress{
+    background: rgb(154, 114, 105,0.4);
+    padding: 10px 15px;
+    margin: 20px 0;
+    font-size: 16px;
+    border-radius: 18px;
+
+}
+.progress-row{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.chart canvas{
+    width: 100%;
+    height: 300px;
+}
+.chart{
+    background: rgba(255,255,255,0.75);
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.button-chart{
+    background: rgba(255,255,255,0.88);
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 10px 10px;
+
+}
+.button-chart:hover{
+    background-color: #8c7d7c;
+    color: white;
+}

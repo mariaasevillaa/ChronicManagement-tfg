@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient alerts</title>
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
 <body>
+<article id="background">
+    <div class="review-reports">
+        <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
+        <h1 class="title1">PATIENT ALERTS</h1>
+        <h3>Alerts are generated when the patient has reported mood lower than the defined threshold</h3>
+        <table class="reports-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Alert type</th>
+                <th>Message</th>
+                <th>Status</th>
 
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:if="${#lists.isEmpty(alertsList)}">
+                <td colspan="4">No alerts available for this patient.</td>
+            </tr>
+            <tr th:each="alert : ${alertsList}">
+                <td th:text="${alert.getDate()}"></td>
+                <td th:text="${alert.getType()} "></td>
+                <td th:text="${alert.getMessage()}"></td>
+                <td th:text="${alert.getResolved() == 1 ? 'Resolved' : 'Active'}"></td>
+
+
+            </tr>
+            </tbody>
+        </table>
+        <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>
+
+    </div>
+
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+</article>
 </body>
-</html>

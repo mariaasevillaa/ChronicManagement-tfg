@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view patient</title>
+  <link rel="stylesheet" href="/images/dashboard_hp1.css">
+</head>
+<body>
+<article id="background">
+  <div class="viewPatient">
+
+      <h1 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h1>
+      <h4>PATIENT INFORMATION</h4>
+    <h4>-----------------------------------------------------</h4>
+      <p>
+        <br>Name: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span>
+        <br>Date of birth: <span th:text="${dob}"> </span>
+        <br>Chronic condition: <span th:text="${chronic}"> </span>
+        <br>Diagnosis date: <span th:text="${diagnosis}"> </span>
+      </p>
+    <h4>ACTIONS</h4>
+    <section class="pdash_buttons">
+      <form action="review_reports" method="get">
+        <input type="hidden" name="patient_id" th:value="${patient_id}">
+        <button type="submit" class="option-hp">📋 Review reports</button>
+      </form>
+      <form action="/progress" method="get">
+        <input type="hidden" name="patient_id" th:value="${patient_id}">
+        <button type="submit" class="option-hp">📊 View progress</button>
+      </form>
+      <form action="/patient_alerts" method="get">
+        <input type="hidden" name="patient_id" th:value="${patient_id}">
+        <button type="submit" class="option-hp">🚨 View alerts</button>
+      </form>
+      <form action="/configure_parameters" method="get">
+        <input type="hidden" name="patient_id" th:value="${patient_id}">
+        <button type="submit" class="option-hp">⚙️ Configure parameters</button>
+      </form>
+
+
+    </section>
+    <a href="/hp_dashboard" class="return_dashboard">Back to dashboard</a>
+    </div>
+
+  <div class="top">
+    <span  th:text="${name}" class="name"></span>
+    <a href="/logout" class="logout">| Log out</a>
+  </div>
+  <img src="/images/logo2.png" class="logo">
+  <img src="/images/silueta.png" class="icono1">
+</article>
+
+
+</body>
+</html>

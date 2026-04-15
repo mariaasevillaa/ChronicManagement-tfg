@@ -19,7 +19,7 @@ public class JDBCHealthCareManager {
     public Health_professional getHealthProfessionalByEmail(String email) {
         String sql = "SELECT hp.* " +
                 "FROM health_professional hp " +
-                "INNER JOIN users u ON hp.user_id = u.id " +
+                "JOIN users u ON hp.user_id = u.id " +
                 "WHERE u.email = ?";
 
         try (Connection conn = ds.getConnection();
@@ -39,6 +39,21 @@ public class JDBCHealthCareManager {
         }
 
         return null;
+    }
+    public int getHpIDbyUserID(int user_id) {
+        String sql = "SELECT id FROM health_professional WHERE user_id=?";
+        try(Connection c = ds.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, user_id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     }

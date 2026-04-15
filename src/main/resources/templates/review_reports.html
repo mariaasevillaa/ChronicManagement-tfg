@@ -1,5 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Patient Reports</title>
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
+<body>
+<article id="background">
+    <div class="review-reports">
+        <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
+        <h1 class="title1">DAILY REPORTS HISTORY</h1>
+        <table class="reports-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Mood</th>
+                <th>Medication</th>
+                <th>Symptoms</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="report : ${dailyReports}">
+                <td th:text="${report.getReport_date()}"></td>
+                <td th:text="${report.getMood()} "></td>
+                <td th:text="${report.getMedication_taken() == 1 ? 'Yes' : 'No'}"></td>
+
+                <td th:text="${report.getNote()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>
+
+
+    </div>
+
+
+
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+</article>
+
+</body>
+
