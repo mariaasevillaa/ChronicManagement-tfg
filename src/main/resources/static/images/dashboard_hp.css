@@ -259,3 +259,10 @@
     background-color: #8c7d7c;
     color: white;
 }
+.table1{
+    background: rgba(154, 114, 105, 0.35);
+    padding: 20px 24px;
+
+    border-radius: 15px;
+    box-sizing: border-box;
+}

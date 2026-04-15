@@ -46,7 +46,7 @@ public class JDBCAlertsManager {
 
  }
  public List<Alerts> getAllAlerts (int patient_id) {
-        String sql="SELECT * FROM alerts WHERE patient_id=? AND resolved=0";
+        String sql="SELECT * FROM alerts WHERE patient_id=? ";
         List<Alerts> alerts = new ArrayList<Alerts>();
         try(Connection c = dataSource.getConnection();
         PreparedStatement ps =c.prepareStatement(sql)) {
@@ -62,5 +62,39 @@ public class JDBCAlertsManager {
             throw new RuntimeException(e);
         }
  }
+    public List<Alerts> getAllActiveAlerts (int patient_id) {
+        String sql="SELECT * FROM alerts WHERE patient_id=? AND resolved=0";
+        List<Alerts> alerts = new ArrayList<Alerts>();
+        try(Connection c = dataSource.getConnection();
+            PreparedStatement ps =c.prepareStatement(sql)) {
+            ps.setInt(1,patient_id);
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Alerts alert = new Alerts (rs.getInt("id"),rs.getInt("patient_id"),rs.getString("message"),rs.getString("date"),rs.getInt("resolved"),rs.getString("type"));
+                    alerts.add(alert);
+                }
+            }
+            return alerts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public List<Alerts> getAllResolvedAlerts (int patient_id) {
+        String sql="SELECT * FROM alerts WHERE patient_id=? AND resolved=1";
+        List<Alerts> alerts = new ArrayList<Alerts>();
+        try(Connection c = dataSource.getConnection();
+            PreparedStatement ps =c.prepareStatement(sql)) {
+            ps.setInt(1,patient_id);
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Alerts alert = new Alerts (rs.getInt("id"),rs.getInt("patient_id"),rs.getString("message"),rs.getString("date"),rs.getInt("resolved"),rs.getString("type"));
+                    alerts.add(alert);
+                }
+            }
+            return alerts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

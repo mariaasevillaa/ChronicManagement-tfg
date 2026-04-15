@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient alerts</title>
-    <link rel="stylesheet" href="/images/dashboard_hp1.css">
+    <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
 <article id="background">
     <div class="review-reports">
         <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
         <h1 class="title1">PATIENT ALERTS</h1>
-        <h3>Alerts are generated when the patient has reported mood lower than the defined threshold</h3>
+        <h3>Alerts are generated when the reported mood falls below the defined threshold.</h3>
+        <div class="table2">
+            <h4>Total alerts: <span th:text="${totalalerts}"></span></h4>
+            <h4>Active alerts: <span th:text="${alertsactive}"></span></h4>
+            <h4>Resolved alerts: <span th:text="${resolvedalerts}"></span></h4>
+        </div>
+        <div class="table1">
         <table class="reports-table">
             <thead>
             <tr>
@@ -28,7 +34,7 @@
             </tr>
             <tr th:each="alert : ${alertsList}">
                 <td th:text="${alert.getDate()}"></td>
-                <td th:text="${alert.getType()} "></td>
+                <td th:text="${alert.getType() == 'LOW_MOOD' ? '⚠ Low mood' : alert.type}"></td>
                 <td th:text="${alert.getMessage()}"></td>
                 <td th:text="${alert.getResolved() == 1 ? 'Resolved' : 'Active'}"></td>
 
@@ -36,6 +42,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
         <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>
 
     </div>

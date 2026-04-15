@@ -154,12 +154,17 @@ public class HpController {
     @GetMapping("/patient_alerts")
     public String patientAlerts(Model model, @RequestParam("patient_id") int patient_id,HttpSession session) {
         List<Alerts>alertsList=alertsManager.getAllAlerts(patient_id);
+        List<Alerts>alertsactive=alertsManager.getAllActiveAlerts(patient_id);
+        List<Alerts>alertsresolved=alertsManager.getAllResolvedAlerts(patient_id);
         model.addAttribute("alertsList", alertsList);
         String name= (String) session.getAttribute("name");
         Patient patient= patientManager1.getPatientbyID(patient_id);
         model.addAttribute("pname", patient.getName());
         model.addAttribute("patient_id", patient.getId());
         model.addAttribute("name", name);
+        model.addAttribute("totalalerts",alertsList.size());
+        model.addAttribute("alertsactive", alertsactive.size());
+        model.addAttribute("resolvedalerts",alertsresolved.size());
         return "patient_alerts";
     }
 
