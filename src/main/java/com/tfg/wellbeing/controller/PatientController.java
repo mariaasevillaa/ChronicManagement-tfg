@@ -49,6 +49,22 @@ public class PatientController {
 
         return "patient_dashboard";
     }
+    @GetMapping("/patient_profile")
+    public String patientProfile(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        Patient patient= patientManager.getPatientbyID(patient_id);
+        model.addAttribute("patient_id", patient_id);
+
+        model.addAttribute("patient_id", patient.getId());
+        model.addAttribute("name", patient.getName());
+        model.addAttribute("surname", patient.getSurname());
+        model.addAttribute("date_of_birth", patient.getDate_of_birth());
+        model.addAttribute("chronic_condition", patient.getChronic_condition());
+        model.addAttribute("diagnosis_date", patient.getDiagnosis_date());
+        return "patient_profile";
+
+    }
     @GetMapping("/daily_reports")
     public String dailyReports(HttpSession session,Model model) {
         Integer user_id = (Integer) session.getAttribute("user_id");

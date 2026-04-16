@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient alerts</title>
-    <link rel="stylesheet" href="/images/dashboard_hp.css">
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
 <body>
 <article id="background">
@@ -11,10 +11,10 @@
         <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
         <h1 class="title1">PATIENT ALERTS</h1>
         <h3>Alerts are generated when the reported mood falls below the defined threshold.</h3>
-        <div class="table2">
-            <h4>Total alerts: <span th:text="${totalalerts}"></span></h4>
-            <h4>Active alerts: <span th:text="${alertsactive}"></span></h4>
-            <h4>Resolved alerts: <span th:text="${resolvedalerts}"></span></h4>
+        <div class="structured-boxes">
+            <h4 class="table2">Total alerts:<br> <span th:text="${totalalerts}"></span></h4>
+            <h4 class="table2">Active alerts: <br><span th:text="${alertsactive}"></span></h4>
+            <h4 class="table2">Resolved alerts: <br><span th:text="${resolvedalerts}"></span></h4>
         </div>
         <div class="table1">
         <table class="reports-table">

@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient profile</title>
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
+<article id="background">
+    <div class="container">
+        <div class="left-box">
+            <div class="fade-in delay1">
+                <div class="register-left">
+                    <div class="avatar-letter" th:text="${name.substring(0,1).toUpperCase()}"></div>
+                    <h2 class="myprofile"><span th:text="${name}" ></span></h2>
+                    <button type="submit">Edit profile</button>
+                    <button type="submit">Back </button>
+
+                </div>
+            </div>
+        </div>
+
+    <div class="profile-box">
+        <h2>My profile</h2>
+        <p>Name: <span th:text="${name}" ></span></p>
+        <p>Surname: <span th:text="${surname}" ></span></p>
+        <p>Date of birth(yyyy-mm-dd): <span th:text="${date_of_birth}" ></span></p>
+        <p>Chronic condition: <span th:text="${chronic_condition}" ></span></p>
+        <p>Diagnosis date(yyyy-mm-dd): <span th:text="${diagnosis_date}" ></span></p>
+
+
+    </div>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+</article>
 
 </body>
 </html>

@@ -36,10 +36,7 @@ public class JDBCMonitoringParameters {
 
 
     }
-    public void setMonitoringParameters(int patient_id,
-                                        int mood_threshold,
-                                        int missed_reports_days,
-                                        int medication_missed_days) {
+    public void setMonitoringParameters(int patient_id, int mood_threshold, int missed_reports_days, int medication_missed_days) {
 
         String checkSql = "SELECT id FROM monitoring_parameters WHERE patient_id = ?";
 

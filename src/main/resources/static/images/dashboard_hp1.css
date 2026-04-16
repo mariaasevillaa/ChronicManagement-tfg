@@ -266,3 +266,20 @@
     border-radius: 15px;
     box-sizing: border-box;
 }
+.table2{
+    background: rgba(154, 114, 105, 0.7);
+    padding: 20px 24px;
+
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+.structured-boxes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    width: 820px;
+    max-width: 90%;
+    margin: 40px auto 0 auto;
+    align-items: center;
+    text-align: center;
+}
