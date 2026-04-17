@@ -65,6 +65,30 @@ public class PatientController {
         return "patient_profile";
 
     }
+    @GetMapping("/edit_profile")
+    public String editProfile(HttpSession session, Model model) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        model.addAttribute("patient_id", patient_id);
+        Patient patient= patientManager.getPatientbyID(patient_id);
+        model.addAttribute("patient", patient);
+        model.addAttribute("name",patient.getName());
+
+        return "edit_profile";
+    }
+    @PostMapping("/edit_profile")
+    public String editProfile( HttpSession session, Model model,@RequestParam String name, @RequestParam String surname, @RequestParam String chronic_condition, @RequestParam String diagnosis_date) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        model.addAttribute("patient_id", patient_id);
+        patientManager.updatePatientProfile(patient_id, name, surname, chronic_condition, diagnosis_date);
+       session.setAttribute("name", name);
+       session.setAttribute("surname", surname);
+       session.setAttribute("chronic_condition", chronic_condition);
+       session.setAttribute("diagnosis_date", diagnosis_date);
+       return "redirect:/patient_profile";
+    }
+
     @GetMapping("/daily_reports")
     public String dailyReports(HttpSession session,Model model) {
         Integer user_id = (Integer) session.getAttribute("user_id");

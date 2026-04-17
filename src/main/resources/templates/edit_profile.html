@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit patient profile</title>
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
+</head>
+<body>
+<article id="background">
+    <form action="edit_profile" method="post">
+        <div class="container">
+            <div class="left-box">
+                <div class="fade-in delay1">
+                    <div class="register-left">
+                        <div class="avatar-letter" th:text="${name.substring(0,1).toUpperCase()}"></div>
+                        <h2 class="myprofile"><span th:text="${name}" ></span></h2>
+
+                        <div class="buttons-myprofile">
+                            <button type="submit" class="button-profile" >Save changes</button>
+                            <a href="/patient_profile" class="button-profile">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-box">
+                <h2>Edit profile</h2>
+                <label>Name</label>
+                <input type="text" name="name" th:value="${patient.name}" class="input-edit">
+
+                <label>Surname</label>
+                <input type="text" name="surname" th:value="${patient.surname}" class="input-edit">
+
+                <label>Chronic condition</label>
+                <input type="text" name="chronic_condition" th:value="${patient.chronic_condition}" class="input-edit">
+
+                <label>Diagnosis date</label>
+                <input type="date" name="diagnosis_date" th:value="${patient.diagnosis_date}" class="input-edit">
+            </div>
+        </div>
+
+    </form>
+    <img src="/images/logo2.png" class="logo">
+</article>
+
+</body>
+</html>

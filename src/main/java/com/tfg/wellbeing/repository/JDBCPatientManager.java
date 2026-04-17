@@ -38,34 +38,34 @@ public class JDBCPatientManager {
     }
 
 
-        public List<Patient> getAllPatients() {
-            String sql2 = "SELECT * FROM patient ";
-            List<Patient> patients = new ArrayList<>();
-            try (Connection c = dataSource.getConnection();
-                 PreparedStatement ps = c.prepareStatement(sql2)) {
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        Patient patient= new Patient(rs.getInt("id"),
-                                rs.getInt("user_id"),
-                                rs.getString("name"),
-                                rs.getString("surname"),
-                                rs.getString("date_of_birth"),
-                               rs.getString("chronic_condition"),
-                                rs.getString("diagnosis_date"));
-                        patients.add(patient);
-                    }
-                    return patients;
+    public List<Patient> getAllPatients() {
+        String sql2 = "SELECT * FROM patient ";
+        List<Patient> patients = new ArrayList<>();
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql2)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Patient patient = new Patient(rs.getInt("id"),
+                            rs.getInt("user_id"),
+                            rs.getString("name"),
+                            rs.getString("surname"),
+                            rs.getString("date_of_birth"),
+                            rs.getString("chronic_condition"),
+                            rs.getString("diagnosis_date"));
+                    patients.add(patient);
                 }
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                return patients;
             }
-        }
 
-        public int getPatientIDbyUserID(int user_id) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getPatientIDbyUserID(int user_id) {
         String sql = "SELECT id FROM patient WHERE user_id=?";
-        try(Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)) {
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, user_id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -76,7 +76,8 @@ public class JDBCPatientManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        }
+    }
+
     public Patient getPatientByEmail(String email) {
         String sql = "SELECT p.* " +
                 "FROM patient p " +
@@ -90,8 +91,8 @@ public class JDBCPatientManager {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Patient patient = new Patient(rs.getInt("id"),rs.getInt("user_id"),rs.getString("name"),
-                    rs.getString("surname"),rs.getString("date_of_birth"),rs.getString("chronic_condition"),rs.getString("diagnosis_date")
+                    Patient patient = new Patient(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"),
+                            rs.getString("surname"), rs.getString("date_of_birth"), rs.getString("chronic_condition"), rs.getString("diagnosis_date")
                     );
                     return patient;
                 }
@@ -103,6 +104,7 @@ public class JDBCPatientManager {
 
         return null;
     }
+
     public Patient getPatientbyID(int patient_id) {
         String sql = "SELECT * FROM patient WHERE id=?";
         try (Connection conn = dataSource.getConnection();
@@ -123,6 +125,22 @@ public class JDBCPatientManager {
         }
         return null;
     }
+
+    public void updatePatientProfile(int patient_id, String name, String surname, String chronic_condition, String diagnosis_date) {
+        String sql = "UPDATE patient SET name=?, surname=?, chronic_condition=?, diagnosis_date=? WHERE id=?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, surname);
+            stmt.setString(3, chronic_condition);
+            stmt.setString(4, diagnosis_date);
+            stmt.setInt(5, patient_id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+}
 
 

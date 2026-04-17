@@ -433,3 +433,28 @@
     font-weight: 600;
     border: 2px solid rgba(255,255,255,0.6);
 }
+.button-profile{
+    border-radius: 10px;
+    background-color: white;
+    color: #8c7d7c;
+    text-decoration: none;
+    padding: 20px ;
+    font-size: 20px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    border: none;
+
+}
+.button-profile:hover{
+    background-color: #8c7d7c;
+    color: white;
+}
+.buttons-myprofile{
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+}
+.input-edit{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+}
