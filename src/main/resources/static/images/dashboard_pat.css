@@ -415,6 +415,21 @@
     color: #69443c;
     font-size: 25px;
 }
+.profile-box h2{
+    margin: 0 0 28px 0;
+    font-size: 36px;
+    font-weight: 600;
+    color: #7a5247;
+}
+
+.profile-box p{
+    margin: 0;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(105, 68, 60, 0.15);
+    font-size: 26px;
+    line-height: 1.4;
+}
+
 .myprofile{
     font-family: "Italiana", sans-serif;
     color: #FFF1B5;

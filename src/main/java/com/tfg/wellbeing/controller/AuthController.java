@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.tfg.wellbeing.model.Patient;
+import org.springframework.ui.Model;
 
 @Controller
 public class AuthController {
@@ -90,4 +91,54 @@ public class AuthController {
         session.invalidate();
         return "redirect:/login";
     }
+    @GetMapping("/forgot_password")
+    public String forgotPassword() {
+        return "forgot_password";
+    }
+
+    @PostMapping("/forgot_password")
+    public String forgotPassword(@RequestParam String email, HttpSession session, Model model) {
+        User user = userManager.getUserByEmail(email);
+
+        if (user == null) {
+            model.addAttribute("error", "Email not found");
+            return "forgot_password";
+        }
+        session.setAttribute("reset_email", email);
+        return "redirect:/reset_password";
+    }
+    @GetMapping("/reset_password")
+    public String resetPassword(HttpSession session) {
+        String email = (String) session.getAttribute("reset_email");
+
+        if (email == null) {
+            return "redirect:/forgot_password";
+        }
+
+        return "reset_password";
+    }
+
+    @PostMapping("/reset_password")
+    public String resetPassword(@RequestParam String password,
+                                @RequestParam String confirmPassword,
+                                HttpSession session,
+                                Model model) {
+        String email = (String) session.getAttribute("reset_email");
+
+        if (email == null) {
+            return "redirect:/forgot_password";
+        }
+
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("error", "Passwords do not match");
+            return "reset_password";
+        }
+
+        userManager.updatePassword(email, password);
+
+        session.removeAttribute("reset_email");
+
+        return "redirect:/login";
+    }
+
 }

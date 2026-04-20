@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient progress</title>
-    <link rel="stylesheet" href="/images/dashboard_pa.css">
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
 <article id="background">
@@ -33,7 +33,7 @@
 
     </div>
     <div class="top">
-        <span  th:text="${name}" class="name"></span>
+        <a href="/patient_profile" th:text="${name}" class="name"></a>
         <a href="/logout" class="logout">| Log out</a>
     </div>
     <img src="/images/logo2.png" class="logo">
