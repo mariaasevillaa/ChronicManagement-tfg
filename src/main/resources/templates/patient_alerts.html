@@ -34,7 +34,11 @@
             </tr>
             <tr th:each="alert : ${alertsList}">
                 <td th:text="${alert.getDate()}"></td>
-                <td th:text="${alert.getType() == 'LOW_MOOD' ? '⚠ Low mood' : alert.type}"></td>
+                <td th:switch="${alert.type}">
+                    <span th:case="'LOW_MOOD'">⚠ Low mood</span>
+                    <span th:case="'NO_MEDICATION'">💊 No medication taken</span>
+                    <span th:case="*" th:text="${alert.type}"></span>
+                </td>
                 <td th:text="${alert.getMessage()}"></td>
                 <td th:text="${alert.getResolved() == 1 ? 'Resolved' : 'Active'}"></td>
 

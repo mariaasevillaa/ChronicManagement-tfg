@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Daily Reports</title>
-    <link rel="stylesheet" href="/images/dashboard_pat.css">
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
 </head>
 <body>
 <article id="background">
@@ -12,65 +12,77 @@
             <h1 class="header_report">  Daily Well-being report</h1>
             <h2 class="header3_report"> Complete your daily check-in in less than 1 minute</h2>
             <div class="report1">
-                <label>What is your mood?</label><br>
-                <label> <input type="radio" name="mood" value="1">Extremely low</label>
-                <label> <input type="radio" name="mood" value="2">Low</label>
-                <label> <input type="radio" name="mood" value="3">Medium</label>
-                <label> <input type="radio" name="mood" value="4">High</label>
-                <label> <input type="radio" name="mood" value="5">Extremely high</label>
-                <br>
-                <label>Have you taken your medication today? </label><br>
-                <label> <input type="radio" name="medication_taken" value="0">No</label>
-                <label> <input type="radio" name="medication_taken" value="1">Yes</label>
-                <br>
+                <div class="top-row">
+                        <label class="section-label">Your mood?</label>
+                    <div class="mood-medication">
+                        <label class="option-pill"> <input type="radio" name="mood" value="1"><span>Very low</span></label>
+                        <label class="option-pill"> <input type="radio" name="mood" value="2"><span> Low</span></label>
+                        <label class="option-pill"> <input type="radio" name="mood" value="3"><span>Medium</span></label>
+                        <label class="option-pill"> <input type="radio" name="mood" value="4"><span>High</span></label>
+                        <label class="option-pill"> <input type="radio" name="mood" value="5"><span>Very high</span></label>
 
-                <label>Today's date (yyyy-mm-dd)</label>
-                <input type="text" name="date" required>
-                <br>
-                <label>Comment</label>
-                <input type="text" name="note" required>
-                <br>
-            </div>
-            <div class="report2">
-                <h2 class="header3_report"> Select as many symptoms as you have<br>(scroll down to see all of them) </h2>
+                    </div>
+                </div>
 
-                <div class="button">
-                    <label> <input type="checkbox" name="symptoms" value="1">Fatigue</label>
-                    <label> <input type="checkbox" name="symptoms" value="2">Headache</label>
-                    <label> <input type="checkbox" name="symptoms" value="3">Dizziness</label>
-                    <label> <input type="checkbox" name="symptoms" value="4">Nausea</label>
-                    <label> <input type="checkbox" name="symptoms" value="5">Vomiting</label>
-                    <label> <input type="checkbox" name="symptoms" value="6">Fever</label>
-                    <label> <input type="checkbox" name="symptoms" value="7">Chills</label>
-                    <label> <input type="checkbox" name="symptoms" value="8">Muscle pain</label>
-                    <label> <input type="checkbox" name="symptoms" value="9">Joint pain</label>
-                    <label> <input type="checkbox" name="symptoms" value="10">Abdominal pain</label>
-                    <label> <input type="checkbox" name="symptoms" value="11">Chest pain</label>
-                    <label> <input type="checkbox" name="symptoms" value="12">Shortness of breath</label>
-                    <label> <input type="checkbox" name="symptoms" value="13">Cough</label>
-                    <label> <input type="checkbox" name="symptoms" value="14">Palpitations</label>
-                    <label> <input type="checkbox" name="symptoms" value="15">Swelling (edema)</label>
-                    <label> <input type="checkbox" name="symptoms" value="16">Sleep problems</label>
-                    <label> <input type="checkbox" name="symptoms" value="17">Insomnia</label>
-                    <label> <input type="checkbox" name="symptoms" value="18">Excessive sleepiness</label>
-                    <label> <input type="checkbox" name="symptoms" value="19">Weakness</label>
-                    <label> <input type="checkbox" name="symptoms" value="20">Diarrhea</label>
-                    <label> <input type="checkbox" name="symptoms" value="21">Constipation</label>
-                    <label> <input type="checkbox" name="symptoms" value="22">Loss of appetite</label>
-                    <label> <input type="checkbox" name="symptoms" value="23">Anxiety</label>
-                    <label> <input type="checkbox" name="symptoms" value="24">Low mood</label>
-                    <label> <input type="checkbox" name="symptoms" value="25">Irritability</label>
-                    <label> <input type="checkbox" name="symptoms" value="26">Difficulty concentrating</label>
-                    <label> <input type="checkbox" name="symptoms" value="27">High blood sugar symptoms</label>
-                    <label> <input type="checkbox" name="symptoms" value="28">Low blood sugar symptoms</label>
-                    <label> <input type="checkbox" name="symptoms" value="29">High blood pressure symptoms</label>
-                    <label> <input type="checkbox" name="symptoms" value="30">Low blood pressure symptoms</label>
-                    <label> <input type="checkbox" name="symptoms" value="31">Other</label>
+
+                <div class="top-row">
+                        <label class="section-label">Medication taken? </label>
+                    <div class="mood-medication">
+                        <label class="option-pill"> <input type="radio" name="medication_taken" value="0"><span>No</span></label>
+                        <label class="option-pill"> <input type="radio" name="medication_taken" value="1"><span>Yes</span></label>
+
+                    </div>
+
+                </div>
+                <div class="input">
+                    <label class="section-label">Today's date </label>
+                    <input type="date" name="date" class="text" required>
+
+                </div>
+                <div class="input">
+                    <label class="section-label">Comment</label>
+                    <input type="text" name="note" class="text" required>
                 </div>
 
 
             </div>
+            <div class="report2">
+                <h2 class="header3_report">Select as many symptoms as you have<br>(scroll down to see all of them)</h2>
 
+                <div class="button">
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="1"><span>Fatigue</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="2"><span>Headache</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="3"><span>Dizziness</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="4"><span>Nausea</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="5"><span>Vomiting</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="6"><span>Fever</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="7"><span>Chills</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="8"><span>Muscle pain</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="9"><span>Joint pain</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="10"><span>Abdominal pain</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="11"><span>Chest pain</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="12"><span>Shortness of breath</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="13"><span>Cough</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="14"><span>Palpitations</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="15"><span>Swelling (edema)</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="16"><span>Sleep problems</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="17"><span>Insomnia</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="18"><span>Excessive sleepiness</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="19"><span>Weakness</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="20"><span>Diarrhea</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="21"><span>Constipation</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="22"><span>Loss of appetite</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="23"><span>Anxiety</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="24"><span>Low mood</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="25"><span>Irritability</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="26"><span>Difficulty concentrating</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="27"><span>High blood sugar symptoms</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="28"><span>Low blood sugar symptoms</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="29"><span>High blood pressure symptoms</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="30"><span>Low blood pressure symptoms</span></label>
+                    <label class="symptom-pill"><input type="checkbox" name="symptoms" value="31"><span>Other</span></label>
+                </div>
+            </div>
             <button type="submit" class="report_send">Send</button>
         </form>
 

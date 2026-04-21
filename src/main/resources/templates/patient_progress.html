@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient progress</title>
-    <link rel="stylesheet" href="/images/dashboard_pat.css">
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
 </head>
 <body>
 <article id="background">
@@ -17,6 +17,10 @@
             <p class="box-progress"><span th:text="${Averagemedicationtaken}"></span><br>Medication adherence</p>
             </div>
             <h2 class="header3_progress">Mood chart </h2>
+            <div class="chart-switch">
+                <button type="button" class="button-chart" onclick="showGraph('mood')">Mood</button>
+                <button type="button" class="button-chart" onclick="showGraph('medication')">Medication</button>
+            </div>
                 <div class="range-button">
                     <button type="button" class="button-chart" onclick="updateChart('days')"> Days</button>
                     <button type="button" class="button-chart" onclick="updateChart('weeks')"> Weeks</button>
@@ -24,8 +28,12 @@
                 </div>
 
 
-            <div class=" chart">
+            <div class=" chart" id="moodChartContainer">
                 <canvas id="moodChart"></canvas>
+
+            </div>
+            <div class=" chart" id="medicationChartContainer">
+                <canvas id="medicationChart"></canvas>
 
             </div>
             <a class="return_dashboard" href="/patient_dashboard">Back to dashboard</a>
@@ -45,21 +53,25 @@
     const chartData = {
         days: {
             labels: [[${dayslabels}]],
-            values: [[${daysvalues}]]
+            moodvalues: [[${daysvalues}]],
+            medicationvalues: [[${daysmedicationvalues}]]
         },
         weeks: {
             labels: [[${weekslabels}]],
-            values: [[${weeksvalues}]]
+            moodvalues: [[${weeksvalues}]],
+            medicationvalues:[[${weeksmedicationvalues}]]
         },
         months: {
             labels: [[${monthslabels}]],
-            values: [[${monthsvalues}]]
+            moodvalues: [[${monthsvalues}]],
+            medicationvalues:[[${monthsmedicationvalues}]]
         }
     };
 
     const ctx = document.getElementById('moodChart').getContext('2d');
+    const ctx = document.getElementById('medicationChart').getContext('2d');
 
-    let moodChart = new Chart(ctx, {
+    let moodChart = new Chart(moodctx, {
         type: 'line',
         data: {
             labels: chartData.days.labels,
@@ -83,13 +95,74 @@
             }
         }
     });
+    let moodChart = new Chart(medicationctx, {
+        type: 'line',
+        data: {
+            labels: chartData.days.labels,
+            datasets: [{
+                label: 'Mood',
+                data: chartData.days.values,
+                borderWidth: 2,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    min: 0,
+                    max: 1,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            return value === 1 ? 'Yes' : 'No';
+                        }
+                    }
+                }
+            }
+        }
+    });
 
     function updateChart(range) {
         moodChart.data.labels = chartData[range].labels;
-        moodChart.data.datasets[0].data = chartData[range].values;
+        moodChart.data.datasets[0].data = chartData[range].moodvalues;
+        moodChart.update();
+        moodChart.data.labels = chartData[range].labels;
+        moodChart.data.datasets[0].data = chartData[range].medicationvalues;
         moodChart.update();
     }
+    function showGraph(type) {
+        const moodContainer = document.getElementById('moodChartContainer');
+        const medicationContainer = document.getElementById('medicationChartContainer');
+        const chartTitle = document.getElementById('chartTitle');
+
+        if (type === 'mood') {
+            moodContainer.style.display = 'block';
+            medicationContainer.style.display = 'none';
+            chartTitle.textContent = 'Mood chart';
+
+            setTimeout(() => {
+                moodChart.resize();
+                moodChart.update();
+            }, 100);
+
+        } else {
+            moodContainer.style.display = 'none';
+            medicationContainer.style.display = 'block';
+            chartTitle.textContent = 'Medication chart';
+
+            setTimeout(() => {
+                medicationChart.resize();
+                medicationChart.update();
+            }, 100);
+        }
+    }
 </script>
+
+
+
+
+
 
 </body>
 </html>

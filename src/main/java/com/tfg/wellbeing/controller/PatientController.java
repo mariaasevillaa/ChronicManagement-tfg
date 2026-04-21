@@ -121,7 +121,14 @@ public class PatientController {
         }
         if(mood<=2){
             if(!alertsManager.hasActiveAlerts(patient_id,"LOW_MOOD")){
-                alertsManager.createAlerts(patient_id,"LOW_MOOD",0,"Patient reported low_mood",date);
+                alertsManager.createAlerts(patient_id,"LOW_MOOD",0,"Patient reported low mood",date);
+
+            }
+        }
+        if(medication_taken==0){
+            System.out.println("entra NO_MEDICATION");
+            if(!alertsManager.hasActiveAlerts(patient_id,"NO_MEDICATION")){
+                alertsManager.createAlerts(patient_id,"NO_MEDICATION",0,"Patient hasn't taken the medication",date);
 
             }
         }
