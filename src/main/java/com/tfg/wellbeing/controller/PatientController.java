@@ -156,6 +156,9 @@ public class PatientController {
         model.addAttribute("weekslabels", dailyReportManager.getWeekLabels(patient_id));
         model.addAttribute("monthsvalues", dailyReportManager.getMonthValues(patient_id));
         model.addAttribute("monthslabels", dailyReportManager.getMonthLabels(patient_id));
+        model.addAttribute("medicationdays",dailyReportManager.getDaysValuesMed(patient_id));
+        model.addAttribute("medicationweeks",dailyReportManager.getWeekValuesMed(patient_id));
+        model.addAttribute("medicationmonths",dailyReportManager.getMonthValuesMed(patient_id));
         return "patient_progress";
 
     }

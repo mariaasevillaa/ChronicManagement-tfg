@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>view patient</title>
-  <link rel="stylesheet" href="/images/dashboard_hp1.css">
+  <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
 <article id="background">
   <div class="viewPatient">
 
       <h1 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h1>
-      <h4>PATIENT INFORMATION</h4>
-    <h4>-----------------------------------------------------</h4>
-      <p>
-        <br>Name: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span>
-        <br>Date of birth: <span th:text="${dob}"> </span>
-        <br>Chronic condition: <span th:text="${chronic}"> </span>
-        <br>Diagnosis date: <span th:text="${diagnosis}"> </span>
-      </p>
-    <h4>ACTIONS</h4>
+    <section>
+      <h4 class="title-section">PATIENT INFORMATION</h4>
+      <div class="info-position">
+        <div class="info">
+          <p>Full name:
+            <span th:text="${pname}"></span> <span th:text="${psurname}"> </span></p>
+        </div>
+        <div class="info">
+          <p>Date of birth: <span th:text="${dob}"> </span></p>
+        </div>
+         <div class="info">
+           <p>Chronic condition: <span th:text="${chronic}"> </span></p>
+         </div>
+        <div class="info">
+          <p>Diagnosis date: <span th:text="${diagnosis}"> </span></p>
+        </div>
+
+
+      </div>
+
+    </section>
+
+    <h4 class="title-section">ACTIONS</h4>
     <section class="pdash_buttons">
       <form action="review_reports" method="get">
         <input type="hidden" name="patient_id" th:value="${patient_id}">

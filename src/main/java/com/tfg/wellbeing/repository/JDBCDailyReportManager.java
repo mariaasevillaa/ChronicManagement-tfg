@@ -284,14 +284,14 @@ public class JDBCDailyReportManager {
         return 0;
     }
     public List<Double>getDaysValuesMed(int patient_id){
-        String sql = "SELECT medication FROM daily_reports WHERE patient_id= ? ORDER BY date  ";
+        String sql = "SELECT medication_taken FROM daily_reports WHERE patient_id= ? ORDER BY date  ";
         List<Double>values=new ArrayList<>();
         try(Connection c =datasource.getConnection();
             PreparedStatement ps= c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    values.add(rs.getDouble("medication"));
+                    values.add(rs.getDouble("medication_taken"));
 
                 }
             }
@@ -305,7 +305,7 @@ public class JDBCDailyReportManager {
     public List<Double> getWeekValuesMed(int patientId) {
         List<Double> values = new ArrayList<>();
 
-        String sql = "SELECT AVG(medication) AS avg_med " +
+        String sql = "SELECT AVG(medication_taken) AS avg_med " +
                 "FROM daily_reports WHERE patient_id = ? " +
                 "GROUP BY strftime('%W', date) " +
                 "ORDER BY strftime('%W', date)";
@@ -329,7 +329,7 @@ public class JDBCDailyReportManager {
     public List<Double> getMonthValuesMed(int patientId) {
         List<Double> values = new ArrayList<>();
 
-        String sql = "SELECT AVG(medication) AS avg_med " +
+        String sql = "SELECT AVG(medication_taken) AS avg_med " +
                 "FROM daily_reports WHERE patient_id = ? " +
                 "GROUP BY strftime('%Y-%m', date) " +
                 "ORDER BY strftime('%Y-%m', date)";
