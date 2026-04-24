@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class JDBCDailyReportManager {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Daily_report report = new Daily_report(rs.getInt("id"), rs.getInt("patient_id"), rs.getInt("mood"), rs.getInt("medication_taken"), rs.getString("notes"), rs.getString("date"));
+
                     daily_reports.add(report);
                 }
                 return daily_reports;
@@ -350,6 +353,30 @@ public class JDBCDailyReportManager {
 
         return values;
     }
+    public int getDaysSinceLastReport(int patient_id) {
+        String sql = "SELECT date FROM daily_reports WHERE patient_id = ? ORDER BY date DESC LIMIT 1";
+
+        try (Connection c = datasource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, patient_id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return (int) ChronoUnit.DAYS.between(
+                            LocalDate.parse(rs.getString("date")),
+                            LocalDate.now()
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
 
 
 }

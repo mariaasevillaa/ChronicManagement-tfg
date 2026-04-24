@@ -9,14 +9,14 @@
 <article id="background">
     <div class="review-reports">
         <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
-        <h1 class="title1">PATIENT ALERTS</h1>
-        <h3>Alerts are generated when the reported mood falls below the defined threshold.</h3>
+        <h1 class="title-section">PATIENT ALERTS</h1>
+        <h3 class="alerts-description">  Alerts are triggered when low mood or missed medication is detected</h3>
         <div class="structured-boxes">
-            <h4 class="table2">Total alerts:<br> <span th:text="${totalalerts}"></span></h4>
-            <h4 class="table2">Active alerts: <br><span th:text="${alertsactive}"></span></h4>
-            <h4 class="table2">Resolved alerts: <br><span th:text="${resolvedalerts}"></span></h4>
+            <h4 class="table2"><strong>Total alerts:<br> </strong><span th:text="${totalalerts}"></span></h4>
+            <h4 class="table2"><strong>Active alerts: <br></strong><span th:text="${alertsactive}"></span></h4>
+            <h4 class="table2"><strong>Resolved alerts: <br></strong><span th:text="${resolvedalerts}"></span></h4>
         </div>
-        <div class="table1">
+
         <table class="reports-table">
             <thead>
             <tr>
@@ -37,6 +37,7 @@
                 <td th:switch="${alert.type}">
                     <span th:case="'LOW_MOOD'">⚠ Low mood</span>
                     <span th:case="'NO_MEDICATION'">💊 No medication taken</span>
+                    <span th:case="'MISSED_REPORTS'"> Missed reports</span>
                     <span th:case="*" th:text="${alert.type}"></span>
                 </td>
                 <td th:text="${alert.getMessage()}"></td>
@@ -46,10 +47,9 @@
             </tr>
             </tbody>
         </table>
-        </div>
         <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>
-
     </div>
+
 
     <div class="top">
         <span  th:text="${name}" class="name"></span>

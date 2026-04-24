@@ -16,7 +16,7 @@
         <p class="box-progress"><span th:text="${Averagemood}+ '/5'"></span><br>Average mood</p>
         <p class="box-progress"><span th:text="${Averagemedicationtaken}"></span><br>Medication adherence</p>
       </div>
-      <h2 class="header3_progress">Mood chart </h2>
+      <h2 class="header3_progress">Health chart </h2>
       <div class="range-button">
         <button type="button" class="button-chart" onclick="updateChart('days')"> Days</button>
         <button type="button" class="button-chart" onclick="updateChart('weeks')"> Weeks</button>
@@ -25,7 +25,7 @@
 
 
       <div class=" chart">
-        <canvas id="moodChart"></canvas>
+        <canvas id="healthChart"></canvas>
 
       </div>
       <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>

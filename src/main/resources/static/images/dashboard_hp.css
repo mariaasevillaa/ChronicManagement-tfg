@@ -148,9 +148,9 @@
 .return_dashboard{
     font-family: "Alumni Sans Pinstripe", sans-serif;
     font-size: 18px;
-    font-weight: bolder;
-    padding: 10px 20px;
-    margin: 10px;
+    font-weight: 999;
+    padding: 10px 10px;
+    margin: 28px auto 0 auto;
     background-color: white;
     color: #8c7d7c;
     border-radius: 8px;
@@ -165,15 +165,12 @@
     color: white;
 }
 .review-reports{
-    width: 85%;
-    max-width: 620px;
-    align-items: center;
-    margin: 8px auto;
+    width: 900px;
+    max-width: 90%;
     background: rgba(255,255,255,0.88);
-    padding: 40px;
-
-    border-radius: 25px;
-    box-sizing: border-box;
+    border-radius: 24px;
+    padding: 20px 28px;
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
 }
 .reports-table {
     width: 100%;
@@ -272,11 +269,19 @@
     box-sizing: border-box;
 }
 .table2{
-    background: rgba(154, 114, 105, 0.7);
+    background-color:  rgba(220, 196, 188, 0.35);
     padding: 20px 24px;
 
     border-radius: 15px;
     box-sizing: border-box;
+}
+.table2 strong{
+    font-family: "Italiana", sans-serif;
+    font-size: 18px;
+}
+.table2 span{
+    font-family: "Italiana", sans-serif;
+    font-size: 17px;
 }
 .structured-boxes{
     display: grid;
@@ -317,4 +322,36 @@
     border-bottom: 2px solid rgba(170, 137, 126, 0.25);
     font-family: "Italiana", sans-serif;
     font-weight: bold;
+}
+.reports-table thead{
+    background: rgba(122, 84, 70, 0.12);
+}
+
+.reports-table th{
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 18px;
+    color: #6f4b3f;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(111, 75, 63, 0.18);
+    font-family: "Italiana", sans-serif;
+}
+
+.reports-table td{
+    padding: 16px 18px;
+    font-size: 16px;
+    color: #3f2a25;
+    border-bottom: 1px solid rgba(111, 75, 63, 0.08);
+}
+
+.reports-table tbody tr:hover{
+    background: rgba(255,255,255,0.45);
+    transition: 0.2s ease;
+}
+.alerts-description{
+    font-size: 20px;
+    color: #7a5a4f;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    text-align: center;
 }

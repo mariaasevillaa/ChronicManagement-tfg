@@ -8,14 +8,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class JDBCAlertsManager {
     private final DataSource dataSource;
-    public JDBCAlertsManager(DataSource dataSource) {
+    private final JDBCDailyReportManager dailyReportManager;
+    private final JDBCMonitoringParameters monitoringParameters;
+    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameters monitoringParameters) {
         this.dataSource = dataSource;
+        this.dailyReportManager = dailyReportManager;
+        this.monitoringParameters = monitoringParameters;
     }
  public boolean hasActiveAlerts (int patient_id, String type) {
         String sql= "SELECT 1 FROM alerts WHERE patient_id=? AND type=? AND resolved= 0";
@@ -95,6 +100,22 @@ public class JDBCAlertsManager {
             return alerts;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void checkMissedReportsAlert(int patient_id) {
+        int daysWithoutReports = dailyReportManager.getDaysSinceLastReport(patient_id);
+        int missedReportsDays = monitoringParameters.getMissedReportsDays(patient_id);
+
+        if (daysWithoutReports >= missedReportsDays) {
+            if (!hasActiveAlerts(patient_id, "MISSED_REPORTS")) {
+                createAlerts(
+                        patient_id,
+                        "MISSED_REPORTS",
+                        0,
+                        "Patient has not submitted daily reports",
+                        LocalDate.now().toString()
+                );
+            }
         }
     }
 }

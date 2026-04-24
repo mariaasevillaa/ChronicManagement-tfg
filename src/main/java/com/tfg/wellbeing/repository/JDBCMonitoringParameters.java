@@ -83,5 +83,25 @@ public class JDBCMonitoringParameters {
             throw new RuntimeException(e);
         }
     }
+    public int getMissedReportsDays(int patient_id) {
+        String sql = "SELECT missed_reports_days FROM monitoring_parameters WHERE patient_id = ?";
+
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, patient_id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("missed_reports_days");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 2;
+    }
 
 }

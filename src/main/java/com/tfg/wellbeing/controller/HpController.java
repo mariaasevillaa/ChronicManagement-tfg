@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HpController {
@@ -101,7 +103,6 @@ public class HpController {
     public String reviewReports(Model model, @RequestParam ("patient_id") int patient_id,HttpSession session) {
         List<Daily_report> dailyReportList= dailyReportManager.getReportByPatientId(patient_id);
         model.addAttribute("dailyReports", dailyReportList);
-        List<String>reportswithsymptoms= new ArrayList<>();
         String name = (String) session.getAttribute("name");
 
         Patient patient= patientManager1.getPatientbyID(patient_id);
@@ -109,9 +110,11 @@ public class HpController {
         if (patient_id == 0) {
             return "redirect:/hp_dashboard";
         }
-        for(Daily_report report: dailyReportList){
-            List<String>symptoms= dailySymptomsManager.getSymptomsByReportId(report.getId());
-            reportswithsymptoms.addAll(symptoms);
+        Map<Integer, List<String>> reportswithsymptoms = new HashMap<>();
+
+        for (Daily_report report : dailyReportList) {
+            List<String> symptoms = dailySymptomsManager.getSymptomsByReportId(report.getId());
+            reportswithsymptoms.put(report.getId(), symptoms);
         }
         model.addAttribute("reportswithsymptoms", reportswithsymptoms);
         model.addAttribute("name", name);
@@ -141,18 +144,36 @@ public class HpController {
         model.addAttribute("weekslabels", dailyReportManager.getWeekLabels(patient_id));
         model.addAttribute("monthsvalues", dailyReportManager.getMonthValues(patient_id));
         model.addAttribute("monthslabels", dailyReportManager.getMonthLabels(patient_id));
+        model.addAttribute("medicationdays",dailyReportManager.getDaysValuesMed(patient_id));
+        model.addAttribute("medicationweeks",dailyReportManager.getWeekValuesMed(patient_id));
+        model.addAttribute("medicationmonths",dailyReportManager.getMonthValuesMed(patient_id));
         return "progress";
 
     }
 
     @GetMapping("/configure_parameters")
-    public String configureParameters(Model model, @RequestParam("patient_id") int patient_id) {
+    public String configureParameters(Model model, @RequestParam("patient_id") int patient_id,HttpSession session) {
         MonitoringParameters mp= monitoringParameters.getParametersbyPatientId(patient_id);
+        Patient patient =patientManager1.getPatientbyID(patient_id);
+        String name = (String) session.getAttribute("name");
+
+        model.addAttribute("patient_id", patient_id);
+        model.addAttribute("pname", patient.getName());
+        model.addAttribute("name", name);
         model.addAttribute("monitoringParameters", mp);
         return "configure_parameters";
     }
+    @PostMapping("/configure_parameters")
+    public String configureParameters(@RequestParam("patient_id") int patient_id,
+                                      @RequestParam("mood_threshold") int mood_threshold,
+                                      @RequestParam("missed_medication_days") int missed_medication_days,
+                                      @RequestParam("missed_reports_days") int missed_reports_days){
+        monitoringParameters.setMonitoringParameters(patient_id,mood_threshold,missed_reports_days,missed_medication_days);
+        return "redirect:/view_patient?patient_id=" + patient_id;
+    }
     @GetMapping("/patient_alerts")
     public String patientAlerts(Model model, @RequestParam("patient_id") int patient_id,HttpSession session) {
+        alertsManager.checkMissedReportsAlert(patient_id);
         List<Alerts>alertsList=alertsManager.getAllAlerts(patient_id);
         List<Alerts>alertsactive=alertsManager.getAllActiveAlerts(patient_id);
         List<Alerts>alertsresolved=alertsManager.getAllResolvedAlerts(patient_id);

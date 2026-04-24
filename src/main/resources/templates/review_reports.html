@@ -7,8 +7,8 @@
 <body>
 <article id="background">
     <div class="review-reports">
-        <h2 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
-        <h1 class="title1">DAILY REPORTS HISTORY</h1>
+        <h2 class="header3"> Patient record: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h2>
+        <h1 class="title-section">DAILY REPORTS HISTORY</h1>
         <table class="reports-table">
             <thead>
             <tr>
@@ -23,8 +23,13 @@
             <tbody>
             <tr th:each="report : ${dailyReports}">
                 <td th:text="${report.getReport_date()}"></td>
-                <td th:text="${report.getMood()} "></td>
+                <td th:text="${report.getMood()}+ '/5'"></td>
                 <td th:text="${report.getMedication_taken() == 1 ? 'Yes' : 'No'}"></td>
+                <td>
+                     <span th:if="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}">No symptoms</span>
+                    <span th:unless="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}"
+                          th:text="${#strings.listJoin(reportswithsymptoms[report.getId()], ', ')}"></span>
+                </td>
 
                 <td th:text="${report.getNote()}"></td>
             </tr>
