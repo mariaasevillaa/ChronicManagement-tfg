@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient alerts</title>
-    <link rel="stylesheet" href="/images/dashboard_hp.css">
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
 <body>
 <article id="background">
@@ -37,7 +37,7 @@
                 <td th:switch="${alert.type}">
                     <span th:case="'LOW_MOOD'">⚠ Low mood</span>
                     <span th:case="'NO_MEDICATION'">💊 No medication taken</span>
-                    <span th:case="'MISSED_REPORTS'"> Missed reports</span>
+                    <span th:case="'MISSED_REPORTS'"> 📝 Missed reports</span>
                     <span th:case="*" th:text="${alert.type}"></span>
                 </td>
                 <td th:text="${alert.getMessage()}"></td>

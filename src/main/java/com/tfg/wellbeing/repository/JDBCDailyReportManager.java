@@ -374,7 +374,7 @@ public class JDBCDailyReportManager {
             throw new RuntimeException(e);
         }
 
-        return 0;
+        return -1;
     }
 
 

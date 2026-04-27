@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,27 @@ public class HpController {
         if (patientId == 0) {
             return "redirect:/hp_dashboard";
         }
+        int daysNoReport=dailyReportManager.getDaysSinceLastReport(patientId);
+        if(daysNoReport==-1|| daysNoReport>=2){
+            if(!alertsManager.hasActiveAlerts(patientId,"MISSED_REPORTS")){
+
+                String message;
+                if (daysNoReport == -1) {
+                    message = "Patient has not submitted any reports yet";
+                } else {
+                    message = "Patient has not submitted reports for " + daysNoReport + " days";
+                }
+
+                alertsManager.createAlerts(
+                        patientId,
+                        "MISSED_REPORT",
+                        0,
+                        message,
+                        LocalDate.now().toString()
+                );
+            }
+
+        }
         model.addAttribute("name", name);
         model.addAttribute("patient_id",patientId);
         model.addAttribute("pname", patient.getName());
@@ -153,9 +175,15 @@ public class HpController {
 
     @GetMapping("/configure_parameters")
     public String configureParameters(Model model, @RequestParam("patient_id") int patient_id,HttpSession session) {
-        MonitoringParameters mp= monitoringParameters.getParametersbyPatientId(patient_id);
+
         Patient patient =patientManager1.getPatientbyID(patient_id);
         String name = (String) session.getAttribute("name");
+        MonitoringParameters mp = monitoringParameters.getParametersbyPatientId(patient_id);
+
+        if (mp == null) {
+            monitoringParameters.setMonitoringParameters(patient_id, 2, 2, 1);
+            mp = monitoringParameters.getParametersbyPatientId(patient_id);
+        }
 
         model.addAttribute("patient_id", patient_id);
         model.addAttribute("pname", patient.getName());
@@ -164,10 +192,12 @@ public class HpController {
         return "configure_parameters";
     }
     @PostMapping("/configure_parameters")
-    public String configureParameters(@RequestParam("patient_id") int patient_id,
-                                      @RequestParam("mood_threshold") int mood_threshold,
-                                      @RequestParam("missed_medication_days") int missed_medication_days,
-                                      @RequestParam("missed_reports_days") int missed_reports_days){
+    public String configureParameters(@RequestParam("patient_id") int patient_id, @RequestParam("mood_threshold") int mood_threshold, @RequestParam("missed_medication_days") int missed_medication_days, @RequestParam("missed_reports_days") int missed_reports_days, HttpSession session, Model model){
+        Patient patient=patientManager1.getPatientbyID(patient_id);
+        String name= (String) session.getAttribute("name");
+        model.addAttribute("name", name);
+        model.addAttribute("patient_id", patient_id);
+        model.addAttribute("pname", patient.getName());
         monitoringParameters.setMonitoringParameters(patient_id,mood_threshold,missed_reports_days,missed_medication_days);
         return "redirect:/view_patient?patient_id=" + patient_id;
     }

@@ -126,7 +126,6 @@ public class PatientController {
             }
         }
         if(medication_taken==0){
-            System.out.println("entra NO_MEDICATION");
             if(!alertsManager.hasActiveAlerts(patient_id,"NO_MEDICATION")){
                 alertsManager.createAlerts(patient_id,"NO_MEDICATION",0,"Patient hasn't taken the medication",date);
 

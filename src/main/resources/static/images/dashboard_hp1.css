@@ -78,13 +78,19 @@
 }
 .pdash_buttons{
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+.pdash_buttons2{
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin-top: 40px;
 }
 .info-patient{
     background: rgba(214, 186, 178, 0.58);
-    padding: 8px 10px  ;
+    padding: 8px;
     border-radius: 20px;
     text-decoration: none;
     color: black;

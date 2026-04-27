@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Configure parameters</title>
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
 <body>
+<article id="background">
+
+
+
+    <div class="top">
+        <span  th:text="${name}" class="name"></span>
+        <a href="/logout" class="logout">| Log out</a>
+    </div>
+    <img src="/images/logo2.png" class="logo">
+    <img src="/images/silueta.png" class="icono1">
+</article>
 
 </body>
 </html>

@@ -22,7 +22,7 @@ public class JDBCMonitoringParameters {
             ps.setInt(1, patient_id);
             try(ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    MonitoringParameters monitoringParameters = new MonitoringParameters(rs.getInt("id"),rs.getInt("patient_id"),rs.getInt("missed_medication_days"),rs.getInt("missed_report_days"),rs.getInt("mood_threshold"));
+                    MonitoringParameters monitoringParameters = new MonitoringParameters(rs.getInt("id"),rs.getInt("patient_id"),rs.getInt("mood_threshold"),rs.getInt("missed_medication_days"),rs.getInt("missed_reports_days"));
                     return monitoringParameters;
                 }
 
@@ -50,7 +50,7 @@ public class JDBCMonitoringParameters {
                 if (rs.next()) {
 
                     // UPDATE si ya existe
-                    String updateSql = "UPDATE monitoring_parameters SET mood_threshold = ?, missed_reports_days = ?, medication_missed_days = ? WHERE patient_id = ?";
+                    String updateSql = "UPDATE monitoring_parameters SET mood_threshold = ?, missed_medication_days = ?,missed_reports_days = ? WHERE patient_id = ?";
 
                     try (PreparedStatement update = c.prepareStatement(updateSql)) {
 
@@ -65,7 +65,7 @@ public class JDBCMonitoringParameters {
                 } else {
 
                     // INSERT si no existe
-                    String insertSql = "INSERT INTO monitoring_parameters (patient_id, mood_threshold, missed_reports_days, medication_missed_days) VALUES (?, ?, ?, ?)";
+                    String insertSql = "INSERT INTO monitoring_parameters (patient_id, mood_threshold, missed_medication_days, missed_reports_days) VALUES (?, ?, ?, ?)";
 
                     try (PreparedStatement insert = c.prepareStatement(insertSql)) {
 
