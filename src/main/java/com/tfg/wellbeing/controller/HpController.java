@@ -119,7 +119,13 @@ public class HpController {
         model.addAttribute("diagnosis", patient.getDiagnosis_date());
         return "view_patient";
     }
+    @PostMapping("/resolve_alert")
+    public String resolveAlert(@RequestParam("alert_id") int alertId,
+                               @RequestParam("patient_id") int patientId) {
 
+        alertsManager.resolveAlert(alertId);
+        return "redirect:/patient_alerts?patient_id=" + patientId;
+    }
 
     @GetMapping("/review_reports")
     public String reviewReports(Model model, @RequestParam ("patient_id") int patient_id,HttpSession session) {

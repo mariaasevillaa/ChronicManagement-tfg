@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Configure parameters</title>
-    <link rel="stylesheet" href="/images/dashboard_hp1.css">
+    <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
 <article id="background">
+    <div class="configure-box">
+        <h1 class="title-section">CONFIGURE MONITORING PARAMETERS</h1>
+        <h3 class="alerts-description">Adjust the threshold used for alerts for the patient</h3>
+        <div class="box-parameters">
+            <label class="config-label">Mood threshold</label>
+            <input type="number" name="mood_threshold" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMood_threshold()}">
+            <p class="config-label">Alert if mood is equal to or below this value </p>
+        </div>
+        <div class="box-parameters">
+            <label class="config-label">Missed reports days</label>
+            <input type="number" name="missed_reports_days" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMissed_report_days()}">
+            <p class="config-label">Alert if reports are not submitted for these many days</p>
+
+        </div>
+        <div class="box-parameters">
+            <label class="config-label">Missed medication days</label>
+            <input type="number" name="missed_reports_days" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMissed_medication_days()}">
+            <p class="config-label">Alert if medication is missed for these many days</p>
+
+        </div>
+
+    </div>
 
 
 

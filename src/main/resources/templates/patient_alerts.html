@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient alerts</title>
-    <link rel="stylesheet" href="/images/dashboard_hp1.css">
+    <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
 <article id="background">
@@ -24,6 +24,7 @@
                 <th>Alert type</th>
                 <th>Message</th>
                 <th>Status</th>
+                <th>Action</th>
 
             </tr>
             </thead>
@@ -42,6 +43,15 @@
                 </td>
                 <td th:text="${alert.getMessage()}"></td>
                 <td th:text="${alert.getResolved() == 1 ? 'Resolved' : 'Active'}"></td>
+                <td>
+                    <form th:if="${alert.resolved == 0}" action="/resolve_alert" method="post">
+                        <input type="hidden" name="alert_id" th:value="${alert.getId()}">
+                        <input type="hidden" name="patient_id" th:value="${patient_id}">
+                        <button type="submit" class="resolve-btn">Resolve</button>
+                    </form>
+
+                    <span th:if="${alert.resolved == 1}">—</span>
+                </td>
 
 
             </tr>

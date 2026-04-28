@@ -118,4 +118,16 @@ public class JDBCAlertsManager {
             }
         }
     }
+    public void resolveAlert(int alert_id){
+        String sql="UPDATE alerts SET resolved=1 WHERE id=?";
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, alert_id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
