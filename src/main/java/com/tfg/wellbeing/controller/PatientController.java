@@ -1,9 +1,7 @@
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.model.Achievements;
-import com.tfg.wellbeing.model.Daily_report;
-import com.tfg.wellbeing.model.Patient;
-import com.tfg.wellbeing.model.Symptoms;
+import com.tfg.wellbeing.model.*;
+import com.tfg.wellbeing.model.MonitoringParameters;
 import com.tfg.wellbeing.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,10 @@ public class PatientController {
     private final JDBCPatientAchievements patientAchievementsManager;
     private final JDBCGamificationManager gamificationManager;
     private final JDBCAlertsManager alertsManager;
+    private final JDBCMonitoringParameters monitoringParameters;
 
-    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomsManager dailySymptomsManager, JDBCAchievementsManager achievementsManager, JDBCPatientAchievements patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertsManager alertsManager) {
+
+    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomsManager dailySymptomsManager, JDBCAchievementsManager achievementsManager, JDBCPatientAchievements patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertsManager alertsManager, JDBCMonitoringParameters monitoringParameters) {
         this.patientManager = patientManager;
         this.dailyReportManager = dailyReportManager;
         this.symptomsManager = symptomsManager;
@@ -36,6 +36,9 @@ public class PatientController {
         this.patientAchievementsManager = patientAchievementsManager;
         this.gamificationManager = gamificationManager;
         this.alertsManager = alertsManager;
+        this.monitoringParameters = monitoringParameters;
+
+
     }
     @GetMapping("/patient_dashboard")
     public String patientDashboard(HttpSession session, Model model) {
@@ -119,7 +122,12 @@ public class PatientController {
                 }
             }
         }
-        if(mood<=2){
+        MonitoringParameters monitoringParameters1= monitoringParameters.getParametersbyPatientId(patient_id);
+        int moodThreshold=2;
+        if(monitoringParameters1 != null) {
+            moodThreshold= monitoringParameters1.getMood_threshold();
+        }
+        if(mood<=moodThreshold) {
             if(!alertsManager.hasActiveAlerts(patient_id,"LOW_MOOD")){
                 alertsManager.createAlerts(patient_id,"LOW_MOOD",0,"Patient reported low mood",date);
 

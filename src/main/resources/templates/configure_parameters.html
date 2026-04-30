@@ -7,38 +7,51 @@
 </head>
 <body>
 <article id="background">
+
     <div class="configure-box">
-        <h1 class="title-section">CONFIGURE MONITORING PARAMETERS</h1>
-        <h3 class="alerts-description">Adjust the threshold used for alerts for the patient</h3>
-        <div class="box-parameters">
-            <label class="config-label">Mood threshold</label>
-            <input type="number" name="mood_threshold" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMood_threshold()}">
-            <p class="config-label">Alert if mood is equal to or below this value </p>
-        </div>
-        <div class="box-parameters">
-            <label class="config-label">Missed reports days</label>
-            <input type="number" name="missed_reports_days" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMissed_report_days()}">
-            <p class="config-label">Alert if reports are not submitted for these many days</p>
+        <form action="/configure_parameters" method="post">
+            <input type="hidden" name="patient_id" th:value="${patient_id}">
 
-        </div>
-        <div class="box-parameters">
-            <label class="config-label">Missed medication days</label>
-            <input type="number" name="missed_reports_days" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMissed_medication_days()}">
-            <p class="config-label">Alert if medication is missed for these many days</p>
+            <h1 class="title-section">CONFIGURE MONITORING PARAMETERS</h1>
+            <h3 class="alerts-description">Adjust the alert thresholds for this patient</h3>
 
-        </div>
+            <div class="box-parameters">
+                <div class="parameter-top">
+                    <label class="config-label">Mood threshold</label>
+                    <input type="number" name="mood_threshold" min="1" max="5" class="config-input" th:value="${monitoringParameters.getMood_threshold()}">
+                </div>
+                <p class="config-help">Alert if mood is equal to or below this value</p>
+            </div>
 
+            <div class="box-parameters">
+                <div class="parameter-top">
+                    <label class="config-label">Missed reports days</label>
+                    <input type="number" name="missed_reports_days" min="1" class="config-input" th:value="${monitoringParameters.getMissed_report_days()}">
+                </div>
+                <p class="config-help">Alert if reports are not submitted for this many days</p>
+            </div>
+
+            <div class="box-parameters">
+                <div class="parameter-top">
+                    <label class="config-label">Missed medication days</label>
+                    <input type="number" name="missed_medication_days" min="1" class="config-input" th:value="${monitoringParameters.getMissed_medication_days()}">
+                </div>
+                <p class="config-help">Alert if medication is missed for this many days</p>
+            </div>
+
+            <div class="config-buttons">
+                <button type="submit" class="save-button">Save changes</button>
+                <a th:href="@{/view_patient(patient_id=${patient_id})}" class="back-button">Back</a>
+            </div>
+        </form>
     </div>
 
-
-
     <div class="top">
-        <span  th:text="${name}" class="name"></span>
+        <span th:text="${name}" class="name"></span>
         <a href="/logout" class="logout">| Log out</a>
     </div>
     <img src="/images/logo2.png" class="logo">
     <img src="/images/silueta.png" class="icono1">
 </article>
-
 </body>
 </html>
