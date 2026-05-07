@@ -1,6 +1,8 @@
 package com.tfg.wellbeing.repository;
 
 import com.tfg.wellbeing.model.Alerts;
+import com.tfg.wellbeing.model.Patient;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -17,10 +19,12 @@ public class JDBCAlertsManager {
     private final DataSource dataSource;
     private final JDBCDailyReportManager dailyReportManager;
     private final JDBCMonitoringParameters monitoringParameters;
-    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameters monitoringParameters) {
+    private JDBCPatientManager patientManager;
+    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameters monitoringParameters,JDBCPatientManager patientManager) {
         this.dataSource = dataSource;
         this.dailyReportManager = dailyReportManager;
         this.monitoringParameters = monitoringParameters;
+        this.patientManager = patientManager;
     }
  public boolean hasActiveAlerts (int patient_id, String type) {
         String sql= "SELECT 1 FROM alerts WHERE patient_id=? AND type=? AND resolved= 0";
@@ -106,18 +110,47 @@ public class JDBCAlertsManager {
         int daysWithoutReports = dailyReportManager.getDaysSinceLastReport(patient_id);
         int missedReportsDays = monitoringParameters.getMissedReportsDays(patient_id);
 
-        if (daysWithoutReports >= missedReportsDays) {
-            if (!hasActiveAlerts(patient_id, "MISSED_REPORTS")) {
+        if (daysWithoutReports==-1 || daysWithoutReports >= missedReportsDays) {
+            if (!hasActiveAlerts(patient_id, "MISSED_REPORT")) {
+                String message;
+                if (daysWithoutReports == -1) {
+                    message = "Patient has not submitted any reports yet";
+                } else {
+                    message = "Patient has not submitted daily reports for " + daysWithoutReports + " days";
+                }
                 createAlerts(
                         patient_id,
-                        "MISSED_REPORTS",
+                        "MISSED_REPORT",
                         0,
-                        "Patient has not submitted daily reports",
+                        message,
                         LocalDate.now().toString()
                 );
             }
         }
     }
+    @Scheduled(cron = "0 0 9 * * *")
+    public void checkAllPatientsMissedReports() {
+        List<Patient> patients = patientManager.getAllPatients();
+
+        for (Patient p : patients) {
+            checkMissedReportsAlert(p.getId());
+        }
+    }
+
+    public void resolveAlertForReports(int patient_id, String type){
+        String sql="UPDATE alerts SET resolved=1 WHERE patient_id=? AND type=? AND resolved=0";
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, patient_id);
+            ps.setString(2,type);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void resolveAlert(int alert_id){
         String sql="UPDATE alerts SET resolved=1 WHERE id=?";
         try (Connection c = dataSource.getConnection();

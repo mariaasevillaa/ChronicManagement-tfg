@@ -36,7 +36,7 @@ public class JDBCMonitoringParameters {
 
 
     }
-    public void setMonitoringParameters(int patient_id, int mood_threshold, int missed_reports_days, int medication_missed_days) {
+    public void setMonitoringParameters(int patient_id, int mood_threshold,  int missed_medication_days, int missed_reports_days) {
 
         String checkSql = "SELECT id FROM monitoring_parameters WHERE patient_id = ?";
 
@@ -55,8 +55,8 @@ public class JDBCMonitoringParameters {
                     try (PreparedStatement update = c.prepareStatement(updateSql)) {
 
                         update.setInt(1, mood_threshold);
-                        update.setInt(2, missed_reports_days);
-                        update.setInt(3, medication_missed_days);
+                        update.setInt(2, missed_medication_days);
+                        update.setInt(3, missed_reports_days);
                         update.setInt(4, patient_id);
 
                         update.executeUpdate();
@@ -71,8 +71,8 @@ public class JDBCMonitoringParameters {
 
                         insert.setInt(1, patient_id);
                         insert.setInt(2, mood_threshold);
-                        insert.setInt(3, missed_reports_days);
-                        insert.setInt(4, medication_missed_days);
+                        insert.setInt(3, missed_medication_days);
+                        insert.setInt(4, missed_reports_days);
 
                         insert.executeUpdate();
                     }

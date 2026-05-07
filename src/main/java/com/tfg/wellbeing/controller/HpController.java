@@ -89,27 +89,7 @@ public class HpController {
         if (patientId == 0) {
             return "redirect:/hp_dashboard";
         }
-        int daysNoReport=dailyReportManager.getDaysSinceLastReport(patientId);
-        if(daysNoReport==-1|| daysNoReport>=2){
-            if(!alertsManager.hasActiveAlerts(patientId,"MISSED_REPORTS")){
 
-                String message;
-                if (daysNoReport == -1) {
-                    message = "Patient has not submitted any reports yet";
-                } else {
-                    message = "Patient has not submitted reports for " + daysNoReport + " days";
-                }
-
-                alertsManager.createAlerts(
-                        patientId,
-                        "MISSED_REPORT",
-                        0,
-                        message,
-                        LocalDate.now().toString()
-                );
-            }
-
-        }
         model.addAttribute("name", name);
         model.addAttribute("patient_id",patientId);
         model.addAttribute("pname", patient.getName());

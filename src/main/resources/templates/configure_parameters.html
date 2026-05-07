@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Configure parameters</title>
-    <link rel="stylesheet" href="/images/dashboard_hp.css">
+    <link rel="stylesheet" href="/images/dashboard_hp1.css">
 </head>
 <body>
 <article id="background">
@@ -34,9 +34,12 @@
             <div class="box-parameters">
                 <div class="parameter-top">
                     <label class="config-label">Missed medication days</label>
-                    <input type="number" name="missed_medication_days" min="1" class="config-input" th:value="${monitoringParameters.getMissed_medication_days()}">
+                    <select name="missed_medication_days" class="config-input">
+                        <option value="1" th:selected="${monitoringParameters.getMissed_medication_days() == 1}">Enabled</option>
+                        <option value="0" th:selected="${monitoringParameters.getMissed_medication_days() == 0}">Disabled</option>
+                    </select>
                 </div>
-                <p class="config-help">Alert if medication is missed for this many days</p>
+                <p class="config-help">Enable or disable alerts when the patient reports not taking medication</p>
             </div>
 
             <div class="config-buttons">

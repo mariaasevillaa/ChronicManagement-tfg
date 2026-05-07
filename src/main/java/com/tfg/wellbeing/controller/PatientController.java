@@ -106,6 +106,7 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int report_id= dailyReportManager.addDailyReport(patient_id,mood,medication_taken,note,date);
+        alertsManager.resolveAlertForReports(patient_id,"MISSED_REPORT");
         if(symptoms != null) {
             for(Integer symptom_id : symptoms) {
                 dailySymptomsManager.addDailySymptoms(symptom_id,report_id);
@@ -124,20 +125,30 @@ public class PatientController {
         }
         MonitoringParameters monitoringParameters1= monitoringParameters.getParametersbyPatientId(patient_id);
         int moodThreshold=2;
+        int medication_enabled=1;
         if(monitoringParameters1 != null) {
             moodThreshold= monitoringParameters1.getMood_threshold();
+            medication_enabled= monitoringParameters1.getMissed_medication_days();
         }
-        if(mood<=moodThreshold) {
-            if(!alertsManager.hasActiveAlerts(patient_id,"LOW_MOOD")){
-                alertsManager.createAlerts(patient_id,"LOW_MOOD",0,"Patient reported low mood",date);
 
-            }
+        if (mood <= moodThreshold) {
+            alertsManager.createAlerts(
+                    patient_id,
+                    "LOW_MOOD",
+                    0,
+                    "Patient reported low mood",
+                    date
+            );
         }
-        if(medication_taken==0){
-            if(!alertsManager.hasActiveAlerts(patient_id,"NO_MEDICATION")){
-                alertsManager.createAlerts(patient_id,"NO_MEDICATION",0,"Patient hasn't taken the medication",date);
 
-            }
+        if (medication_taken == 0 && medication_enabled == 1) {
+            alertsManager.createAlerts(
+                    patient_id,
+                    "NO_MEDICATION",
+                    0,
+                    "Patient hasn't taken the medication",
+                    date
+            );
         }
         String name= (String) session.getAttribute("name");
         model.addAttribute("name",name);
@@ -200,21 +211,32 @@ public class PatientController {
     @GetMapping("/patient_achievements")
     public String patientAchievements(HttpSession session, Model model) {
         Integer user_id = (Integer) session.getAttribute("user_id");
-        int patient_id= patientManager.getPatientIDbyUserID(user_id);
-        int points= gamificationManager.getPoints(patient_id);
-        int reportsCount= dailyReportManager.countReportsByPatientId(patient_id);
-        List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
-        List<Achievements> allAchievements=achievementsManager.getAchievements();
+        int patient_id = patientManager.getPatientIDbyUserID(user_id);
+
+        int points = gamificationManager.getPoints(patient_id);
+
+        List<Achievements> unlockedAchievements =
+                patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+
+        List<Achievements> allAchievements = achievementsManager.getAchievements();
         List<Achievements> lockedAchievements = new ArrayList<>();
 
         for (Achievements a : allAchievements) {
-            if (reportsCount >= a.getReports_needed()) {
-                unlockedAchievements.add(a);
-            } else {
+            boolean unlocked = false;
+
+            for (Achievements ua : unlockedAchievements) {
+                if (ua.getId() == a.getId()) {
+                    unlocked = true;
+                    break;
+                }
+            }
+
+            if (!unlocked) {
                 lockedAchievements.add(a);
             }
         }
-        model.addAttribute("points",points);
+
+        model.addAttribute("points", points);
         model.addAttribute("unlockedAchievements", unlockedAchievements);
         model.addAttribute("lockedAchievements", lockedAchievements);
         model.addAttribute("unlockedAchievementssize", unlockedAchievements.size());
@@ -223,7 +245,6 @@ public class PatientController {
         model.addAttribute("name", name);
 
         return "patient_achievements";
-
     }
 
 

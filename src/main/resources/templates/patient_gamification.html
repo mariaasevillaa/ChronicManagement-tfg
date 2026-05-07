@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient gamification</title>
-    <link rel="stylesheet" href="/images/dashboard_pa.css">
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
 <article id="background">
@@ -12,11 +12,23 @@
             <h1 class="header_progress"> Your gamification status </h1>
             <h2 class="header3"> Track your points and progress</h2>
             <div class="gamification-row">
-                <p class="box-gamification">Your current points <span th:text="${points}"></span></p>
-                <p class="box-gamification"> Streak days: <span th:text="${streakdays}"></span></p>
+
+                <div class="stat-card">
+                    <img src="/images/estrella.png" alt="Points icon" class="stat-icon">
+                    <span class="stat-value" th:text="${points}"></span>
+                    <span class="stat-label">Current points</span>
+                </div>
+
+                <div class="stat-card">
+                    <img src="/images/fuego.png" alt="Streak icon" class="stat-icon">
+                    <span class="stat-value" th:text="${streakdays}"></span>
+                    <span class="stat-label">Streak days</span>
+                </div>
+
             </div>
             <h3 class="header3_progress"> Next achievement:</h3>
             <div class="nextAchievement">
+
                 <p > Name: <span th:text="${nextachievement.getName()}"></span></p>
                 <p > Description: <span th:text="${nextachievement.getDescription()}"></span></p>
                 <p > Reward: <span th:text="${nextachievement.getPoints_reward()}"></span>points</p>
