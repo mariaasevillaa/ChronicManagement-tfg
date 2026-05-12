@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient achievements</title>
-    <link rel="stylesheet" href="/images/dashboard_pat.css">
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
 </head>
 <body>
 <article id="background">
@@ -23,10 +23,11 @@
             </div>
 
             <div class="unlocked_achievements">
-                <h3 class="header3_progress">Unlocked</h3>
+                <h3 class="unlocked"> ✔ Unlocked badges</h3>
                 <div>
                     <div th:each="a : ${unlockedAchievements}" class="achievements-box-unlocked">
-                        <p> ✔ <span th:text="${a.name}"></span></p>
+                        <img src="/images/trofeo.png" class="trofeo">
+                        <p> <span th:text="${a.name}" ></span></p>
                         <p th:text="${a.points_reward} + ' points'"></p>
 
                     </div>
@@ -34,10 +35,11 @@
 
             </div>
             <div class="locked_achievements">
-            <h3 class="header3_progress">Locked</h3>
+            <h3 class="locked"> 🔒 Locked badges</h3>
                 <div>
                     <div th:each="a : ${lockedAchievements}" class="achievements-box">
-                        <p> 🔒 <span th:text="${a.name}"></span></p>
+                        <img src="/images/candado.png" class="trofeo">
+                        <p> <span th:text="${a.name}"></span></p>
                         <p th:text="${a.points_reward} + ' points'"></p>
 
                     </div>

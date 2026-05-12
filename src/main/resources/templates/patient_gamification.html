@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient gamification</title>
-    <link rel="stylesheet" href="/images/dashboard_pat.css">
+    <link rel="stylesheet" href="/images/dashboard_pa.css">
 </head>
 <body>
 <article id="background">
@@ -26,12 +26,15 @@
                 </div>
 
             </div>
-            <h3 class="header3_progress"> Next achievement:</h3>
+            <h3 class="nextachiev"> Next achievement</h3>
             <div class="nextAchievement">
+                <img src="/images/medalla.png" class="medalla">
+                <div class="achiev-info">
+                    <h3 class="achiev1"> <span th:text="${nextachievement.getName()}"></span></h3>
+                    <p class="achiev2"> <span th:text="${nextachievement.getDescription()}"></span> to unlock this badge </p>
+                    <p > Reward: <span th:text="${nextachievement.getPoints_reward()}"></span>points</p>
+                </div>
 
-                <p > Name: <span th:text="${nextachievement.getName()}"></span></p>
-                <p > Description: <span th:text="${nextachievement.getDescription()}"></span></p>
-                <p > Reward: <span th:text="${nextachievement.getPoints_reward()}"></span>points</p>
             </div>
                 <a href="/patient_dashboard" class="return_dashboard">Back to dashboard</a>
 
