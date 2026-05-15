@@ -41,6 +41,24 @@ public class JDBCDailyReportManager {
         }
 
     }
+    public boolean hasReportforDate(int patient_id, String date) {
+        String sql = "SELECT COUNT(*) FROM daily_reports WHERE patient_id=? AND date=?";
+        try (Connection c = datasource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, patient_id);
+            ps.setString(2, date);
+            try (ResultSet rs = ps.executeQuery()) {
+                if(rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+
+    }
 
     public List<Daily_report> getReportByPatientId(int patient_id) {
         String sql = "SELECT * FROM daily_reports WHERE patient_id= ? ORDER BY date DESC ";

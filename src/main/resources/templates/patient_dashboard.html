@@ -9,6 +9,7 @@
 <article id="background">
     <div class="patient" >
         <form action="/patient_dashboard" method="get">
+            <p th:if="${error}" th:text="${error}" class="error"></p>
             <h1 class="header">Welcome back, <span th:text="${name}"></span>!</h1>
             <h2 class="header3"> Below you can find several options. <br>Please choose what you want to do! </h2>
             <section class="pdash_buttons">
@@ -21,12 +22,18 @@
             </section>
         </form>
     </div>
+
+        <img src="/images/logo2.png" class="logo">
         <div class="top">
             <a href="/patient_profile" th:text="${name}" class="name"></a>
-            <a href="/logout" class="logout">| Log out</a>
+            <a href="/logout" class="logout">| [-> Log out</a>
         </div>
-        <img src="/images/logo2.png" class="logo">
-        <img src="/images/silueta.png" class="icono1">
+
+        <img src="/images/silueta2.png" class="icono1">
+
+
+
+
 
 
 <!--añadir luego como quiero que sea mi boton -->

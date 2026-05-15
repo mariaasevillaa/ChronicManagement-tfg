@@ -41,7 +41,7 @@ public class PatientController {
 
     }
     @GetMapping("/patient_dashboard")
-    public String patientDashboard(HttpSession session, Model model) {
+    public String patientDashboard(HttpSession session, Model model, @RequestParam(required = false) Boolean reportSubmitted) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         if (user_id == null) {
             return "redirect:/login";
@@ -49,6 +49,9 @@ public class PatientController {
         model.addAttribute("user_id", user_id);
         String name= (String) session.getAttribute("name");
         model.addAttribute("name", name);
+        if(Boolean.TRUE.equals(reportSubmitted)) {
+            model.addAttribute("error", "You are already submitted a report for this day");
+        }
 
         return "patient_dashboard";
     }
@@ -105,6 +108,10 @@ public class PatientController {
     public String dailyReports(HttpSession session, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms, Model model ) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        if(dailyReportManager.hasReportforDate(patient_id,date)){
+            System.out.println("REPORT ALREADY EXISTS FOR THIS DATE");
+            return "redirect:/patient_dashboard?reportSubmitted=true";
+        }
         int report_id= dailyReportManager.addDailyReport(patient_id,mood,medication_taken,note,date);
         alertsManager.resolveAlertForReports(patient_id,"MISSED_REPORT");
         if(symptoms != null) {
@@ -153,7 +160,6 @@ public class PatientController {
         String name= (String) session.getAttribute("name");
         model.addAttribute("name",name);
         return "redirect:/patient_dashboard";
-
     }
 
     @GetMapping("/patient_progress")
