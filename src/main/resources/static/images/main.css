@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Italiana&family=Playwrite+CU+Guides&family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap');
 .header {
-    color: #69443c;
+    color: #5A342E;
     font-family: "Italiana", sans-serif;
     font-weight: 800;
     font-style: normal;
@@ -11,7 +11,7 @@
 
 }
 .header3{
-    color: #69443c;
+    color: #6F4941;
     font-family: "Italiana", sans-serif;
     font-size: 30px;
     text-align: center;
@@ -48,6 +48,19 @@
 }
 
 
+.button-lrStarted{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 16px 30px;
+    margin: 10px;
+    background-color: #8F5A4E;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+
+}
 .button-lr{
     font-family: "Alumni Sans Pinstripe", sans-serif;
     font-size: 22px;
@@ -55,16 +68,20 @@
     padding: 16px 30px;
     margin: 10px;
     background-color: white;
-    color: #8c7d7c;
+    color: #8F5A4E;
+    border-color: #8F5A4E;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
 
-
 }
 .button-lr:hover {
-    background-color: #8c7d7c;
+    background-color: #8F5A4E;
     color: white;
+}
+.button-lrStarted:hover{
+    background-color: white;
+    color: #8F5A4E;
 }
 .top-buttons {
     display: flex;
@@ -99,13 +116,13 @@
     position: absolute;
     top: 0px;
     left: 30px;
-    width: 150px;
+    width: 170px;
     z-index: 2;
 }
 .top{
     position: absolute;
-    top: 50px;
-    right: 140px;
+    top: 40px;
+    right: 120px;
     align-items: center;
     z-index: 2;
 
@@ -130,15 +147,15 @@
     font-weight: bolder;
     padding: 10px 20px;
     margin: 10px;
-    background-color: white;
-    color: #8c7d7c;
+    background-color:#8F5A4E;
+    color: white;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
 }
 .submit-login:hover{
-    background-color: #8c7d7c;
-    color: white;
+    background-color: white;
+    color: #8F5A4E;
 
 }
 .perfil{
@@ -218,13 +235,7 @@
     font-size: 18px;
 }
 
-.logo{
-    position: absolute;
-    top: 10px;
-    left: 30px;
-    width: 240px;
 
-}
 .bottom{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -234,10 +245,18 @@
     margin: 40px auto 0 auto;
 }
 .bottom-info{
-    background: rgba(154, 114, 105, 0.35);
+    background-color: rgba(255, 250, 246, 0.78);
+    border: 1px solid rgba(105, 68, 60, 0.10);
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
     border-radius: 18px;
-    padding: 18px 20px;
-    text-align: center;
+    padding: 18px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+
+    text-align: left;
     color: #3f2a25;
     font-size: 22px;
     line-height: 1.4;
@@ -307,17 +326,97 @@
     text-decoration: none;
     margin-top: 0px;
 }
-.Signin{
+.signin{
     font-family: "Alumni Sans Pinstripe", sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 800;
-    padding: 16px 16px;
+    padding: 12px;
     margin: 10px;
     background-color: white;
-    color: #4B2D26;
-    border-color: #4B2D26;
+    color: #8F5A4E;
+    border-color:#8F5A4E;
     border-width: 5px;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
+}
+.getStarted{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px;
+    margin: 10px;
+    background-color: #8F5A4E;
+    color: white;
+    border-width: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.signin:hover{
+    color: white;
+    background-color: #8F5A4E;
+}
+.getStarted:hover{
+    color: #8F5A4E;
+    background-color: white;
+}
+.icon-frontpage{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.section-title{
+    text-align: center;
+    color: #5A342E;
+    font-family: "Italiana", sans-serif;
+    font-size: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    margin: 30px 0 18px;
+}
+.section-title:before,
+.section-title:after{
+    content: "";
+    height: 1px;
+    width: 130px;
+    background-color: rgba(138, 102, 94, 0.35);
+}
+.main-square{
+    width: 78%;
+    max-width: 1180px;
+    margin: 95px auto 0 auto;
+    padding: 70px 70px 55px;
+
+    background-color: rgba(255, 255, 255, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 32px;
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 22px 55px rgba(105, 68, 60, 0.10);
+
+    text-align: center;
+}
+.top2{
+    position: absolute;
+    top: 40px;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+.top2 p{
+    color: #69443c;
+    font-size: 20px;
+}
+.minitext{
+    font-size: 20px;
+    font-family: "Italiana", sans-serif;
+    color:#69443c;
+    align-items: center;
+    text-align: center;
 }
