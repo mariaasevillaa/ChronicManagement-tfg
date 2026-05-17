@@ -12,9 +12,19 @@
         <h1 class="header_progress"> Your progress over time </h1>
         <h2 class="header3_progress"> Track your daily reports, mood and medication adherence</h2>
             <div class="progress-row">
-            <p class="box-progress"><span th:text="${Totalreports}"></span><br>Reports submitted</p>
-            <p class="box-progress"><span th:text="${Averagemood}+ '/5'"></span><br>Average mood</p>
-            <p class="box-progress"><span th:text="${Averagemedicationtaken}"></span><br>Medication adherence</p>
+                <div class="box-progress">
+                    <img src="/images/calendario.png" class="icon">
+                    <p><span th:text="${Totalreports}"></span><br>Reports submitted</p>
+                </div>
+                <div class="box-progress">
+                    <img src="/images/mood.png" class="icon">
+                    <p><span th:text="${Averagemood}+ '/5'"></span><br>Average mood</p>
+                </div>
+                <div class="box-progress">
+                    <img src="/images/medication.png" class="icon">
+                    <p><span th:text="${Averagemedicationtaken}"></span><br>Medication adherence</p>
+                </div>
+
             </div>
             <h2 class="header3_progress">Health chart </h2>
 
@@ -36,10 +46,10 @@
     </div>
     <div class="top">
         <a href="/patient_profile" th:text="${name}" class="name"></a>
-        <a href="/logout" class="logout">| Log out</a>
+        <a href="/logout" class="logout">| [-> Log out</a>
     </div>
     <img src="/images/logo2.png" class="logo">
-    <img src="/images/silueta.png" class="icono1">
+    <img src="/images/silueta2.png" class="icono1">
 </article>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

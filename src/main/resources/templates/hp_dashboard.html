@@ -8,37 +8,43 @@
 <body>
 <article id="background">
     <div class="healthcare">
+        <div class="main-square-dashboard">
             <h1 class="header">Welcome back, Doctor <span th:text="${name}"></span>!</h1>
             <h2 class="header3"> List of available patients. Select a patient to view. </h2>
-        <div class="scroll">
-            <div class="pdash_buttons">
-                <div class="info-patient" th:each="patient: ${Patientlist}">
-                    <p> <span th:text="${patient.getName()} " ></span> <span th:text="${ patient.getSurname()}" ></span></p>
-                    <p> <span th:text="${patient.getChronic_condition()}" ></span></p>
-                    <form action="/select_patient" method="post">
-                        <input type="hidden" name="patient_id" th:value="${patient.getId()}">
-                        <input type="hidden" name="assign" value="true">
-                        <button type="submit" class="select-patinent"> View Patient</button>
+            <div class="scroll">
+                <div class="pdash_buttons">
+                    <div class="info-patient" th:each="patient: ${Patientlist}">
+                        <div class="avatar-letter" th:text="${patient.getName().substring(0,1).toUpperCase()}"></div>
+                        <h3 class="name-patient"> <span th:text="${patient.getName()} " ></span> <span th:text="${ patient.getSurname()}" ></span></h3>
+                        <p class="name-condition"> <span th:text="${patient.getChronic_condition()}" ></span></p>
+                        <form action="/select_patient" method="post">
+                            <input type="hidden" name="patient_id" th:value="${patient.getId()}">
+                            <input type="hidden" name="assign" value="true">
+                            <button type="submit" class="select-patinent"> View Patient</button>
 
-                    </form>
+                        </form>
+
+                    </div>
 
                 </div>
-
             </div>
+            <p class="privacy-note"> Patient information is confidential and only visible to authorized healthcare professionals </p>
         </div>
 
 
 
 
-    </div>
+
+        </div>
+
 
 
     <div class="top">
         <span  th:text="${name}" class="name"></span>
-        <a href="/logout" class="logout">| Log out</a>
+        <a href="/logout" class="logout">| [-> Log out</a>
     </div>
     <img src="/images/logo2.png" class="logo">
-    <img src="/images/silueta.png" class="icono1">
+    <img src="/images/silueta2.png" class="icono1">
 
 
 </article>

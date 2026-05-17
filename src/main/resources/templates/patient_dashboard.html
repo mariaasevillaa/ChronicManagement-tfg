@@ -7,20 +7,34 @@
 </head>
 <body>
 <article id="background">
+    <div class="main-square">
     <div class="patient" >
         <form action="/patient_dashboard" method="get">
             <p th:if="${error}" th:text="${error}" class="error"></p>
             <h1 class="header">Welcome back, <span th:text="${name}"></span>!</h1>
+            <h2 class="section-title"> 🤎 </h2>
             <h2 class="header3"> Below you can find several options. <br>Please choose what you want to do! </h2>
             <section class="pdash_buttons">
-                <a href="/daily_reports" class="option-patient">  📝 Daily well-being report</a>
-                <a href="/patient_progress" class="option-patient">  📈 View your progress
+                <a href="/daily_reports" class="option-patient">
+                    <img src="/images/calendario.png" class="icon">
+                    <span> Daily well-being report</span>
                 </a>
-                <a href="/patient_gamification" class="option-patient">⭐ Gamification status
+                <a href="/patient_progress" class="option-patient">
+                    <img src="/images/progress.png" class="icon">
+                    <span> View your progress</span>
                 </a>
-                <a href="/patient_achievements" class="option-patient"> 🏆 Achievements </a>
+                <a href="/patient_gamification" class="option-patient">
+                    <img src="/images/estrella.png" class="icon">
+                    <span> Gamification status</span>
+                </a>
+                <a href="/patient_achievements" class="option-patient">
+                    <img src="/images/trofeo.png" class="icon">
+                    <span> Achievements</span>
+                </a>
+
             </section>
         </form>
+    </div>
     </div>
 
         <img src="/images/logo2.png" class="logo">

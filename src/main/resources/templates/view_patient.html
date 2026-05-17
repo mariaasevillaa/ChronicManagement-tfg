@@ -8,23 +8,25 @@
 <body>
 <article id="background">
   <div class="viewPatient">
-
       <h1 class="header3"> Selected patient: <span th:text="${pname}"> </span> <span th:text="${psurname}"> </span></h1>
     <section>
       <h4 class="title-section">PATIENT INFORMATION</h4>
       <div class="info-position">
         <div class="info">
-          <p>Full name:
-            <span th:text="${pname}"></span> <span th:text="${psurname}"> </span></p>
+          <img src="/images/patient.png" class="icon">
+          <p>Full name<br><span th:text="${pname}"></span> <span th:text="${psurname}"> </span></p>
         </div>
         <div class="info">
-          <p>Date of birth: <span th:text="${dob}"> </span></p>
+          <img src="/images/calendario.png" class="icon">
+          <p>Date of birth<br> <span th:text="${dob}"> </span></p>
         </div>
          <div class="info">
-           <p>Chronic condition: <span th:text="${chronic}"> </span></p>
+           <img src="/images/condition.png" class="icon">
+           <p>Chronic condition<br> <span th:text="${chronic}"> </span></p>
          </div>
         <div class="info">
-          <p>Diagnosis date: <span th:text="${diagnosis}"> </span></p>
+          <img src="/images/diagnosis_date.png" class="icon">
+          <p>Diagnosis date<br> <span th:text="${diagnosis}"> </span></p>
         </div>
 
 
@@ -36,19 +38,44 @@
     <section class="pdash_buttons2">
       <form action="review_reports" method="get">
         <input type="hidden" name="patient_id" th:value="${patient_id}">
-        <button type="submit" class="option-hp">📋 Review reports</button>
+        <button type="submit" class="option-hp"><img src="/images/reports.png" class="icon">
+          <div>
+            <span>Review reports</span>
+            <p>Check daily reports</p>
+          </div>
+
+        </button>
       </form>
       <form action="/progress" method="get">
         <input type="hidden" name="patient_id" th:value="${patient_id}">
-        <button type="submit" class="option-hp">📊 View progress</button>
+        <button type="submit" class="option-hp"><img src="/images/progress2.png" class="icon">
+          <div>
+            <span>View progress</span>
+            <p>See health trends</p>
+          </div>
+
+        </button>
       </form>
       <form action="/patient_alerts" method="get">
         <input type="hidden" name="patient_id" th:value="${patient_id}">
-        <button type="submit" class="option-hp">🚨 View alerts</button>
+        <button type="submit" class="option-hp">
+        <img src="/images/alerts.png" class="icon">
+          <div>
+            <span>View alerts</span>
+            <p>Review active alerts</p>
+          </div>
+
+        </button>
       </form>
       <form action="/configure_parameters" method="get">
+
         <input type="hidden" name="patient_id" th:value="${patient_id}">
-        <button type="submit" class="option-hp">⚙️ Configure parameters</button>
+        <button type="submit" class="option-hp"><img src="/images/parameters.png" class="icon">
+          <div>
+            <span> Configure parameters</span>
+            <p>Adjust alert thresholds</p>
+          </div>
+        </button>
       </form>
 
 
@@ -58,10 +85,10 @@
 
   <div class="top">
     <span  th:text="${name}" class="name"></span>
-    <a href="/logout" class="logout">| Log out</a>
+    <a href="/logout" class="logout">| [-> Log out</a>
   </div>
   <img src="/images/logo2.png" class="logo">
-  <img src="/images/silueta.png" class="icono1">
+  <img src="/images/silueta2.png" class="icono1">
 </article>
 
 
