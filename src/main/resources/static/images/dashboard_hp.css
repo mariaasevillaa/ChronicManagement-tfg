@@ -225,6 +225,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 16px;
+    margin-top: 30px;
 }
 
 .reports-table th {
@@ -275,11 +276,17 @@
     top: 260px;
 }
 .box-progress{
-    background: rgb(154, 114, 105,0.4);
+    background-color: rgba(255, 250, 246, 0.78);
+    border: 1px solid rgba(105, 68, 60, 0.10);
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
     padding: 10px 15px;
     margin: 20px 0;
     font-size: 16px;
     border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
 
 }
 .progress-row{
@@ -303,11 +310,12 @@
     background: rgba(255,255,255,0.88);
     border-radius: 20px;
     font-size: 12px;
-    padding: 10px 10px;
+    padding: 15px;
+    border: 1px solid #69443c;
 
 }
 .button-chart:hover{
-    background-color: #8c7d7c;
+    background-color:#69443c ;
     color: white;
 }
 .table1{
@@ -320,17 +328,22 @@
 .table2{
     background-color:  rgba(220, 196, 188, 0.35);
     padding: 20px 24px;
-
+    gap: 8px;
+    height: 150px;
     border-radius: 15px;
     box-sizing: border-box;
+    align-items: center;
+    display: flex;
 }
 .table2 strong{
     font-family: "Italiana", sans-serif;
     font-size: 18px;
+    margin: 0;
 }
 .table2 span{
     font-family: "Italiana", sans-serif;
     font-size: 17px;
+    margin: 0;
 }
 .structured-boxes{
     display: grid;
@@ -622,4 +635,32 @@
     object-fit: contain;
     flex-shrink: 0;
 
+}
+.icon-alerts{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin: 30px auto 0 auto;
+
+}
+.alerts{
+    width: 900px;
+    max-width: 90%;
+
+    margin: 70px auto 0 auto;   /* clave: separa del header */
+    padding: 24px 28px 24px;
+
+    background: rgba(255,255,255,0.88);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
+
+    box-sizing: border-box;
+}
+.scroll-alerts{
+    max-height: 270px;
+    overflow-y: auto;
+
+    margin-top: 22px;
+    border-radius: 14px;
 }

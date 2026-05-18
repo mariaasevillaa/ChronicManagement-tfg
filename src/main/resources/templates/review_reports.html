@@ -2,38 +2,41 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Patient Reports</title>
-    <link rel="stylesheet" href="/images/dashboard_hp1.css">
+    <link rel="stylesheet" href="/images/dashboard_hp.css">
 </head>
 <body>
 <article id="background">
     <div class="review-reports">
         <h1 class="title-section">DAILY REPORTS HISTORY</h1>
-        <table class="reports-table">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Mood</th>
-                <th>Medication</th>
-                <th>Symptoms</th>
-                <th>Notes</th>
-            </tr>
-            </thead>
+        <div class="scroll">
+            <table class="reports-table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Mood</th>
+                    <th>Medication</th>
+                    <th>Symptoms</th>
+                    <th>Notes</th>
+                </tr>
+                </thead>
 
-            <tbody>
-            <tr th:each="report : ${dailyReports}">
-                <td th:text="${report.getReport_date()}"></td>
-                <td th:text="${report.getMood()}+ '/5'"></td>
-                <td th:text="${report.getMedication_taken() == 1 ? 'Yes' : 'No'}"></td>
-                <td>
-                     <span th:if="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}">No symptoms</span>
-                    <span th:unless="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}"
-                          th:text="${#strings.listJoin(reportswithsymptoms[report.getId()], ', ')}"></span>
-                </td>
+                <tbody>
+                <tr th:each="report : ${dailyReports}">
+                    <td th:text="${report.getReport_date()}"></td>
+                    <td th:text="${report.getMood()}+ '/5'"></td>
+                    <td th:text="${report.getMedication_taken() == 1 ? 'Yes' : 'No'}"></td>
+                    <td>
+                        <span th:if="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}">No symptoms</span>
+                        <span th:unless="${reportswithsymptoms[report.getId()] == null or #lists.isEmpty(reportswithsymptoms[report.getId()])}"
+                              th:text="${#strings.listJoin(reportswithsymptoms[report.getId()], ', ')}"></span>
+                    </td>
 
-                <td th:text="${report.getNote()}"></td>
-            </tr>
-            </tbody>
-        </table>
+                    <td th:text="${report.getNote()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
         <a class="return_dashboard" th:href="@{/view_patient(patient_id=${patient_id})}"> <- Back </a>
 
 
@@ -43,10 +46,10 @@
 
     <div class="top">
         <span  th:text="${name}" class="name"></span>
-        <a href="/logout" class="logout">| Log out</a>
+        <a href="/logout" class="logout">| [-> Log out</a>
     </div>
     <img src="/images/logo2.png" class="logo">
-    <img src="/images/silueta.png" class="icono1">
+    <img src="/images/silueta2.png" class="icono1">
 </article>
 
 </body>
