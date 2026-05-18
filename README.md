@@ -14,6 +14,7 @@ The technologies used are the following ones
 - Maven
 
 The project source code (src folder) is structured as follow
+
 src/main/java
 - The model package contains the main entities and classes representing the healthcare professional, patient, symptoms, daily reports, achievements.
 - The controllers package handles HTTP requests and navigation throught views.
