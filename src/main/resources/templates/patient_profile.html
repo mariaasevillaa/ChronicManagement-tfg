@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient profile</title>
-    <link rel="stylesheet" href="/images/dashboard_pa.css">
+    <link rel="stylesheet" href="/images/dashboard_pat.css">
 </head>
 <body>
 <article id="background">
@@ -14,21 +14,44 @@
                     <div class="avatar-letter" th:text="${name.substring(0,1).toUpperCase()}"></div>
                     <h2 class="myprofile"><span th:text="${name}" ></span></h2>
                     <div class="buttons-myprofile">
-                        <a href="patient_dashboard" class="button-profile">Back</a>
-                        <a href="edit_profile" class="button-profile">Edit profile</a>
+                        <a href="edit_profile" class="button-profile-edit">
+                            <span>Edit profile</span>
+                        </a>
+                        <a href="patient_dashboard" class="button-profile-back">Back</a>
+
+
                     </div>
+
+
 
                 </div>
             </div>
         </div>
 
     <div class="profile-box">
-        <h2>My profile</h2>
-        <p><strong>Name:</strong> <span th:text="${name}" ></span></p>
-        <p><strong>Surname:</strong> <span th:text="${surname}" ></span></p>
-        <p><strong>Date of birth: </strong><span th:text="${date_of_birth}" ></span></p>
-        <p><strong>Chronic condition:</strong> <span th:text="${chronic_condition}" ></span></p>
-        <p><strong>Diagnosis date: </strong><span th:text="${diagnosis_date}" ></span></p>
+        <h2 >My profile</h2>
+        <p >Personal health overview</p>
+        <div class="profile">
+            <img src="/images/patient.png" class="icon">
+            <p><strong>Name:</strong> <span th:text="${name}" ></span></p>
+        </div>
+        <div class="profile">
+            <img src="/images/patient.png" class="icon">
+            <p><strong>Surname:</strong> <span th:text="${surname}" ></span></p>
+        </div>
+        <div class="profile">
+            <img src="/images/calendario.png" class="icon">
+            <p><strong>Date of birth: </strong><span th:text="${date_of_birth}" ></span></p>
+        </div>
+        <div class="profile">
+            <img src="/images/condition.png" class="icon">
+            <p><strong>Chronic condition:</strong> <span th:text="${chronic_condition}" ></span></p>
+        </div>
+        <div class="profile">
+            <img src="/images/calendario.png" class="icon">
+            <p><strong>Diagnosis date: </strong><span th:text="${diagnosis_date}" ></span></p>
+
+        </div>
 
 
     </div>

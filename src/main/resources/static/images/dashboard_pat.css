@@ -567,7 +567,7 @@
     flex-direction: column;
     gap: 4px;
 
-    background: rgba(154, 114, 105, 0.35);
+    background: rgba(154, 114, 105, 0.38);
     padding: 40px;
     border-radius: 20px;
 
@@ -604,9 +604,7 @@
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 
-    font-family: "Alumni Sans Pinstripe", sans-serif;
-    color: #69443c;
-    font-size: 25px;
+
 }
 .profile-box h2{
     margin: 0 0 28px 0;
@@ -625,41 +623,64 @@
 
 .myprofile{
     font-family: "Italiana", sans-serif;
-    color: #FFF1B5;
-    font-size: 20px;
+    color: #9b5e3f;
+    font-size: 30px;
 }
 .avatar-letter{
-    width: 110px;
-    height: 110px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: #f3e4dc;
     color: #9b5e3f;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 52px;
+    font-size: 90px;
     font-weight: 600;
     border: 2px solid rgba(255,255,255,0.6);
 }
-.button-profile{
+.button-profile-edit{
+    width: 150px;
+    height: 15px;
     border-radius: 10px;
-    background-color: white;
-    color: #8c7d7c;
+    background-color:#8F5A4E;
+    color: white;
     text-decoration: none;
-    padding: 20px ;
-    font-size: 20px;
+    padding: 18px 20px;
+    font-size: 22px;
     font-family: "Alumni Sans Pinstripe", sans-serif;
     border: none;
 
 }
-.button-profile:hover{
-    background-color: #8c7d7c;
+
+.button-profile-edit:hover{
+    background-color: white;
+    color: #8F5A4E;
+}
+.button-profile-back{
+    width: 150px;
+    height: 15px;
+    border-radius: 10px;
+    background-color:white;
+    color: #8F5A4E;
+    text-decoration: none;
+    padding: 18px 20px;
+    font-size: 22px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    border: none;
+
+}
+.button-profile-back:hover{
+    background-color: #8F5A4E;
     color: white;
 }
 .buttons-myprofile{
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 12px;
+
+    margin-top: 22px;
 }
 .input-edit{
     font-family: "Alumni Sans Pinstripe", sans-serif;
@@ -754,6 +775,39 @@
 .icon{
     width: 60px;
     height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.profile{
+    background: rgba(255, 250, 246, 0.72);
+    border: 1px solid rgba(105, 68, 60, 0.10);
+    border-radius: 14px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 58px;
+    box-sizing: border-box;
+    font-size: 22px;
+}
+.profile-box h2{
+    margin: 20px auto 0;
+    font-family: "Italiana", sans-serif;
+    color: #69443c;
+    font-size: 22px;
+}
+.profile-box p{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    color: #69443c;
+    font-size: 20px;
+    font-weight: bold;
+}
+.icon2{
+    width: 25px;
+    height: 25px;
     object-fit: contain;
     flex-shrink: 0;
 }
