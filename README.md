@@ -61,3 +61,8 @@ Installation and execution
 4. Run the application
 5. Open in browser the following link: http://localhost:8080
 
+Future improvements
+- Contact the healthprofessional with the patient through the application
+- Alerts notifications to the patient
+
+This project is developed for educational purpose
