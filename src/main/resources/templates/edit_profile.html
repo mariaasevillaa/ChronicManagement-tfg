@@ -16,16 +16,17 @@
                         <h2 class="myprofile"><span th:text="${name}" ></span></h2>
 
                         <div class="buttons-myprofile">
-                            <button type="submit" class="button-profile" >Save changes</button>
-                            <a href="/patient_profile" class="button-profile">Cancel</a>
+                            <button type="submit" class="button-profile-savechanges" >Save changes</button>
+                            <a href="/patient_profile" class="button-profile-cancel">Cancel</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="profile-box">
+            <div class="edit-profile-box">
                 <h2>Edit profile</h2>
-                <label>Name</label>
-                <input type="text" name="name" th:value="${patient.name}" class="input-edit">
+                    <label>Name</label>
+                    <input type="text" name="name" th:value="${patient.name}" class="input-edit">
+
 
                 <label>Surname</label>
                 <input type="text" name="surname" th:value="${patient.surname}" class="input-edit">

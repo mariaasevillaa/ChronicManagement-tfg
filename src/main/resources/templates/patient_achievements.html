@@ -13,40 +13,52 @@
             <h2 class="header3"> Unlock rewards by staying consistent with your reports</h2>
             <div class="achievements-summary">
                 <div class="summary">
-                    <p class="summary-number" ><span th:text="${points}"></span></p>
+                    <img src="/images/trofeo_summary.png" class="icon">
+                    <p class="summary-number" ><span th:text="${points}"></span></p><br>
                     <p class="summary-number">Total points</p>
                 </div>
                 <div class="summary">
+                    <img src="/images/unlocked.png" class="icon">
                     <p class="summary-number" th:text="${unlockedAchievementssize}" ></p>
                     <p class="summary-number">Unlocked</p>
                 </div>
             </div>
+            <div class="achievements-scroll">
+                <div class="unlocked_achievements">
+                    <h3 class="unlocked"> ✔ Unlocked badges</h3>
+                    <div>
+                        <div th:each="a : ${unlockedAchievements}" class="achievements-box-unlocked">
+                            <img src="/images/trofeo.png" class="icon">
+                            <div class="achievement-info">
+                                <p class="achievement-name"> <span th:text="${a.name}" ></span></p>
+                                <p class="achievement-points" th:text="${a.points_reward} + ' points'"></p>
 
-            <div class="unlocked_achievements">
-                <h3 class="unlocked"> ✔ Unlocked badges</h3>
-                <div>
-                    <div th:each="a : ${unlockedAchievements}" class="achievements-box-unlocked">
-                        <img src="/images/trofeo.png" class="trofeo">
-                        <p> <span th:text="${a.name}" ></span></p>
-                        <p th:text="${a.points_reward} + ' points'"></p>
+                            </div>
 
+
+
+                        </div>
                     </div>
-                </div>
 
+                </div>
+                <div class="locked_achievements">
+                    <h3 class="locked"> 🔒 Locked badges</h3>
+                    <div>
+                        <div th:each="a : ${lockedAchievements}" class="achievements-box">
+                            <img src="/images/locked.png" class="icon">
+                            <div class="achievement-info">
+                                <p class="achievement-name"> <span th:text="${a.name}"></span></p>
+                                <p class="achievement-points" th:text="${a.points_reward} + ' points'"></p>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="locked_achievements">
-            <h3 class="locked"> 🔒 Locked badges</h3>
-                <div>
-                    <div th:each="a : ${lockedAchievements}" class="achievements-box">
-                        <img src="/images/candado.png" class="trofeo">
-                        <p> <span th:text="${a.name}"></span></p>
-                        <p th:text="${a.points_reward} + ' points'"></p>
 
-                    </div>
-                </div>
-
-    </div>
-            <a href="/patient_dashboard" class="return_dashboard">Back to dashboard</a>
+            <a href="/patient_dashboard" class="return_dashboard_achievements">Back to dashboard</a>
         </form>
 
     </div>

@@ -250,12 +250,13 @@
 .progress{
     text-align: center;
     width: 85%;
-    max-width: 620px;
-    align-items: center;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.88);
-    padding: 20px 24px;
+    max-width: 680px;
 
+    margin: 25px auto 0 auto;
+    padding: 16px 26px 14px;
+
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
     border-radius: 25px;
     box-sizing: border-box;
 }
@@ -271,7 +272,7 @@
 .header3_progress{
     color: #69443c;
     font-family: "Italiana", sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
     top: 260px;
 }
@@ -304,7 +305,7 @@
     border-radius: 20px;
     padding: 25px;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 10px auto 10px;
 }
 .button-chart{
     background: rgba(255,255,255,0.88);
@@ -663,4 +664,11 @@
 
     margin-top: 22px;
     border-radius: 14px;
+}
+.progress-description{
+    font-size: 17px;
+    color: #7a5a4f;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
 }

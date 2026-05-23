@@ -135,10 +135,10 @@
     width: 85%;
     max-width: 780px;
     align-items: center;
-    margin: 100px auto 40px auto;
-    background-color: rgba(255, 255, 255, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    padding: 20px 24px;
+    margin: 45px auto 0 auto;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
+    padding: 18px 24px 14px;
 
     border-radius: 25px;
     box-sizing: border-box;
@@ -147,8 +147,8 @@
     background: rgb(154, 114, 105,0.4);
     border-radius: 20px;
 
-    padding: 18px 28px;
-    margin: 20px 0;
+    padding: 15px 28px;
+    margin: 14px 0;
 
     font-size: 16px;
 
@@ -158,8 +158,8 @@
 
     border-radius: 20px;
 
-    padding: 22px 30px;
-    margin: 20px 0;
+    padding: 14px 20px;
+    margin: 14px 0;
 
     font-size: 16px;
 }
@@ -181,7 +181,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    max-height: 230px;
+    max-height: 210px;
     overflow-y: auto;
     padding: 8px;
     grid-template-columns: repeat(4, 1fr);
@@ -208,15 +208,17 @@
     font-weight: bolder;
     padding: 10px 20px;
     margin: 10px;
-    background-color: white;
-    color: #8c7d7c;
+    background-color: #69443c;
+    color: white;
+    border: 1px solid #69443c;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
 }
 .report_send:hover{
-    background-color: #8c7d7c;
-    color: white;
+    background-color: white;
+    color: #69443c;
+    border: 1px solid #69443c;
     transform: translateY(-1px);
 }
 .section-label{
@@ -294,8 +296,8 @@
     max-width: 620px;
     align-items: center;
     margin: 100px auto;
-    background-color: rgba(255, 255, 255, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
     padding: 20px 24px;
 
     border-radius: 25px;
@@ -437,6 +439,7 @@
 .return_dashboard:hover{
     background-color: #69443c;
     color: white;
+    transform: translateY(-1px);
 }
 .nextAchievement{
     background-color: #F6EDEA;
@@ -488,16 +491,18 @@
     text-align: right;
 }
 .achievements{
-    text-align: center;
-    width: 85%;
-    max-width: 620px;
-    align-items: center;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.88);
-    padding: 20px 24px;
+    width: 1000px;
+    max-width: 90%;
+    height: 700px;
+    margin: 65px auto 0 auto;
+    padding: 24px 45px 20px;
 
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(80, 55, 45, 0.12);
+
     box-sizing: border-box;
+    overflow: hidden;
 }
 .unlocked_achievements,
 .locked_achievements {
@@ -517,36 +522,75 @@
 }
 
 .achievements-box-unlocked {
-    background: rgb(154, 114, 105, 1);
-    padding: 10px 12px;
+    background: rgba(255, 250, 246, 0.95);
+    border: 1px solid rgba(105, 68, 60, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
+    width: 260px;
+    height: 82px;
+    padding: 10px 16px;
     margin: 10px 0;
-    font-size: 18px;
-    font-family: "Alumni Sans Pinstripe", sans-serif;
-    width: 160px;
-
-    border-radius: 10px;
+    font-size: 15px;
+    color: #7a5148;
+    text-align: center;
     display: flex;
+
 }
 .achievements-box{
-    background: rgb(154, 114, 105, 0.4);
-    padding: 10px 12px;
+    background: rgba(226, 205, 198, 0.82);
+    border: 1px solid rgba(105, 68, 60, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
+    width: 260px;
+    height: 82px;
+    padding: 10px 16px;
     margin: 10px 0;
-    font-size: 18px;
-    font-family: "Alumni Sans Pinstripe", sans-serif;
-    width: 160px;
+    font-size: 15px;
+    color: #7a5148;
     text-align: center;
-    border-radius: 10px;
     display: flex;
 }
+.achievement-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.achievement-name {
+    margin: 0;
+    font-family: "Italiana", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #69443c;
+    line-height: 1.1;
+}
+
+.achievement-points {
+    margin: 4px 0 0 0;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #69443c;
+    line-height: 1.1;
+}
 .summary{
-    background: rgba(154, 114, 105, 0.15);
+    width: 230px;
+    height: 90px;
+    padding: 16px 22px;
+
+    background: rgba(255, 250, 246, 0.78);
+    border: 1px solid rgba(105, 68, 60, 0.08);
     border-radius: 16px;
-    padding: 10px 20px;
-    min-width: 130px;
-    text-align: center;
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
 }
 .summary-number{
-    font-size: 14px;
+    font-size: 18px;
     margin: 0;
     color: #7a5148;
     font-weight: bold;
@@ -686,6 +730,12 @@
     font-family: "Alumni Sans Pinstripe", sans-serif;
     font-size: 20px;
     font-weight: bolder;
+    cursor: pointer;
+    text-decoration: none;
+    padding:10px 10px;
+    background: rgba(255, 250, 246, 0.72);
+    border: 1px solid rgba(105, 68, 60, 0.16);
+    border-radius: 12px;
 }
 .chart-switch{
     display: flex;
@@ -778,6 +828,7 @@
     object-fit: contain;
     flex-shrink: 0;
 }
+
 .profile{
     background: rgba(255, 250, 246, 0.72);
     border: 1px solid rgba(105, 68, 60, 0.10);
@@ -810,4 +861,94 @@
     height: 25px;
     object-fit: contain;
     flex-shrink: 0;
+}
+.edit-profile-box{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    background: rgba(255, 255, 255, 0.88);
+    padding: 24px 80px;
+    border-radius: 20px;
+
+    width: 380px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    color: #69443c;
+    font-size: 24px;
+}
+.button-profile-savechanges{
+    width: 150px;
+    height: 20px;
+    border-radius: 10px;
+    background-color:#8F5A4E;
+    color: white;
+    text-decoration: none;
+    padding: 18px 20px;
+    font-size: 22px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    border: none;
+}
+
+.button-profile-savechanges:hover{
+    background-color: white;
+    color: #8F5A4E;
+}
+.button-profile-cancel{
+    width: 150px;
+    height: 15px;
+    border-radius: 10px;
+    background-color:white;
+    color: #8F5A4E;
+    text-decoration: none;
+    padding: 18px 20px;
+    font-size: 22px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    border: none;
+    text-align: center;
+
+}
+.button-profile-cancel:hover{
+    background-color: #8F5A4E;
+    color: white;
+}
+.edit-profile-box h2{
+    margin: 20px auto 0;
+    font-family: "Italiana", sans-serif;
+    color: #69443c;
+    font-size: 22px;
+}
+.achievements-scroll {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    margin-top: 24px;
+    padding-right: 10px;
+
+}
+
+.return_dashboard_achievements{
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    background-color: white;
+    color: #69443c;
+    border: 1px solid #69443c;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+    margin: 14px auto 0 auto;
+
+}
+.return_dashboard_achievements:hover{
+    background-color: #69443c;
+    color: white;
+    transform: translateY(-1px);
 }
