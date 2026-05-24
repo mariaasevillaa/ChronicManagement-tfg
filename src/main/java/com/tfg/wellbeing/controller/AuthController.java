@@ -140,5 +140,17 @@ public class AuthController {
 
         return "redirect:/login";
     }
+    @GetMapping("/about_us")
+    public String aboutUs(HttpSession session) {
+        return "about_us";
+    }
+    @GetMapping("/how_works")
+    public String howWorks(HttpSession session) {
+        return "how_works";
+    }
+    @GetMapping("/frontPage")
+    public String frontPage(HttpSession session) {
+        return "frontPage";
+    }
 
 }
