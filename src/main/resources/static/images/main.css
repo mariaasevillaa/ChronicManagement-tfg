@@ -410,6 +410,7 @@
     z-index: 2;
     margin-left: 10px;
     gap: 45px;
+    display: flex;
 }
 .top2 a{
     color: #69443c;
@@ -429,7 +430,7 @@
 .scroll{
     width: 88%;
     max-width: 1100px;
-    max-height: 1100px;
+    max-height: 800px;
     margin-top: 70px;
 
     border-radius: 28px;
@@ -537,5 +538,59 @@
 .value-icon {
     width: 62px;
     height: 62px;
+    object-fit: contain;
+}
+.about-container{
+    width: 82%;
+    max-width: 1180px;
+
+    margin: 100px auto 70px auto;
+    padding: 35px 55px 45px;
+
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 28px;
+    box-shadow: 0 14px 40px rgba(80, 55, 45, 0.12);
+
+    text-align: center;
+    box-sizing: border-box;
+}
+.steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+
+    width: 100%;
+    margin-top: 35px;
+}
+.item{
+    background: rgba(255, 250, 246, 0.82);
+    border: 1px solid rgba(105, 68, 60, 0.10);
+    border-radius: 22px;
+    padding: 28px 18px 24px;
+
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    box-shadow: 0 10px 25px rgba(105, 68, 60, 0.08);
+}
+.item h3{
+    margin: 0 0 6px 0;
+    font-family: "Italiana", sans-serif;
+    font-size: 19px;
+    color: #69443c;
+}
+.item p{
+    margin: 0;
+    font-family: "Italiana", sans-serif;
+    font-size: 14px;
+    color: rgba(105, 68, 60, 0.75);
+}
+.item-icon{
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
