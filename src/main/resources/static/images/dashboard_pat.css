@@ -881,16 +881,19 @@
     font-size: 24px;
 }
 .button-profile-savechanges{
-    width: 150px;
-    height: 20px;
+
+    width: 190px;
+    height: 48px;
     border-radius: 10px;
     background-color:#8F5A4E;
     color: white;
     text-decoration: none;
-    padding: 18px 20px;
     font-size: 22px;
     font-family: "Alumni Sans Pinstripe", sans-serif;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-profile-savechanges:hover{
@@ -951,4 +954,22 @@
     background-color: #69443c;
     color: white;
     transform: translateY(-1px);
+}
+.top2{
+    position: absolute;
+    top: 40px;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    margin-left: 10px;
+    gap: 45px;
+    display: flex;
+}
+.top2 a{
+    color: #69443c;
+    font-size: 20px;
+    text-decoration: none;
+}
+.top2 a:hover{
+    color: #9b5e3f;
 }

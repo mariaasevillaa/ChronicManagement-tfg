@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" href="/images/main.css">
+    <link rel="stylesheet" href="/images/main1.css">
 </head>
 <body>
 <article id="background">
@@ -45,6 +45,7 @@
 
         <label>Password</label>
         <input type="password" name="password" class="register-button" required >
+        <p th:if="${error}" th:text="${error}" class="error-message"></p>
 
 
         <button type="submit" class="submit-login">Register</button>
@@ -53,6 +54,12 @@
 
 </form>
     <img src="/images/logo2.png" class="logo">
+    <div class="top2">
+        <a href="/frontPage"> Home </a>
+        <a href="/about_us"> About us</a>
+        <a href="/how_works"> How does it work</a>
+
+    </div>
 </article>
 
 </body>

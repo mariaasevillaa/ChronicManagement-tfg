@@ -6,6 +6,7 @@ import com.tfg.wellbeing.repository.JDBCHealthCareManager;
 import com.tfg.wellbeing.repository.JDBCPatientManager;
 import com.tfg.wellbeing.repository.JDBCUserManager;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.tfg.wellbeing.model.Patient;
@@ -33,7 +34,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String surname, @RequestParam String date_of_birth, @RequestParam String chronic_condition,
-                           @RequestParam String diagnosis_date,@RequestParam String email,  @RequestParam String password) {
+                           @RequestParam String diagnosis_date,@RequestParam String email,  @RequestParam String password, Model model) {
+        if(userManager.existsEmail(email)) {
+            model.addAttribute("error", "Email already exists");
+            return "register";
+
+        }
         int user_id=userManager.addUser(email, password, "patient");
         patientManager.addPatient(user_id,name,surname,date_of_birth,chronic_condition,diagnosis_date);
         return "redirect:/login";
@@ -45,14 +51,12 @@ public class AuthController {
     }
     //HttpSession is used to save the data if the log in is successfull
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, HttpSession session) {
+    public String login(@RequestParam String email, @RequestParam String password, HttpSession session,Model model) {
         User user = userManager.getUserByEmail(email);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        if(user == null) {
-            return "login";
-        }
-        if(!user.getPassword().equals(password)) {
-            System.out.println("Wrong password");
+        if(user== null||!passwordEncoder.matches(password, user.getPassword())) {
+            model.addAttribute("error", "Incorrect email or password.");
             return "login";
 
         }

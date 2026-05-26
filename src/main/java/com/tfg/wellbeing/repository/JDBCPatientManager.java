@@ -126,15 +126,16 @@ public class JDBCPatientManager {
         return null;
     }
 
-    public void updatePatientProfile(int patient_id, String name, String surname, String chronic_condition, String diagnosis_date) {
-        String sql = "UPDATE patient SET name=?, surname=?, chronic_condition=?, diagnosis_date=? WHERE id=?";
+    public void updatePatientProfile(int patient_id, String name, String surname,String date_of_birth, String chronic_condition, String diagnosis_date) {
+        String sql = "UPDATE patient SET name=?, surname=?,date_of_birth=?, chronic_condition=?, diagnosis_date=? WHERE id=?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
             stmt.setString(2, surname);
-            stmt.setString(3, chronic_condition);
-            stmt.setString(4, diagnosis_date);
-            stmt.setInt(5, patient_id);
+            stmt.setString(3, date_of_birth);
+            stmt.setString(4, chronic_condition);
+            stmt.setString(5, diagnosis_date);
+            stmt.setInt(6, patient_id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {

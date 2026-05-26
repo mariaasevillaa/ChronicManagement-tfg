@@ -159,21 +159,28 @@
 
 }
 .perfil{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.88);
     padding: 10px;
     border-radius: 80px;
     border-color: #69443c;
     position: absolute;
-    width: 90px;
-    left: 46.5%;
-    top: 100px;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 110px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 
 }
 .acount{
     display: block;
     margin-top: 18px;
     text-align: center;
-    font-size: 15px;
+    font-size: 18px;
     color: black;
 
 }
@@ -208,6 +215,8 @@
     font-family: "Alumni Sans Pinstripe", sans-serif;
     color: #69443c;
     font-size: 24px;
+    position: relative;
+    margin: 100px auto 0 auto;
 }
 .auth-form{
     min-height: 100vh;
@@ -593,4 +602,44 @@
     width: 80px;
     height: 80px;
     object-fit: contain;
+}
+.journey{
+    width: 82%;
+    height: 150px;
+    border-radius: 20px;
+    background: rgba(245, 238, 232, 0.82);
+    align-items: center;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+.journey h3{
+    margin: 0 0 6px 0;
+    font-family: "Italiana", sans-serif;
+    font-size: 22px;
+    color: #69443c;
+    text-align: center;
+}
+.journey p{
+    margin: 0;
+    font-family: "Italiana", sans-serif;
+    font-size: 18px;
+    color: rgba(105, 68, 60, 0.75);
+}
+.journey a{
+    margin-top: 18px;
+}
+.error-message{
+    color: #8b2f2f;
+    background-color: rgba(139, 47, 47, 0.1);
+    padding: 7px 10px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 4px;
+    font-weight: bold;
+    transition: opacity 0.5s ease;
 }

@@ -83,15 +83,16 @@ public class PatientController {
         return "edit_profile";
     }
     @PostMapping("/edit_profile")
-    public String editProfile( HttpSession session, Model model,@RequestParam String name, @RequestParam String surname, @RequestParam String chronic_condition, @RequestParam String diagnosis_date) {
+    public String editProfile( HttpSession session, Model model,@RequestParam String name, @RequestParam String surname, @RequestParam String chronic_condition, @RequestParam String diagnosis_date, @RequestParam String date_of_birth) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
-        model.addAttribute("patient_id", patient_id);
-        patientManager.updatePatientProfile(patient_id, name, surname, chronic_condition, diagnosis_date);
+        model.addAttribute("patient_id", patient_id);patientManager.updatePatientProfile(patient_id, name, surname, date_of_birth,chronic_condition, diagnosis_date);
        session.setAttribute("name", name);
        session.setAttribute("surname", surname);
+       session.setAttribute("date_of_birth", date_of_birth);
        session.setAttribute("chronic_condition", chronic_condition);
        session.setAttribute("diagnosis_date", diagnosis_date);
+
        return "redirect:/patient_profile";
     }
 

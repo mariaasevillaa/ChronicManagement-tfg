@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/images/main.css">
+    <link rel="stylesheet" href="/images/main1.css">
 </head>
 <body>
 <article id="background">
-        <img src="/images/silueta.png" class="perfil">
+
         <form action="/login" method="post" class="auth-form">
             <section class="login">
+                <img src="/images/silueta.png" class="perfil">
                 <h1 class="header-login">Welcome back! </h1>
                 <h3 class="minitext">Sign in to continue</h3>
                 <label >Email<br></label>
@@ -18,6 +19,7 @@
                 <label>Password <br></label>
                 <input type="password" name="password" class="login-button"  required>
                 <a href="/forgot_password" class="forgot-password" style="color: black"> <strong><span  style="color: #69443c" >Forgot password? </span></strong></a>
+                <p th:if="${error}" th:text="${error}" class="error-message"></p>
 
                 <button type="submit" class="submit-login">Log in</button>
 
@@ -26,6 +28,12 @@
         </form>
 
     <img src="/images/logo2.png" class="logo">
+    <div class="top2">
+        <a href="/frontPage"> Home </a>
+        <a href="/about_us"> About us</a>
+        <a href="/how_works"> How does it work</a>
+
+    </div>
 </article>
 </body>
 </html>

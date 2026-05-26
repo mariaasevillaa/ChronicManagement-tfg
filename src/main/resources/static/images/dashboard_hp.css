@@ -683,3 +683,21 @@
     margin-bottom: 8px;
     text-align: center;
 }
+.top2{
+    position: absolute;
+    top: 40px;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    margin-left: 10px;
+    gap: 45px;
+    display: flex;
+}
+.top2 a{
+    color: #69443c;
+    font-size: 20px;
+    text-decoration: none;
+}
+.top2 a:hover{
+    color: #9b5e3f;
+}
