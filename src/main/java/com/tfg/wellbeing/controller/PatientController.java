@@ -50,7 +50,7 @@ public class PatientController {
         String name= (String) session.getAttribute("name");
         model.addAttribute("name", name);
         if(Boolean.TRUE.equals(reportSubmitted)) {
-            model.addAttribute("error", "You are already submitted a report for this day");
+            model.addAttribute("error", "You have already submitted a report for this day");
         }
 
         return "patient_dashboard";
