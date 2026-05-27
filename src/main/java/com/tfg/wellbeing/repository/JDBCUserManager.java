@@ -85,14 +85,15 @@ public class JDBCUserManager {
         return null;
     }
 
-    public void updatePassword(String email, String password) {
+    public void updatePassword(String email, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encryptedPassword = passwordEncoder.encode(newPassword);
         String sql = "UPDATE users SET password = ? WHERE email = ?";
         try (Connection c = dataSource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, password);
+            ps.setString(1, encryptedPassword);
             ps.setString(2, email);
             ps.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
