@@ -116,7 +116,7 @@ public class JDBCDailyReportManager {
     }
 
     public double getAverageMedicationTaken(int patient_id) {
-        String sql = "SELECT COALESCE((SUM(medication_taken) * 100.0) / NULLIF(COUNT(*), 0), 0) AS avg_med " +
+        String sql = "SELECT COALESCE((SUM(medication_taken) * 100.0)/ NULLIF(COUNT(*), 0), 0) AS avg_med " +
                 "FROM daily_reports WHERE patient_id = ?";
         try (Connection c = datasource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
