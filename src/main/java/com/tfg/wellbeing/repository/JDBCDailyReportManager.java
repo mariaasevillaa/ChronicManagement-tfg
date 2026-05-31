@@ -193,10 +193,10 @@ public class JDBCDailyReportManager {
     public List<String> getWeekLabels(int patientId) {
         List<String> labels = new ArrayList<>();
 
-        String sql = "SELECT strftime('%W', date) AS week_label " +
+        String sql = "SELECT WEEK(date) AS week_label " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%W', date) " +
-                "ORDER BY strftime('%W', date)";
+                "GROUP BY WEEK(date) " +
+                "ORDER BY WEEK(date)";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -220,8 +220,8 @@ public class JDBCDailyReportManager {
 
         String sql = "SELECT AVG(mood) AS avg_mood " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%W', date) " +
-                "ORDER BY strftime('%W', date)";
+                "GROUP BY WEEK(date) " +
+                "ORDER BY WEEK(date)";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -242,10 +242,10 @@ public class JDBCDailyReportManager {
     public List<String> getMonthLabels(int patientId) {
         List<String> labels = new ArrayList<>();
 
-        String sql = "SELECT strftime('%Y-%m', date) AS month_label " +
+        String sql = "SELECT DATE_FORMAT(date, '%Y-%m') AS month_label " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%Y-%m', date) " +
-                "ORDER BY strftime('%Y-%m', date)";
+                "GROUP BY DATE_FORMAT(date, '%Y-%m') " +
+                "ORDER BY DATE_FORMAT(date, '%Y-%m')";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -268,8 +268,8 @@ public class JDBCDailyReportManager {
 
         String sql = "SELECT AVG(mood) AS avg_mood " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%Y-%m', date) " +
-                "ORDER BY strftime('%Y-%m', date)";
+                "GROUP BY DATE_FORMAT(date, '%Y-%m') " +
+                "ORDER BY DATE_FORMAT(date, '%Y-%m')";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -328,8 +328,8 @@ public class JDBCDailyReportManager {
 
         String sql = "SELECT AVG(medication_taken) AS avg_med " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%W', date) " +
-                "ORDER BY strftime('%W', date)";
+                "GROUP BY WEEK(date)" +
+                "ORDER BY WEEK(date)";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -352,8 +352,8 @@ public class JDBCDailyReportManager {
 
         String sql = "SELECT AVG(medication_taken) AS avg_med " +
                 "FROM daily_reports WHERE patient_id = ? " +
-                "GROUP BY strftime('%Y-%m', date) " +
-                "ORDER BY strftime('%Y-%m', date)";
+                "GROUP BY DATE_FORMAT(date, '%Y-%m')" +
+                "ORDER BY DATE_FORMAT(date, '%Y-%m')";
 
         try (Connection con = datasource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
