@@ -99,7 +99,8 @@ public class JDBCDailyReportManager {
     }
 
     public double getAverageMood(int patient_id) {
-        String sql = "SELECT AVG(mood) FROM daily_reports WHERE patient_id= ? ";
+        String sql = "SELECT COALESCE(AVG(mood), 0) AS avg_mood " +
+                "FROM daily_reports WHERE patient_id = ?";
         try (Connection c = datasource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
@@ -115,7 +116,8 @@ public class JDBCDailyReportManager {
     }
 
     public double getAverageMedicationTaken(int patient_id) {
-        String sql = "SELECT (SUM (medication_taken)*100 )/COUNT(*) FROM daily_reports WHERE patient_id= ?";
+        String sql = "SELECT COALESCE((SUM(medication_taken) * 100.0) / NULLIF(COUNT(*), 0), 0) AS avg_med " +
+                "FROM daily_reports WHERE patient_id = ?";
         try (Connection c = datasource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
