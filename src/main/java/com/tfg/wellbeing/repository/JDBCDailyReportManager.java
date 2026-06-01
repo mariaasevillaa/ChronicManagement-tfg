@@ -2,7 +2,7 @@ package com.tfg.wellbeing.repository;
 
 import com.tfg.wellbeing.model.Daily_report;
 import org.springframework.stereotype.Repository;
-
+import java.sql.Statement;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ public class JDBCDailyReportManager {
     public int addDailyReport(int patient_id, int mood, int medication_taken, String note, String date) {
         String sql = "INSERT INTO daily_reports (patient_id,mood,medication_taken,notes,date) VALUES(?,?,?,?,?)";
         try (Connection c = datasource.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, patient_id);
             ps.setInt(2, mood);
             ps.setInt(3, medication_taken);

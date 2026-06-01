@@ -5,10 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Repository
 public class JDBCUserManager {
@@ -23,7 +20,7 @@ public class JDBCUserManager {
         String encryptedpassword = passwordEncoder.encode(password);
         String sql = "INSERT INTO users (email, password, role) values (?, ?, ?)";
         try (Connection c = dataSource.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, email);
             ps.setString(2, encryptedpassword);
             ps.setString(3, role);
