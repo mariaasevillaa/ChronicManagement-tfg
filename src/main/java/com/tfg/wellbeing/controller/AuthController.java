@@ -36,7 +36,7 @@ public class AuthController {
     public String register(@RequestParam String name, @RequestParam String surname, @RequestParam String date_of_birth, @RequestParam String chronic_condition,
                            @RequestParam String diagnosis_date,@RequestParam String email,  @RequestParam String password, Model model, @RequestParam (required = false) String consent) {
         if(consent==null){
-            model.addAttribute("error", "You must acccept the processing of your personal health and wellbeing data.");
+            model.addAttribute("error1", "You must acccept the processing of your personal health and wellbeing data.");
             return "register";
         }
         if(userManager.existsEmail(email)) {

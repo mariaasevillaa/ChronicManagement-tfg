@@ -328,6 +328,7 @@
 .register-left{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .question{
     color: #3f2a25;
