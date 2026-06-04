@@ -34,7 +34,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String surname, @RequestParam String date_of_birth, @RequestParam String chronic_condition,
-                           @RequestParam String diagnosis_date,@RequestParam String email,  @RequestParam String password, Model model) {
+                           @RequestParam String diagnosis_date,@RequestParam String email,  @RequestParam String password, Model model, @RequestParam (required = false) String consent) {
+        if(consent==null){
+            model.addAttribute("error", "You must acccept the processing of your personal health and wellbeing data.");
+            return "register";
+        }
         if(userManager.existsEmail(email)) {
             model.addAttribute("error", "Email already exists");
             return "register";
