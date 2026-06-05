@@ -129,7 +129,7 @@ public class JDBCGamificationManager {
     }
     public void updateStreakdays(int patientId, int streakdays ){
 
-        String sql = "UPDATE gamification_status SET streak_days? WHERE patient_id = ?";
+        String sql = "UPDATE gamification_status SET streak_days=? WHERE patient_id = ?";
 
         try (Connection c = dataSource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
