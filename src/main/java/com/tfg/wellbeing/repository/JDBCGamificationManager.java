@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 @Repository
 public class JDBCGamificationManager {
@@ -113,5 +114,31 @@ public class JDBCGamificationManager {
             throw new RuntimeException(e);
         }
         return 0;
+    }
+    public int calculateStreakdays(int patient_id){
+        String sql= "SELECT date FROM daily_reports WHERE patient_id = ? ";
+        try(Connection c =dataSource.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, patient_id);
+            try(ResultSet rs = ps.executeQuery()) {
+                int streakDays = 0;
+                LocalDate date= LocalDate.now();
+                while (rs.next()) {
+                    String dateString = rs.getString("date");
+                    LocalDate reportDate = LocalDate.parse(dateString);
+                   if(reportDate.equals(date)) {
+                       streakDays++;
+                       date = date.minusDays(1);
+                   }else{
+                           break;
+
+                   }
+                }
+                return streakDays;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

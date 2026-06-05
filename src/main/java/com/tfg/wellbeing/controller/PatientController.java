@@ -193,7 +193,7 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
-        int streakdays= gamificationManager.getStreakDayss(patient_id);
+        int streakdays= gamificationManager.calculateStreakdays(patient_id);
         int reportsCount=dailyReportManager.countReportsByPatientId(patient_id);
         List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         List<Achievements> allAchievements=achievementsManager.getAchievements();
