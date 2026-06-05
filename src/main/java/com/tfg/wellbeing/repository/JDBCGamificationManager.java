@@ -100,21 +100,7 @@ public class JDBCGamificationManager {
 
         return getPoints(patientId);
     }
-    public int getStreakDayss (int patient_id){
-        String sql = "SELECT streak_days FROM gamification_status WHERE patient_id = ?";
-        try(Connection c =dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, patient_id);
-            try(ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    return rs.getInt("streak_days");
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
-    }
+
     public int calculateStreakdays(int patient_id){
         String sql= "SELECT date FROM daily_reports WHERE patient_id = ? ";
         try(Connection c =dataSource.getConnection();
@@ -138,6 +124,22 @@ public class JDBCGamificationManager {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+
+    }
+    public void updateStreakdays(int patientId, int streakdays ){
+
+        String sql = "UPDATE gamification_status SET streak_days? WHERE patient_id = ?";
+
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, streakdays);
+            ps.setInt(2, patientId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating points", e);
         }
 
     }

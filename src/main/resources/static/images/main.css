@@ -644,3 +644,98 @@
     font-weight: bold;
     transition: opacity 0.5s ease;
 }
+/* Responsive rápido para toda la web */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Hace que imágenes y cajas grandes no se salgan */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablets y móviles */
+@media (max-width: 768px) {
+
+    /* Quita problemas de elementos demasiado anchos */
+    .login,
+    .register-box,
+    .left-box,
+    .main-square,
+    .about-container,
+    .scroll,
+    .image-box,
+    .values,
+    .bottom {
+        width: 90%;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Convierte grids en una sola columna */
+    .bottom,
+    .values,
+    .steps,
+    .image-box {
+        grid-template-columns: 1fr;
+    }
+
+    /* Registro en columna */
+    .container,
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Botones en columna */
+    .top-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-lr,
+    .button-lrStarted {
+        width: 85%;
+        text-align: center;
+    }
+
+    /* Menú superior más manejable */
+    .top,
+    .top2 {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 80px auto 20px auto;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 110px;
+        left: 15px;
+    }
+
+    .header,
+    .header3 {
+        font-size: 24px;
+        padding: 0 15px;
+    }
+
+    .img {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .about-photo {
+        height: auto;
+    }
+}
