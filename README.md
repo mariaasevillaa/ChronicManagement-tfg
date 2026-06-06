@@ -2,15 +2,15 @@
 
 Web application design using Spring Boot and Thymeleaf focused on healthcare monitoring and patient engagement.
 The platform allows interaction between patients and doctors, facilitating medical follow-up and encouraging patient engagement through gamification techniques.
-The application uses an SQLite database managed through DB Browser for SQLite for data storage and management
+The application uses a relational database hosted on Railway for data storage and management.
 
 ### Technologies used
 - Java
 - CSS
 - HTML
 - Thymeleaf
-- SQLite
-- DB Browser for SQLite
+- MySQL
+- Railway Database
 - Maven
 
 ### The project source code (src folder) is structured as follow
@@ -48,21 +48,22 @@ The application uses an SQLite database managed through DB Browser for SQLite fo
 - Daily reports
 - Monitoring parameters
 
-### Installation and execution
-#### Prerequisites
+### Security considerations
+The application includes basic security measures such as role-based access, session management and encrypted password storage.
+
+#### Requirements for local execution
 - Java 17+
 - Maven
-- SQLite
-- DB Browser for SQLite
-#### Steps
-1. Clone the github repository
-2. Open the project with Intellij or Eclipse
-3. Configure the SQLite databe path in applications.properties
-4. Run the application
-5. Open in browser the following link: http://localhost:8080
+- MySQLite
+- IntelliJ IDEA or Eclipse
+  
+### Installation and execution
+This project is currently configured for deployment using Railway. The application uses a relational database hosted on Railway, and the database connection is managed through environment variables.
 
-### Future improvements
-- Contact the healthcare professional with the patient through the application
-- Alerts notifications to the patient
+For local execution, it would be necessary to configure a local compatible database and update the corresponding values in `application.properties`.
+The deployed version of the application can be accessed at: https://chronicmanagement-tfg-production.up.railway.app
 
-#### This project is part of a Bachelor Thesis, developed for educational purposes
+
+### Disclaimer
+This project was developed for academic and educational purposes as part of a Bachelor Thesis in Biomedical Engineering.
+The platform is intended to support patient self-monitoring and medical follow-up, but it is not intended to replace professional medical judgement, clinical diagnosis or medical treatment.
