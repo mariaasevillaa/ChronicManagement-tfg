@@ -1,13 +1,13 @@
 package com.tfg.wellbeing.model;
 
-public class Health_professional {
+public class HealthProfessional {
     private int id;
     private int user_id;
     private String name;
     private String surname;
     private String speciality;
 
-    public Health_professional(int id, int user_id, String name, String surname, String speciality) {
+    public HealthProfessional(int id, int user_id, String name, String surname, String speciality) {
         this.id = id;
         this.user_id = user_id;
         this.name = name;

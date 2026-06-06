@@ -1,10 +1,10 @@
 package com.tfg.wellbeing.model;
 
-public class Symptoms {
+public class Symptom {
     private int id;
     private String name;
 
-    public Symptoms(int id, String name) {
+    public Symptom(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,10 +1,10 @@
 package com.tfg.wellbeing.model;
 
-public class Patient_Achievements {
+public class PatientAchievement {
     private int patient_id;
     private int achievement_id;
 
-    public Patient_Achievements(int patient_id, int achievement_id) {
+    public PatientAchievement(int patient_id, int achievement_id) {
         this.patient_id = patient_id;
         this.achievement_id = achievement_id;
     }

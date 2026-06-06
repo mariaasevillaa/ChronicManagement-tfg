@@ -1,8 +1,8 @@
 package com.tfg.wellbeing.controller;
 
 import com.tfg.wellbeing.model.Alerts;
-import com.tfg.wellbeing.model.Daily_report;
-import com.tfg.wellbeing.model.MonitoringParameters;
+import com.tfg.wellbeing.model.DailyReport;
+import com.tfg.wellbeing.model.MonitoringParameter;
 import com.tfg.wellbeing.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ import java.util.Map;
 public class HpController {
 
     private final JDBCHpPatientManager patientManager;
-    private final JDBCMonitoringParameters monitoringParameters;
+    private final JDBCMonitoringParameterManager monitoringParameters;
     private final JDBCAlertsManager alertsManager;
     private final JDBCDailyReportManager dailyReportManager;
     private final JDBCPatientManager patientManager1;
@@ -30,7 +28,7 @@ public class HpController {
     private final JDBCDailySymptomsManager dailySymptomsManager;
 
 
-    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameters monitoringParameters, JDBCAlertsManager alertsManager, JDBCDailyReportManager dailyReportManager, JDBCPatientManager patientManager1, JDBCHealthCareManager healthCareManager, JDBCDailySymptomsManager dailySymptomsManager) {
+    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameterManager monitoringParameters, JDBCAlertsManager alertsManager, JDBCDailyReportManager dailyReportManager, JDBCPatientManager patientManager1, JDBCHealthCareManager healthCareManager, JDBCDailySymptomsManager dailySymptomsManager) {
         this.patientManager = patientManager;
         this.monitoringParameters = monitoringParameters;
         this.alertsManager = alertsManager;
@@ -109,7 +107,7 @@ public class HpController {
 
     @GetMapping("/review_reports")
     public String reviewReports(Model model, @RequestParam ("patient_id") int patient_id,HttpSession session) {
-        List<Daily_report> dailyReportList= dailyReportManager.getReportByPatientId(patient_id);
+        List<DailyReport> dailyReportList= dailyReportManager.getReportByPatientId(patient_id);
         model.addAttribute("dailyReports", dailyReportList);
         String name = (String) session.getAttribute("name");
 
@@ -120,7 +118,7 @@ public class HpController {
         }
         Map<Integer, List<String>> reportswithsymptoms = new HashMap<>();
 
-        for (Daily_report report : dailyReportList) {
+        for (DailyReport report : dailyReportList) {
             List<String> symptoms = dailySymptomsManager.getSymptomsByReportId(report.getId());
             reportswithsymptoms.put(report.getId(), symptoms);
         }
@@ -164,7 +162,7 @@ public class HpController {
 
         Patient patient =patientManager1.getPatientbyID(patient_id);
         String name = (String) session.getAttribute("name");
-        MonitoringParameters mp = monitoringParameters.getParametersbyPatientId(patient_id);
+        MonitoringParameter mp = monitoringParameters.getParametersbyPatientId(patient_id);
 
         if (mp == null) {
             monitoringParameters.setMonitoringParameters(patient_id, 2, 2, 1);

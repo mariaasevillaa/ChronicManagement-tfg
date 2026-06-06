@@ -1,14 +1,12 @@
 
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.model.Achievements;
 import com.tfg.wellbeing.model.Alerts;
 import com.tfg.wellbeing.repository.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,14 +15,14 @@ public class DailyReportTestController {
     private final JDBCDailyReportManager reportManager;
     private final JDBCDailySymptomsManager symptomsManager;
     private final JDBCGamificationManager gamification;
-    private final JDBCPatientAchievements patientAchievements;
+    private final JDBCPatientAchievementManager patientAchievements;
     private final JDBCAchievementsManager achievements;
     private final JDBCAlertsManager alertsManager;
 
     public DailyReportTestController(JDBCDailyReportManager reportManager,
-                                           JDBCDailySymptomsManager symptomsManager,
-                                           JDBCGamificationManager gamification,JDBCPatientAchievements patientAchievements,
-                                     JDBCAchievementsManager achievements,JDBCAlertsManager alertsManager) {
+                                     JDBCDailySymptomsManager symptomsManager,
+                                     JDBCGamificationManager gamification, JDBCPatientAchievementManager patientAchievements,
+                                     JDBCAchievementsManager achievements, JDBCAlertsManager alertsManager) {
         this.reportManager = reportManager;
         this.symptomsManager = symptomsManager;
         this.gamification = gamification;

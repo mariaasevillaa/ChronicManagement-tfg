@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.model.Symptoms;
+import com.tfg.wellbeing.model.Symptom;
 import com.tfg.wellbeing.repository.JDBCSymptomsManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +17,7 @@ public class SymptomsTestController {
     }
 
     @GetMapping("/test/symptoms")
-    public List<Symptoms> getSymptoms() {
+    public List<Symptom> getSymptoms() {
         return symptomsManager.listSymptoms();
     }
 }

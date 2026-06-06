@@ -1,10 +1,10 @@
 package com.tfg.wellbeing.model;
 
-public class Hp_Patient {
+public class HpPatient {
     private int patient_id;
     private int hp_id;
 
-    public Hp_Patient(int patient_id, int hp_id) {
+    public HpPatient(int patient_id, int hp_id) {
         this.patient_id = patient_id;
         this.hp_id = hp_id;
     }

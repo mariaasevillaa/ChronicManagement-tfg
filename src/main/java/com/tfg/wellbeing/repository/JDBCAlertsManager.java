@@ -18,9 +18,9 @@ import java.util.List;
 public class JDBCAlertsManager {
     private final DataSource dataSource;
     private final JDBCDailyReportManager dailyReportManager;
-    private final JDBCMonitoringParameters monitoringParameters;
+    private final JDBCMonitoringParameterManager monitoringParameters;
     private JDBCPatientManager patientManager;
-    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameters monitoringParameters,JDBCPatientManager patientManager) {
+    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameterManager monitoringParameters, JDBCPatientManager patientManager) {
         this.dataSource = dataSource;
         this.dailyReportManager = dailyReportManager;
         this.monitoringParameters = monitoringParameters;

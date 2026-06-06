@@ -1,12 +1,11 @@
 package com.tfg.wellbeing.controller;
 
 import com.tfg.wellbeing.model.*;
-import com.tfg.wellbeing.model.MonitoringParameters;
+import com.tfg.wellbeing.model.MonitoringParameter;
 import com.tfg.wellbeing.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
@@ -21,13 +20,13 @@ public class PatientController {
     private final JDBCSymptomsManager symptomsManager;
     private final JDBCDailySymptomsManager dailySymptomsManager;
     private final JDBCAchievementsManager achievementsManager;
-    private final JDBCPatientAchievements patientAchievementsManager;
+    private final JDBCPatientAchievementManager patientAchievementsManager;
     private final JDBCGamificationManager gamificationManager;
     private final JDBCAlertsManager alertsManager;
-    private final JDBCMonitoringParameters monitoringParameters;
+    private final JDBCMonitoringParameterManager monitoringParameters;
 
 
-    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomsManager dailySymptomsManager, JDBCAchievementsManager achievementsManager, JDBCPatientAchievements patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertsManager alertsManager, JDBCMonitoringParameters monitoringParameters) {
+    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomsManager dailySymptomsManager, JDBCAchievementsManager achievementsManager, JDBCPatientAchievementManager patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertsManager alertsManager, JDBCMonitoringParameterManager monitoringParameters) {
         this.patientManager = patientManager;
         this.dailyReportManager = dailyReportManager;
         this.symptomsManager = symptomsManager;
@@ -124,16 +123,16 @@ public class PatientController {
         int streakdays= gamificationManager.calculateStreakdays(patient_id);
         gamificationManager.updateStreakdays(patient_id,streakdays);
         int reportsCount = dailyReportManager.countReportsByPatientId(patient_id);
-        List<Achievements> achievements = achievementsManager.getAchievements();
+        List<Achievement> achievements = achievementsManager.getAchievements();
 
-        for (Achievements a : achievements) {
+        for (Achievement a : achievements) {
             if (reportsCount >= a.getReports_needed()) {
                 if (!patientAchievementsManager.hasAchievement(patient_id, a.getId())) {
                     patientAchievementsManager.addPatientAchievements(patient_id, a.getId());
                 }
             }
         }
-        MonitoringParameters monitoringParameters1= monitoringParameters.getParametersbyPatientId(patient_id);
+        MonitoringParameter monitoringParameters1= monitoringParameters.getParametersbyPatientId(patient_id);
         int moodThreshold=2;
         int medication_enabled=1;
         if(monitoringParameters1 != null) {
@@ -198,10 +197,10 @@ public class PatientController {
         int streakdays= gamificationManager.getStreakdays(patient_id);
 
         int reportsCount=dailyReportManager.countReportsByPatientId(patient_id);
-        List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
-        List<Achievements> allAchievements=achievementsManager.getAchievements();
-        Achievements nextAchievement = null;
-        for (Achievements a : allAchievements) {
+        List<Achievement> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
+        List<Achievement> allAchievements=achievementsManager.getAchievements();
+        Achievement nextAchievement = null;
+        for (Achievement a : allAchievements) {
             if (reportsCount < a.getReports_needed()) {
                 nextAchievement = a;
                 break;
@@ -225,16 +224,16 @@ public class PatientController {
 
         int points = gamificationManager.getPoints(patient_id);
 
-        List<Achievements> unlockedAchievements =
+        List<Achievement> unlockedAchievements =
                 patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
 
-        List<Achievements> allAchievements = achievementsManager.getAchievements();
-        List<Achievements> lockedAchievements = new ArrayList<>();
+        List<Achievement> allAchievements = achievementsManager.getAchievements();
+        List<Achievement> lockedAchievements = new ArrayList<>();
 
-        for (Achievements a : allAchievements) {
+        for (Achievement a : allAchievements) {
             boolean unlocked = false;
 
-            for (Achievements ua : unlockedAchievements) {
+            for (Achievement ua : unlockedAchievements) {
                 if (ua.getId() == a.getId()) {
                     unlocked = true;
                     break;

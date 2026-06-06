@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.MonitoringParameters;
+import com.tfg.wellbeing.model.MonitoringParameter;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -10,19 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class JDBCMonitoringParameters {
+public class JDBCMonitoringParameterManager {
     private final DataSource dataSource;
-    public JDBCMonitoringParameters(DataSource dataSource) {
+    public JDBCMonitoringParameterManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    public MonitoringParameters getParametersbyPatientId(int patient_id) {
+    public MonitoringParameter getParametersbyPatientId(int patient_id) {
         String sql = "SELECT * FROM monitoring_parameters WHERE patient_id = ?";
         try(Connection c = dataSource.getConnection();
             PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
             try(ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    MonitoringParameters monitoringParameters = new MonitoringParameters(rs.getInt("id"),rs.getInt("patient_id"),rs.getInt("mood_threshold"),rs.getInt("missed_medication_days"),rs.getInt("missed_reports_days"));
+                    MonitoringParameter monitoringParameters = new MonitoringParameter(rs.getInt("id"),rs.getInt("patient_id"),rs.getInt("mood_threshold"),rs.getInt("missed_medication_days"),rs.getInt("missed_reports_days"));
                     return monitoringParameters;
                 }
 

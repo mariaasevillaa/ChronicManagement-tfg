@@ -1,7 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Health_professional;
-import com.tfg.wellbeing.model.Patient;
+import com.tfg.wellbeing.model.HealthProfessional;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,7 +15,7 @@ public class JDBCHealthCareManager {
         this.ds = ds;
     }
 
-    public Health_professional getHealthProfessionalByEmail(String email) {
+    public HealthProfessional getHealthProfessionalByEmail(String email) {
         String sql = "SELECT hp.* " +
                 "FROM health_professional hp " +
                 "JOIN users u ON hp.user_id = u.id " +
@@ -29,7 +28,7 @@ public class JDBCHealthCareManager {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Health_professional healthProfessional= new Health_professional(rs.getInt("id"),rs.getInt("user_id"),rs.getString("name"),rs.getString("surname"),rs.getString("speciality"));
+                    HealthProfessional healthProfessional= new HealthProfessional(rs.getInt("id"),rs.getInt("user_id"),rs.getString("name"),rs.getString("surname"),rs.getString("speciality"));
                     return healthProfessional;
                 }
             }

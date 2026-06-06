@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Achievements;
+import com.tfg.wellbeing.model.Achievement;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -17,14 +17,14 @@ public class JDBCAchievementsManager {
     public JDBCAchievementsManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    public List<Achievements> getAchievements() {
+    public List<Achievement> getAchievements() {
         String sql= "SELECT * FROM achievements ";
-        List<Achievements> achievementsList = new ArrayList<>();
+        List<Achievement> achievementsList = new ArrayList<>();
         try(Connection c = dataSource.getConnection();
         PreparedStatement ps= c.prepareStatement(sql)) {
             try(ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    Achievements achievement = new Achievements(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
+                    Achievement achievement = new Achievement(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
                     achievementsList.add(achievement);
                 }
             }

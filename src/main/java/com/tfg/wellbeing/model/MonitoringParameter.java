@@ -1,13 +1,13 @@
 package com.tfg.wellbeing.model;
 
-public class MonitoringParameters {
+public class MonitoringParameter {
     private int patientId;
     private int id;
     private int missed_medication_days;
     private int missed_report_days;
     private int mood_threshold;
 
-    public MonitoringParameters(int id, int patientId, int mood_threshold,  int missed_medication_days, int missed_report_days) {
+    public MonitoringParameter(int id, int patientId, int mood_threshold, int missed_medication_days, int missed_report_days) {
         this.patientId = patientId;
         this.id = id;
         this.missed_medication_days = missed_medication_days;

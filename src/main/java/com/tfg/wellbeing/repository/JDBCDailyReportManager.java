@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Daily_report;
+import com.tfg.wellbeing.model.DailyReport;
 import org.springframework.stereotype.Repository;
 import java.sql.Statement;
 import javax.sql.DataSource;
@@ -60,15 +60,15 @@ public class JDBCDailyReportManager {
 
     }
 
-    public List<Daily_report> getReportByPatientId(int patient_id) {
+    public List<DailyReport> getReportByPatientId(int patient_id) {
         String sql = "SELECT * FROM daily_reports WHERE patient_id= ? ORDER BY date DESC ";
-        List<Daily_report> daily_reports = new ArrayList<>();
+        List<DailyReport> daily_reports = new ArrayList<>();
         try (Connection c = datasource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Daily_report report = new Daily_report(rs.getInt("id"), rs.getInt("patient_id"), rs.getInt("mood"), rs.getInt("medication_taken"), rs.getString("notes"), rs.getString("date"));
+                    DailyReport report = new DailyReport(rs.getInt("id"), rs.getInt("patient_id"), rs.getInt("mood"), rs.getInt("medication_taken"), rs.getString("notes"), rs.getString("date"));
 
                     daily_reports.add(report);
                 }
@@ -132,7 +132,7 @@ public class JDBCDailyReportManager {
         return 0;
     }
 
-    public Daily_report addDailyReports(int patient_id, int mood, int medication_taken, String note, String date) {
+    public DailyReport addDailyReports(int patient_id, int mood, int medication_taken, String note, String date) {
         String sql = "INSERT INTO daily_reports (patient_id,mood,medication_taken,notes,date) VALUES(?,?,?,?,?)";
         try (Connection c = datasource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
@@ -145,7 +145,7 @@ public class JDBCDailyReportManager {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 rs.next();
 
-                return new Daily_report(rs.getInt(1), patient_id, mood, medication_taken, note, date);
+                return new DailyReport(rs.getInt(1), patient_id, mood, medication_taken, note, date);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

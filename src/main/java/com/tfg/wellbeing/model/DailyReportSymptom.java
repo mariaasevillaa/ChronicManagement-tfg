@@ -1,10 +1,10 @@
 package com.tfg.wellbeing.model;
 
-public class DailyReportSymptoms {
+public class DailyReportSymptom {
     private int daily_id;
     private int symptom_id;
 
-    public DailyReportSymptoms(int daily_id, int symptom_id) {
+    public DailyReportSymptom(int daily_id, int symptom_id) {
         this.daily_id = daily_id;
         this.symptom_id = symptom_id;
     }

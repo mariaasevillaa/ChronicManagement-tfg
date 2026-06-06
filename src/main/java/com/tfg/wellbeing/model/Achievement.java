@@ -1,13 +1,13 @@
 package com.tfg.wellbeing.model;
 
-public class Achievements {
+public class Achievement {
     private int id;
     private String name;
     private String description;
     private int points_reward;
     private int reports_needed;
 
-    public Achievements(int id, String name, String description, int points_reward,int reports_needed) {
+    public Achievement(int id, String name, String description, int points_reward, int reports_needed) {
         this.id = id;
         this.name = name;
         this.description = description;

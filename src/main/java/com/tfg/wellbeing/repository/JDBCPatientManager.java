@@ -1,6 +1,5 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Daily_report;
 import com.tfg.wellbeing.model.Patient;
 import org.springframework.stereotype.Repository;
 

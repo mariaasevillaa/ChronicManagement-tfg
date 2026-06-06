@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Achievements;
+import com.tfg.wellbeing.model.Achievement;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JDBCPatientAchievements {
+public class JDBCPatientAchievementManager {
     private final DataSource dataSource;
 
-    public JDBCPatientAchievements(DataSource dataSource) {
+    public JDBCPatientAchievementManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
     public boolean hasAchievement(int patientId, int achievementId) {
@@ -47,15 +47,15 @@ public class JDBCPatientAchievements {
         }
 
     }
-    public List<Achievements> getAchievemntsbyPatientId(int patient_id) {
+    public List<Achievement> getAchievemntsbyPatientId(int patient_id) {
         String sql = "SELECT a.id, a.name, a.description,a.points_reward,a.reports_needed FROM patient_achievements pa JOIN achievements a ON a.id=pa.achievement_id WHERE pa.patient_id=?";
-        List<Achievements> achievementslist = new ArrayList<>();
+        List<Achievement> achievementslist = new ArrayList<>();
         try (Connection c = dataSource.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, patient_id);
             try(ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Achievements achievements= new Achievements(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
+                    Achievement achievements= new Achievement(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("points_reward"),rs.getInt("reports_needed"));
                     achievementslist.add(achievements);
 
                 }

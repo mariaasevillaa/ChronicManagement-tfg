@@ -1,6 +1,5 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Symptoms;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;

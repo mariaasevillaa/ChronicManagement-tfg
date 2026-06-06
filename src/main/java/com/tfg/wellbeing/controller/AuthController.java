@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.controller;
 
-import com.tfg.wellbeing.model.Health_professional;
+import com.tfg.wellbeing.model.HealthProfessional;
 import com.tfg.wellbeing.model.User;
 import com.tfg.wellbeing.repository.JDBCHealthCareManager;
 import com.tfg.wellbeing.repository.JDBCPatientManager;
@@ -77,7 +77,7 @@ public class AuthController {
             return "redirect:/patient_dashboard";
         }
         if(user.getRole().equals("DOCTOR")) {
-            Health_professional healthProfessional= healthCareManager.getHealthProfessionalByEmail(email);
+            HealthProfessional healthProfessional= healthCareManager.getHealthProfessionalByEmail(email);
             System.out.println("LOGIN doctor user = " + user.getEmail());
             System.out.println("LOGIN role = " + user.getRole());
             System.out.println("LOGIN healthProfessional = " + healthProfessional);

@@ -1,6 +1,6 @@
 package com.tfg.wellbeing.repository;
 
-import com.tfg.wellbeing.model.Symptoms;
+import com.tfg.wellbeing.model.Symptom;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -17,15 +17,15 @@ public class JDBCSymptomsManager {
     public JDBCSymptomsManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    public List<Symptoms> listSymptoms (){
-        List<Symptoms> symptoms = new ArrayList<>();
+    public List<Symptom> listSymptoms (){
+        List<Symptom> symptoms = new ArrayList<>();
         String sql= "SELECT * FROM symptoms";
         try(Connection c = dataSource.getConnection();
             PreparedStatement pr = c.prepareStatement(sql)) {
             try{
                 ResultSet rs = pr.executeQuery();
                 while(rs.next()){
-                    Symptoms symptom = new Symptoms(rs.getInt("id"),rs.getString("name"));
+                    Symptom symptom = new Symptom(rs.getInt("id"),rs.getString("name"));
                     symptoms.add(symptom);
                 }
                 return symptoms;

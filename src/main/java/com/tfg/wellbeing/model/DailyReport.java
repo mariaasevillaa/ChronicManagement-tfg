@@ -1,9 +1,7 @@
 package com.tfg.wellbeing.model;
 
 
-import java.sql.Date;
-
-public class Daily_report {
+public class DailyReport {
     private int id;
     private int patient_id;
     private int mood;
@@ -11,7 +9,7 @@ public class Daily_report {
     private String note;
     private String report_date;
 
-    public Daily_report(int id, int patient_id, int mood, int medication_taken, String note,String report_date) {
+    public DailyReport(int id, int patient_id, int mood, int medication_taken, String note, String report_date) {
         this.id = id;
         this.patient_id = patient_id;
         this.mood = mood;
