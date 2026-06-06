@@ -105,9 +105,17 @@ public class PatientController {
         return "daily_reports";
     }
     @PostMapping("/daily_reports")
-    public String dailyReports(HttpSession session, @RequestParam int mood, @RequestParam int medication_taken,@RequestParam String note,@RequestParam String date, @RequestParam List<Integer> symptoms, Model model ) {
+    public String dailyReports(HttpSession session, @RequestParam(required = false) int mood, @RequestParam(required = false) Integer medication_taken,@RequestParam(required = false) String note,@RequestParam(required = false) String date, @RequestParam(required = false) List<Integer> symptoms, Model model ) {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
+        if(mood==0||medication_taken==null||note==null||date==null||date.isBlank()||symptoms==null||symptoms.isEmpty() ) {
+            model.addAttribute("error","Please complete all the fields before submitting the report. ");
+            String name= (String) session.getAttribute("name");
+            model.addAttribute("name",name);
+            model.addAttribute("symptoms",symptomsManager.listSymptoms());
+
+        return "daily_reports";
+        }
         if(dailyReportManager.hasReportforDate(patient_id,date)){
             System.out.println("REPORT ALREADY EXISTS FOR THIS DATE");
             return "redirect:/patient_dashboard?reportSubmitted=true";
