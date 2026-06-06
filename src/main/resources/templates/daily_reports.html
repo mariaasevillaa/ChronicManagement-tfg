@@ -11,6 +11,7 @@
         <form action="/daily_reports" method="post">
             <h1 class="header_report">  Daily Well-being report</h1>
             <h2 class="header3_report"> Complete your daily check-in in less than 1 minute</h2>
+            <p th:if="${error}" th:text="${error}" class="error"></p>
             <div class="report1">
                 <div class="top-row">
                         <label class="section-label">Your mood?</label>
