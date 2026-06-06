@@ -18,7 +18,7 @@ The application uses a relational database hosted on Railway for data storage an
 #### src/main/java
 - The model package contains the main entities and classes: Achievement, Alert, DailyReportSymptom, DailyReport, GamificationStatus, HealthProfessional, HpPatient, MonitoringParameter, Patient, PatientAchievement, Symptom, User.
 - The controllers package handles HTTP requests and navigation through views.
-- The repositories packages implements the methods defined in the interfaces: JDBCAchievementsManager, JDBCAlertsManager, JDBCDailyReportManager, JDBCDailySymptomsManager, JDBCGamificationManager, JDBCHealthcareManagement, JDBCHpPatientManager, JDBCMonitoringParametersManager, JDBCPatientAchievementsManager, JDBCPatientManager, JDBCSymptomsManager, JDBCUserManager
+- The repositories packages implements the methods defined in the interfaces: JDBCAchievementManager, JDBCAlertManager, JDBCDailyReportManager, JDBCDailySymptomManager, JDBCGamificationManager, JDBCHealthcareManager, JDBCHpPatientManager, JDBCMonitoringParameterManager, JDBCPatientAchievementManager, JDBCPatientManager, JDBCSymptomManager, JDBCUserManager
 
 #### src/main/resources
 - The static/images folder contains all the photos and icons used and the css
