@@ -143,4 +143,23 @@ public class JDBCGamificationManager {
         }
 
     }
+    public int getStreakdays(int patientId){
+        String sql = "SELECT streak_days FROM gamification_status WHERE patient_id = ?";
+        try (Connection c = dataSource.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, patientId);
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+
+                    return rs.getInt("streak_days");
+                }
+            }
+            return 0;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating points", e);
+        }
+    }
 }

@@ -120,7 +120,9 @@ public class PatientController {
                 dailySymptomsManager.addDailySymptoms(symptom_id,report_id);
             }
         }
-         int points=  gamificationManager.addPoints(patient_id,10);
+        gamificationManager.addPoints(patient_id,10);
+        int streakdays= gamificationManager.calculateStreakdays(patient_id);
+        gamificationManager.updateStreakdays(patient_id,streakdays);
         int reportsCount = dailyReportManager.countReportsByPatientId(patient_id);
         List<Achievements> achievements = achievementsManager.getAchievements();
 
@@ -193,8 +195,8 @@ public class PatientController {
         Integer user_id = (Integer) session.getAttribute("user_id");
         int patient_id= patientManager.getPatientIDbyUserID(user_id);
         int points= gamificationManager.getPoints(patient_id);
-        int streakdays= gamificationManager.calculateStreakdays(patient_id);
-        gamificationManager.updateStreakdays(patient_id, streakdays);
+        int streakdays= gamificationManager.getStreakdays(patient_id);
+
         int reportsCount=dailyReportManager.countReportsByPatientId(patient_id);
         List<Achievements> unlockedAchievements=patientAchievementsManager.getAchievemntsbyPatientId(patient_id);
         List<Achievements> allAchievements=achievementsManager.getAchievements();
