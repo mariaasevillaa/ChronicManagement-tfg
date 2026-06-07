@@ -231,10 +231,10 @@
     gap: 8px;
 
     background: rgba(255, 255, 255, 0.88);
-    padding: 28px 45px;
+    padding: 24px 70px;
     border-radius: 20px;
 
-    width: 460px;
+    width: 520px;
     max-width: 90%;
     box-sizing: border-box;
 
@@ -315,7 +315,7 @@
     padding: 40px;
     border-radius: 20px;
 
-    width: 460px;
+    width: 520px;
     max-width: 90%;
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
