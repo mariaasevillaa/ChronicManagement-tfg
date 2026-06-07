@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Repository
 public class JDBCGamificationManager {
@@ -101,31 +102,35 @@ public class JDBCGamificationManager {
         return getPoints(patientId);
     }
 
-    public int calculateStreakdays(int patient_id){
-        String sql= "SELECT date FROM daily_reports WHERE patient_id = ? ";
-        try(Connection c =dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, patient_id);
-            try(ResultSet rs = ps.executeQuery()) {
-                int streakDays = 0;
-                LocalDate date= LocalDate.now();
-                while (rs.next()) {
-                    String dateString = rs.getString("date");
-                    LocalDate reportDate = LocalDate.parse(dateString);
-                   if(reportDate.equals(date)) {
-                       streakDays++;
-                       date = date.minusDays(1);
-                   }else{
-                           break;
+    public int calculateStreakdays(int patient_id) {
+        int streakDays = 0;
+        LocalDate currentDate = LocalDate.now(ZoneId.of("Europe/Madrid"));
 
-                   }
+        String sql = "SELECT COUNT(*) FROM daily_reports WHERE patient_id = ? AND date = ?";
+
+        try (Connection c = dataSource.getConnection()) {
+
+            while (true) {
+                try (PreparedStatement ps = c.prepareStatement(sql)) {
+                    ps.setInt(1, patient_id);
+                    ps.setString(2, currentDate.toString());
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next() && rs.getInt(1) > 0) {
+                            streakDays++;
+                            currentDate = currentDate.minusDays(1);
+                        } else {
+                            break;
+                        }
+                    }
                 }
-                return streakDays;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
+            return streakDays;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error calculating streak days", e);
+        }
     }
     public void updateStreakdays(int patientId, int streakdays ){
 

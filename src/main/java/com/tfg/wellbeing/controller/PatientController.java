@@ -127,7 +127,7 @@ public class PatientController {
                 dailySymptomsManager.addDailySymptoms(symptom_id,report_id);
             }
         }
-        gamificationManager.addPoints(patient_id,10);
+        int points=gamificationManager.addPoints(patient_id,10);
         int streakdays= gamificationManager.calculateStreakdays(patient_id);
         gamificationManager.updateStreakdays(patient_id,streakdays);
         int reportsCount = dailyReportManager.countReportsByPatientId(patient_id);
