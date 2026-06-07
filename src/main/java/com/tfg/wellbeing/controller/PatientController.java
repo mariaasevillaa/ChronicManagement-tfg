@@ -179,8 +179,7 @@ public class PatientController {
         int total_reports= dailyReportManager.getTotalReportsByPatientId(patient_id);
         model.addAttribute("Totalreports",total_reports);
         double average_mood =dailyReportManager.getAverageMood(patient_id);
-        String averageMoodFormatted = String.format("%.2f", average_mood);
-        model.addAttribute("Averagemood",averageMoodFormatted);
+        model.addAttribute("Averagemood",average_mood);
         double average_medication = dailyReportManager.getAverageMedicationTaken(patient_id);
         model.addAttribute("Averagemedicationtaken",average_medication);
         String name= (String) session.getAttribute("name");
