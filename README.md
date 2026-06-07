@@ -61,7 +61,7 @@ The application includes basic security measures such as role-based access, sess
 This project is currently configured for deployment using Railway. The application uses a relational database hosted on Railway, and the database connection is managed through environment variables.
 
 For local execution, it would be necessary to configure a local compatible database and update the corresponding values in `application.properties`.
-The deployed version of the application can be accessed at: https://chronicmanagement-tfg-production.up.railway.app
+The deployed version of the application can be accessed at: https://chronicmanagement-tfg-production.up.railway.app/frontPage
 
 
 ### Disclaimer
