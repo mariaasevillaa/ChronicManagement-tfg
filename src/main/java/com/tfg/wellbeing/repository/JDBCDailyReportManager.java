@@ -132,27 +132,7 @@ public class JDBCDailyReportManager {
         return 0;
     }
 
-    public DailyReport addDailyReports(int patient_id, int mood, int medication_taken, String note, String date) {
-        String sql = "INSERT INTO daily_reports (patient_id,mood,medication_taken,notes,date) VALUES(?,?,?,?,?)";
-        try (Connection c = datasource.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, patient_id);
-            ps.setInt(2, mood);
-            ps.setInt(3, medication_taken);
-            ps.setString(4, note);
-            ps.setString(5, date);
-            ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                rs.next();
 
-                return new DailyReport(rs.getInt(1), patient_id, mood, medication_taken, note, date);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
     public List<String>getDaysLabel(int patient_id){
         String sql = "SELECT date FROM daily_reports WHERE patient_id= ? ORDER BY date  ";
         List<String>labels=new ArrayList<>();

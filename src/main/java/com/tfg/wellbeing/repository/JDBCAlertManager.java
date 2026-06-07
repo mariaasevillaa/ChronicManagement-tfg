@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JDBCAlertsManager {
+public class JDBCAlertManager {
     private final DataSource dataSource;
     private final JDBCDailyReportManager dailyReportManager;
     private final JDBCMonitoringParameterManager monitoringParameters;
     private JDBCPatientManager patientManager;
-    public JDBCAlertsManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameterManager monitoringParameters, JDBCPatientManager patientManager) {
+    public JDBCAlertManager(DataSource dataSource, JDBCDailyReportManager dailyReportManager, JDBCMonitoringParameterManager monitoringParameters, JDBCPatientManager patientManager) {
         this.dataSource = dataSource;
         this.dailyReportManager = dailyReportManager;
         this.monitoringParameters = monitoringParameters;

@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JDBCDailySymptomsManager {
+public class JDBCDailySymptomManager {
     private final DataSource dataSource;
 
-    public JDBCDailySymptomsManager(DataSource dataSource) {
+    public JDBCDailySymptomManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

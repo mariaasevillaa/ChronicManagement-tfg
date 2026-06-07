@@ -21,14 +21,14 @@ public class HpController {
 
     private final JDBCHpPatientManager patientManager;
     private final JDBCMonitoringParameterManager monitoringParameters;
-    private final JDBCAlertsManager alertsManager;
+    private final JDBCAlertManager alertsManager;
     private final JDBCDailyReportManager dailyReportManager;
     private final JDBCPatientManager patientManager1;
     private final JDBCHealthCareManager healthCareManager;
-    private final JDBCDailySymptomsManager dailySymptomsManager;
+    private final JDBCDailySymptomManager dailySymptomsManager;
 
 
-    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameterManager monitoringParameters, JDBCAlertsManager alertsManager, JDBCDailyReportManager dailyReportManager, JDBCPatientManager patientManager1, JDBCHealthCareManager healthCareManager, JDBCDailySymptomsManager dailySymptomsManager) {
+    public HpController(JDBCHpPatientManager patientManager, JDBCMonitoringParameterManager monitoringParameters, JDBCAlertManager alertsManager, JDBCDailyReportManager dailyReportManager, JDBCPatientManager patientManager1, JDBCHealthCareManager healthCareManager, JDBCDailySymptomManager dailySymptomsManager) {
         this.patientManager = patientManager;
         this.monitoringParameters = monitoringParameters;
         this.alertsManager = alertsManager;

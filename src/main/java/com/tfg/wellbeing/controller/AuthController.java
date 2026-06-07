@@ -53,7 +53,7 @@ public class AuthController {
     public String login() {
         return "login";
     }
-    //HttpSession is used to save the data if the log in is successfull
+
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session,Model model) {
         User user = userManager.getUserByEmail(email);

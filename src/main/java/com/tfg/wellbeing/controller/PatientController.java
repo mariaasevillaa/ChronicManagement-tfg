@@ -18,15 +18,15 @@ public class PatientController {
     private final JDBCPatientManager patientManager;
     private final JDBCDailyReportManager dailyReportManager;
     private final JDBCSymptomsManager symptomsManager;
-    private final JDBCDailySymptomsManager dailySymptomsManager;
-    private final JDBCAchievementsManager achievementsManager;
+    private final JDBCDailySymptomManager dailySymptomsManager;
+    private final JDBCAchievementManager achievementsManager;
     private final JDBCPatientAchievementManager patientAchievementsManager;
     private final JDBCGamificationManager gamificationManager;
-    private final JDBCAlertsManager alertsManager;
+    private final JDBCAlertManager alertsManager;
     private final JDBCMonitoringParameterManager monitoringParameters;
 
 
-    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomsManager dailySymptomsManager, JDBCAchievementsManager achievementsManager, JDBCPatientAchievementManager patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertsManager alertsManager, JDBCMonitoringParameterManager monitoringParameters) {
+    public PatientController(JDBCPatientManager patientManager, JDBCDailyReportManager dailyReportManager, JDBCSymptomsManager symptomsManager, JDBCDailySymptomManager dailySymptomsManager, JDBCAchievementManager achievementsManager, JDBCPatientAchievementManager patientAchievementsManager, JDBCGamificationManager gamificationManager, JDBCAlertManager alertsManager, JDBCMonitoringParameterManager monitoringParameters) {
         this.patientManager = patientManager;
         this.dailyReportManager = dailyReportManager;
         this.symptomsManager = symptomsManager;

@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JDBCAchievementsManager {
+public class JDBCAchievementManager {
     private final DataSource dataSource;
-    public JDBCAchievementsManager(DataSource dataSource) {
+    public JDBCAchievementManager(DataSource dataSource) {
         this.dataSource = dataSource;
     }
     public List<Achievement> getAchievements() {
