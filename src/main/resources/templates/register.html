@@ -15,9 +15,12 @@
             <img src="/images/logo-removebg-preview.png" class="img">
             <div class="register-left">
                 <a href="/login" class="question"> Already have an account? <span  style="color: #69443c" >Login</span></a>
-                <label>
+                <label class="consent">
                     <input type="checkbox" name="consent" required>
-                    I accept the processing of my personal health and wellbeing data for the purpose of using the Caretrack application
+                    <span>
+                         I accept the processing of my personal health and wellbeing data for the purpose of using the CareTrack application
+                    </span>
+
                 </label>
                 <p th:if="${error1}" th:text="${error1}" class="error-message"></p>
 
@@ -30,13 +33,13 @@
     <section class="register-box">
         <h1 class="header-login">Create an account</h1>
         <p class="header3-register">Start tracking your health in just a few steps</p>
-        <div class="row">
+
             <label>Name</label>
             <input type="text" name="name" class="register-button" required >
 
             <label>Surname</label>
             <input type="text" name="surname" class="register-button" required >
-        </div>
+
         <label>Date of birth</label>
         <input type="date" name="date_of_birth"  class="register-button" required >
 
